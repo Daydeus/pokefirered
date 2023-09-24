@@ -879,7 +879,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_AURORA_BEAM] =
     {
         .effect = EFFECT_ATTACK_DOWN_HIT,
-        .power = 65,
+        .power = 80,
         .type = TYPE_ICE,
         .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
@@ -4264,9 +4264,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_ICE_BALL] =
     {
         .effect = EFFECT_ROLLOUT,
-        .power = 30,
+        .power = 50,
         .type = TYPE_ICE,
-        .accuracy = 90,
+        .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -4712,7 +4712,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_ICICLE_SPEAR] =
     {
         .effect = EFFECT_MULTI_HIT,
-        .power = 10,
+        .power = 25,
         .type = TYPE_ICE,
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
