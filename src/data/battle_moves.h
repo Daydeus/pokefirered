@@ -1524,7 +1524,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_ACCURACY_DOWN,
         .power = 0,
-        .type = TYPE_NORMAL,
+        .type = TYPE_FIRE,
         .accuracy = 100,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 20,
@@ -1704,9 +1704,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_EGG_BOMB] =
     {
         .effect = EFFECT_HIT,
-        .power = 100,
-        .type = TYPE_NORMAL,
-        .accuracy = 75,
+        .power = 80,
+        .type = TYPE_FIRE,
+        .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -2682,8 +2682,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_OCTAZOOKA] =
     {
         .effect = EFFECT_ACCURACY_DOWN_HIT,
-        .power = 65,
-        .type = TYPE_WATER,
+        .power = 85,
+        .type = TYPE_FIRE,
         .accuracy = 85,
         .category = MOVE_CATEGORY_SPECIAL,
         .pp = 10,
@@ -3311,7 +3311,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_MORNING_SUN,
         .power = 0,
-        .type = TYPE_NORMAL,
+        .type = TYPE_FIRE,
         .accuracy = 0,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 5,
