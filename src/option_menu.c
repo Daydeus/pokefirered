@@ -10,6 +10,7 @@
 #include "strings.h"
 #include "field_fadetransition.h"
 #include "gba/m4a_internal.h"
+#include "event_data.h"
 
 // can't include the one in menu_helpers.h since Task_OptionMenu needs bool32 for matching
 bool32 IsActiveOverworldLinkBusy(void);
@@ -19,7 +20,7 @@ enum
 {
     MENUITEM_TEXTSPEED = 0,
     MENUITEM_BATTLESCENE,
-    MENUITEM_BATTLESTYLE,
+    MENUITEM_MOVEMENTMODE,
     MENUITEM_SOUND,
     MENUITEM_BUTTONMODE,
     MENUITEM_FRAMETYPE,
@@ -137,7 +138,7 @@ static const u8 *const sOptionMenuItemsNames[MENUITEM_COUNT] =
 {
     [MENUITEM_TEXTSPEED]   = gText_TextSpeed,
     [MENUITEM_BATTLESCENE] = gText_BattleScene,
-    [MENUITEM_BATTLESTYLE] = gText_BattleStyle,
+    [MENUITEM_MOVEMENTMODE] = gText_MovementMode,
     [MENUITEM_SOUND]       = gText_Sound,
     [MENUITEM_BUTTONMODE]  = gText_ButtonMode,
     [MENUITEM_FRAMETYPE]   = gText_Frame,
@@ -157,10 +158,10 @@ static const u8 *const sBattleSceneOptions[] =
     gText_BattleSceneOff
 };
 
-static const u8 *const sBattleStyleOptions[] =
+static const u8 *const sMovementModeOptions[] =
 {
-    gText_BattleStyleShift,
-    gText_BattleStyleSet
+    gText_Movement_Walk,
+    gText_Movement_Run
 };
 
 static const u8 *const sSoundOptions[] =
@@ -208,7 +209,7 @@ void CB2_OptionsMenuFromStartMenu(void)
     sOptionMenuPtr->cursorPos = 0;
     sOptionMenuPtr->option[MENUITEM_TEXTSPEED] = gSaveBlock2Ptr->optionsTextSpeed;
     sOptionMenuPtr->option[MENUITEM_BATTLESCENE] = gSaveBlock2Ptr->optionsBattleSceneOff;
-    sOptionMenuPtr->option[MENUITEM_BATTLESTYLE] = gSaveBlock2Ptr->optionsBattleStyle;
+    sOptionMenuPtr->option[MENUITEM_MOVEMENTMODE] = FlagGet(FLAG_MOVEMENTMODE);
     sOptionMenuPtr->option[MENUITEM_SOUND] = gSaveBlock2Ptr->optionsSound;
     sOptionMenuPtr->option[MENUITEM_BUTTONMODE] = gSaveBlock2Ptr->optionsButtonMode;
     sOptionMenuPtr->option[MENUITEM_FRAMETYPE] = gSaveBlock2Ptr->optionsWindowFrameType;
@@ -483,8 +484,8 @@ static void BufferOptionMenuString(u8 selection)
     case MENUITEM_BATTLESCENE:
         AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, dst, -1, sBattleSceneOptions[sOptionMenuPtr->option[selection]]);
         break;
-    case MENUITEM_BATTLESTYLE:
-        AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, dst, -1, sBattleStyleOptions[sOptionMenuPtr->option[selection]]);
+    case MENUITEM_MOVEMENTMODE:
+        AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, dst, -1, sMovementModeOptions[sOptionMenuPtr->option[selection]]);
         break;
     case MENUITEM_SOUND:
         AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, dst, -1, sSoundOptions[sOptionMenuPtr->option[selection]]);
@@ -512,7 +513,10 @@ static void CloseAndSaveOptionMenu(u8 taskId)
     FreeAllWindowBuffers();
     gSaveBlock2Ptr->optionsTextSpeed = sOptionMenuPtr->option[MENUITEM_TEXTSPEED];
     gSaveBlock2Ptr->optionsBattleSceneOff = sOptionMenuPtr->option[MENUITEM_BATTLESCENE];
-    gSaveBlock2Ptr->optionsBattleStyle = sOptionMenuPtr->option[MENUITEM_BATTLESTYLE];
+    if (sOptionMenuPtr->option[MENUITEM_MOVEMENTMODE] == 1)
+        FlagSet(FLAG_MOVEMENTMODE);
+    else
+        FlagClear(FLAG_MOVEMENTMODE);
     gSaveBlock2Ptr->optionsSound = sOptionMenuPtr->option[MENUITEM_SOUND];
     gSaveBlock2Ptr->optionsButtonMode = sOptionMenuPtr->option[MENUITEM_BUTTONMODE];
     gSaveBlock2Ptr->optionsWindowFrameType = sOptionMenuPtr->option[MENUITEM_FRAMETYPE];
