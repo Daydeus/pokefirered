@@ -865,7 +865,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_BUBBLE_BEAM] =
     {
         .effect = EFFECT_SPEED_DOWN_HIT,
-        .power = 65,
+        .power = 70,
         .type = TYPE_WATER,
         .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
@@ -1550,12 +1550,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_WITHDRAW] =
     {
-        .effect = EFFECT_DEFENSE_UP,
+        .effect = EFFECT_COSMIC_POWER,
         .power = 0,
         .type = TYPE_WATER,
         .accuracy = 0,
         .category = MOVE_CATEGORY_STATUS,
-        .pp = 40,
+        .pp = 20,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_USER,
         .priority = 0,
@@ -2048,11 +2048,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_BUBBLE] =
     {
         .effect = EFFECT_SPEED_DOWN_HIT,
-        .power = 20,
+        .power = 40,
         .type = TYPE_WATER,
         .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
-        .pp = 30,
+        .pp = 25,
         .secondaryEffectChance = 10,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
@@ -2146,11 +2146,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_CRABHAMMER] =
     {
         .effect = EFFECT_HIGH_CRITICAL,
-        .power = 90,
+        .power = 70,
         .type = TYPE_WATER,
-        .accuracy = 85,
+        .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
-        .pp = 10,
+        .pp = 15,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -4124,9 +4124,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_DIVE] =
     {
         .effect = EFFECT_SEMI_INVULNERABLE,
-        .power = 60,
+        .power = 90,
         .type = TYPE_WATER,
-        .accuracy = 100,
+        .accuracy = 95,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 10,
         .secondaryEffectChance = 0,
