@@ -1,5 +1,9 @@
 # Pokémon FireRed and LeafGreen
 
+## Feature Branch: Move Updates
+
+This branch adds the Physical/Special/Status category splits to all moves in the game. It additionally adds a category icon to the summary and battle screens to indicate the category split to the player.
+
 [![Build Status][travis-badge]][travis]
 
 [travis]: https://travis-ci.org/pret/pokefirered
