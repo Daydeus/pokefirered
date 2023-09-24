@@ -577,7 +577,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_TWINEEDLE] =
     {
         .effect = EFFECT_TWINEEDLE,
-        .power = 25,
+        .power = 30,
         .type = TYPE_BUG,
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
@@ -591,9 +591,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_PIN_MISSILE] =
     {
         .effect = EFFECT_MULTI_HIT,
-        .power = 14,
+        .power = 25,
         .type = TYPE_BUG,
-        .accuracy = 85,
+        .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 20,
         .secondaryEffectChance = 0,
@@ -1136,12 +1136,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_STRING_SHOT] =
     {
-        .effect = EFFECT_SPEED_DOWN,
+        .effect = EFFECT_SPEED_DOWN_2,
         .power = 0,
         .type = TYPE_BUG,
-        .accuracy = 95,
+        .accuracy = 100,
         .category = MOVE_CATEGORY_STATUS,
-        .pp = 40,
+        .pp = 30,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
@@ -1976,7 +1976,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_LEECH_LIFE] =
     {
         .effect = EFFECT_ABSORB,
-        .power = 20,
+        .power = 75,
         .type = TYPE_BUG,
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
@@ -2941,13 +2941,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FURY_CUTTER] =
     {
-        .effect = EFFECT_FURY_CUTTER,
-        .power = 10,
+        .effect = EFFECT_ATTACK_UP_HIT,
+        .power = 40,
         .type = TYPE_BUG,
-        .accuracy = 95,
+        .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 20,
-        .secondaryEffectChance = 0,
+        .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -3137,10 +3137,10 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MEGAHORN] =
     {
-        .effect = EFFECT_HIT,
+        .effect = EFFECT_DOUBLE_EDGE,
         .power = 120,
         .type = TYPE_BUG,
-        .accuracy = 85,
+        .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -4453,13 +4453,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SILVER_WIND] =
     {
-        .effect = EFFECT_ALL_STATS_UP_HIT,
+        .effect = EFFECT_POISON_HIT,
         .power = 60,
         .type = TYPE_BUG,
         .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
         .pp = 5,
-        .secondaryEffectChance = 10,
+        .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
