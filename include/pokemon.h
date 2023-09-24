@@ -235,12 +235,17 @@ struct SpeciesInfo
             u8 noFlip : 1;
 };
 
+#define MOVE_CATEGORY_PHYSICAL 0
+#define MOVE_CATEGORY_SPECIAL  1
+#define MOVE_CATEGORY_STATUS   2
+
 struct BattleMove
 {
     u8 effect;
     u8 power;
     u8 type;
     u8 accuracy;
+    u8 category;
     u8 pp;
     u8 secondaryEffectChance;
     u8 target;

@@ -3,6 +3,9 @@
 ## Feature Branch: Type Updates
 
 This branch adds the Fairy typing to Pokémon and moves, and changes the type icons. It also changes the type chart matchups in the following ways: Ice now resists Water, Flying and Ground; Bug is super effective on Fairy; Poison is super effective on Normal and Water.
+## Feature Branch: Move Updates
+
+This branch adds the Physical/Special/Status category splits to all moves in the game. It additionally adds a category icon to the summary and battle screens to indicate the category split to the player.
 
 [![Build Status][travis-badge]][travis]
 

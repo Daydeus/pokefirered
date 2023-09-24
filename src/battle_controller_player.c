@@ -87,6 +87,7 @@ static void MoveSelectionDisplayPpNumber(void);
 static void MoveSelectionDisplayPpString(void);
 static void MoveSelectionDisplayMoveType(void);
 static void MoveSelectionDisplayMoveNames(void);
+static void MoveSelectionDisplayCategoryIcon(void);
 static void HandleMoveSwitching(void);
 static void WaitForMonSelection(void);
 static void CompleteWhenChoseItem(void);
@@ -172,6 +173,9 @@ static const u8 sTargetIdentities[] = { B_POSITION_PLAYER_LEFT, B_POSITION_PLAYE
 
 // unknown unused data
 static const u8 sUnused[] = { 0x48, 0x48, 0x20, 0x5a, 0x50, 0x50, 0x50, 0x58 };
+
+static const u16 sCategoryIcons_Pal[] = INCBIN_U16("graphics/battle_interface/category_icons_battle.gbapal");
+static const u8 sCategoryIcons_Gfx[] = INCBIN_U8("graphics/battle_interface/category_icons_battle.4bpp");
 
 void BattleControllerDummy(void)
 {
@@ -1378,6 +1382,19 @@ static void MoveSelectionDisplayMoveNames(void)
     }
 }
 
+static void MoveSelectionDisplayCategoryIcon(void)
+{
+    struct ChooseMoveStruct *moveInfo;
+    u32 moveCategory;
+
+    moveInfo = (struct ChooseMoveStruct*)(&gBattleBufferA[gActiveBattler][MAX_BATTLERS_COUNT]);
+    moveCategory = gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].category;
+    LoadPalette(sCategoryIcons_Pal, 10 * 0x10, 0x20);
+    BlitBitmapToWindow(B_WIN_CATEGORY_ICON, sCategoryIcons_Gfx + 0x80 * moveCategory, 0, 0, 16, 16);
+    PutWindowTilemap(B_WIN_CATEGORY_ICON);
+    CopyWindowToVram(B_WIN_CATEGORY_ICON, 3);
+}
+
 static void MoveSelectionDisplayPpString(void)
 {
     StringCopy(gDisplayedStringBattle, gText_MoveInterfacePP);
@@ -1394,8 +1411,6 @@ static void MoveSelectionDisplayPpNumber(void)
     SetPpNumbersPaletteInMoveSelection();
     moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
     txtPtr = ConvertIntToDecimalStringN(gDisplayedStringBattle, moveInfo->currentPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
-    *txtPtr = CHAR_SLASH;
-    ConvertIntToDecimalStringN(++txtPtr, moveInfo->maxPp[gMoveSelectionCursor[gActiveBattler]], STR_CONV_MODE_RIGHT_ALIGN, 2);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_PP_REMAINING);
 }
 
@@ -1411,6 +1426,7 @@ static void MoveSelectionDisplayMoveType(void)
     txtPtr = StringCopy(txtPtr, gText_MoveInterfaceDynamicColors);
     StringCopy(txtPtr, gTypeNames[gBattleMoves[moveInfo->moves[gMoveSelectionCursor[gActiveBattler]]].type]);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
+    MoveSelectionDisplayCategoryIcon();
 }
 
 void MoveSelectionCreateCursorAt(u8 cursorPosition, u8 arg1)
