@@ -1,5 +1,9 @@
 # Pokémon FireRed and LeafGreen
 
+## Feature Branch: Type Updates
+
+This branch adds the Fairy typing to Pokémon and moves, and changes the type icons. It also changes the type chart matchups in the following ways: Ice now resists Water, Flying and Ground; Bug is super effective on Fairy; Poison is super effective on Normal and Water.
+
 [![Build Status][travis-badge]][travis]
 
 [travis]: https://travis-ci.org/pret/pokefirered
