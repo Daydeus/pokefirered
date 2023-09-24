@@ -1150,12 +1150,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DRAGON_RAGE] =
     {
-        .effect = EFFECT_DRAGON_RAGE,
+        .effect = EFFECT_FLAIL,
         .power = 1,
         .type = TYPE_DRAGON,
         .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
-        .pp = 10,
+        .pp = 15,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -2802,11 +2802,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_OUTRAGE] =
     {
         .effect = EFFECT_RAMPAGE,
-        .power = 90,
+        .power = 120,
         .type = TYPE_DRAGON,
-        .accuracy = 100,
+        .accuracy = 90,
         .category = MOVE_CATEGORY_PHYSICAL,
-        .pp = 15,
+        .pp = 10,
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_RANDOM,
         .priority = 0,
@@ -4719,8 +4719,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_DRAGON_CLAW] =
     {
-        .effect = EFFECT_HIT,
-        .power = 80,
+        .effect = EFFECT_HIGH_CRITICAL,
+        .power = 70,
         .type = TYPE_DRAGON,
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
