@@ -405,8 +405,8 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .category = MOVE_CATEGORY_STATUS,
         .pp = 15,
         .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_SELECTED,
-        .priority = 0,
+        .target = MOVE_TARGET_BOTH,
+        .priority = 1,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
     },
 
@@ -1285,9 +1285,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_DIG] =
     {
         .effect = EFFECT_SEMI_INVULNERABLE,
-        .power = 60,
+        .power = 90,
         .type = TYPE_GROUND,
-        .accuracy = 100,
+        .accuracy = 95,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -1760,9 +1760,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_BONE_CLUB] =
     {
         .effect = EFFECT_FLINCH_HIT,
-        .power = 65,
+        .power = 85,
         .type = TYPE_GROUND,
-        .accuracy = 85,
+        .accuracy = 90,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 20,
         .secondaryEffectChance = 10,
@@ -2188,7 +2188,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_BONEMERANG] =
     {
         .effect = EFFECT_DOUBLE_HIT,
-        .power = 50,
+        .power = 30,
         .type = TYPE_GROUND,
         .accuracy = 90,
         .category = MOVE_CATEGORY_PHYSICAL,
@@ -2668,7 +2668,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_MUD_SLAP] =
     {
         .effect = EFFECT_ACCURACY_DOWN_HIT,
-        .power = 20,
+        .power = 40,
         .type = TYPE_GROUND,
         .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
@@ -2796,7 +2796,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .effect = EFFECT_MULTI_HIT,
         .power = 25,
         .type = TYPE_GROUND,
-        .accuracy = 80,
+        .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -4824,12 +4824,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_MUD_SHOT] =
     {
         .effect = EFFECT_SPEED_DOWN_HIT,
-        .power = 55,
+        .power = 60,
         .type = TYPE_GROUND,
         .accuracy = 95,
         .category = MOVE_CATEGORY_SPECIAL,
         .pp = 15,
-        .secondaryEffectChance = 100,
+        .secondaryEffectChance = 30,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
