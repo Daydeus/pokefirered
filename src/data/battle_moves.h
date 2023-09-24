@@ -45,9 +45,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_DOUBLE_SLAP] =
     {
         .effect = EFFECT_MULTI_HIT,
-        .power = 15,
+        .power = 20,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
-        .accuracy = 85,
+    #endif
+        .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -662,8 +666,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_SLEEP,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
-        .accuracy = 55,
+    #endif
+        .accuracy = 75,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 15,
         .secondaryEffectChance = 0,
@@ -1809,7 +1817,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_ALWAYS_HIT,
         .power = 60,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 0,
         .category = MOVE_CATEGORY_SPECIAL,
         .pp = 20,
@@ -1991,7 +2003,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_SLEEP,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 75,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 10,
@@ -2607,8 +2623,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_CONFUSE,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
-        .accuracy = 75,
+    #endif
+        .accuracy = 95,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -2859,7 +2879,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_ATTACK_DOWN_2,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 100,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 20,
@@ -2985,7 +3009,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_ATTRACT,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 100,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 15,
@@ -3041,7 +3069,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_PRESENT,
         .power = 1,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 90,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 15,
@@ -3307,7 +3339,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_MOONLIGHT,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 0,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 5,
@@ -3741,7 +3777,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_NATURE_POWER,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 0,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 20,
@@ -3825,7 +3865,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_WISH,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 100,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 10,
@@ -3839,7 +3883,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_ASSIST,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 100,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 20,
@@ -4804,11 +4852,15 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_COVET] =
     {
         .effect = EFFECT_THIEF,
-        .power = 40,
+        .power = 50,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
-        .pp = 40,
+        .pp = 10,
         .secondaryEffectChance = 100,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
