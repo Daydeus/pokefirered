@@ -97,6 +97,7 @@ gBattleAnims_Moves::
 	.4byte Move_DRAGON_RAGE
 	.4byte Move_DREAM_EATER
 	.4byte Move_DRILL_PECK
+	.4byte Move_DRILL_RUN
 	.4byte Move_DYNAMIC_PUNCH
 	.4byte Move_EARTHQUAKE
 	.4byte Move_EGG_BOMB
@@ -11096,4 +11097,59 @@ Special_SubstituteToMon:
 
 Special_MonToSubstitute:
 	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, FALSE
+	end
+
+Move_DRILL_RUN:
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_HORN_HIT
+	setalpha 12, 8
+	fadetobg BG_FISSURE
+	waitbgfadeout
+	createvisualtask AnimTask_PositionFissureBgOnBattler, 5, ANIM_TARGET, 5, -1
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0x0
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	delay 0x2
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0x1
+	createsprite gHornHitSpriteTemplate, ANIM_TARGET, 4, 0x0, 0x0, 0xc
+	waitforvisualfinish
+	playse 0x14
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 2, 0, 40, 1
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 10, 0, 40, 1
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0x0, 0x0, 0x1, 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0x0, 0x2, 0x1, 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0xfffc, 0x3, 0x1, 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0xfff8, 0xfffb, 0x1, 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0x4, 0xfff4, 0x1, 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0x10, 0x0, 0x1, 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0x5, 0x12, 0x1, 0x3
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0xffef, 0xc, 0x1, 0x2
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0xffeb, 0xfff1, 0x1, 0x2
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0x8, 0xffe5, 0x1, 0x2
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0x20, 0x0, 0x1, 0x2
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	delay 0x4
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0x2
+	waitforvisualfinish
+	call UnsetPsychicBackground
 	end
