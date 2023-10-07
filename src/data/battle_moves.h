@@ -930,7 +930,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_CONFUSE_HIT,
         .power = 70,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 10,
@@ -2520,7 +2524,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_METRONOME,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 0,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 10,
@@ -4643,7 +4651,11 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_TICKLE,
         .power = 0,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
         .type = TYPE_NORMAL,
+    #endif
         .accuracy = 100,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 20,
