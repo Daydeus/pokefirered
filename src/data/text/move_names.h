@@ -189,6 +189,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_MOONLIGHT]     = _("MOONLIGHT"),
     [MOVE_MORNING_SUN]   = _("MORNING SUN"),
     [MOVE_MUDDY_WATER]   = _("MUDDY WATER"),
+    [MOVE_MUD_BOMB]      = _("MUD BOMB"),
     [MOVE_MUD_SHOT]      = _("MUD SHOT"),
     [MOVE_MUD_SLAP]      = _("MUD-SLAP"),
     [MOVE_MUD_SPORT]     = _("MUD SPORT"),
