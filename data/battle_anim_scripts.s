@@ -100,6 +100,7 @@ gBattleAnims_Moves::
 	.4byte Move_DRILL_RUN
 	.4byte Move_DYNAMIC_PUNCH
 	.4byte Move_EARTHQUAKE
+	.4byte Move_EARTH_AURA
 	.4byte Move_EGG_BOMB
 	.4byte Move_EMBER
 	.4byte Move_ENCORE
@@ -11205,3 +11206,42 @@ Move_MUD_BOMB:
 	createsprite gMudBombSplash, ANIM_TARGET, 2, -16, 44, 20
 	waitforvisualfinish
 	end
+
+Move_EARTH_AURA::
+	loadspritegfx ANIM_TAG_WATER_ORB @whirl motion
+	loadspritegfx ANIM_TAG_SPARK_2 @yellow color
+	monbg ANIM_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0xE, 0x0
+	waitforvisualfinish
+	call EarthAuraVortex
+	call EarthAuraVortex
+	call EarthAuraVortex
+	call EarthAuraVortex
+	waitforvisualfinish
+	fadetobg BG_FISSURE
+	waitbgfadeout
+	playsewithpan SE_M_EARTHQUAKE, 0x0
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 10, 0x32
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 10, 0x32
+	createvisualtask AnimTask_PositionFissureBgOnBattler, 5, ANIM_TARGET, 5, -1
+	waitbgfadein
+	waitforvisualfinish
+	call UnsetPsychicBackground
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0x0, 0x0
+	clearmonbg ANIM_ATTACKER
+	end
+EarthAuraVortex:
+	playsewithpan SE_M_SACRED_FIRE2 SOUND_PAN_TARGET
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x1c, 0x180, 0x32, 0x8, 0x32, 0x0
+	delay 0x2
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x20, 0xf0, 0x28, 0xb, 0xffd2, 0x0
+	delay 0x2
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x21, 0x1a0, 0x28, 0x4, 0x2a, 0x0
+	delay 0x2
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x1f, 0x120, 0x2d, 0x6, 0xffd6, 0x0
+	delay 0x2
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x1c, 0x1c0, 0x2d, 0xb, 0x2e, 0x0
+	delay 0x2
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x21, 0x1d0, 0x32, 0xa, 0xffce, 0x0
+	delay 0x2
+	return

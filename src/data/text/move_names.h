@@ -79,6 +79,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_DRILL_RUN]     = _("DRILL RUN"),
     [MOVE_DYNAMIC_PUNCH] = _("DYNAMICPUNCH"),
     [MOVE_EARTHQUAKE]    = _("EARTHQUAKE"),
+    [MOVE_EARTH_AURA]    = _("EARTH AURA"),
     [MOVE_EGG_BOMB]      = _("EGG BOMB"),
     [MOVE_EMBER]         = _("EMBER"),
     [MOVE_ENCORE]        = _("ENCORE"),
