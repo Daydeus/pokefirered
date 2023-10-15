@@ -2968,6 +2968,7 @@ Move_GLARE:
 
 Move_BARRAGE:
 	loadspritegfx ANIM_TAG_RED_BALL
+	call SetPsychicBackground
 	createvisualtask AnimTask_BarrageBall, 3
 	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
 	delay 24
@@ -2975,6 +2976,7 @@ Move_BARRAGE:
 	createvisualtask AnimTask_ShakeMon, 3, ANIM_TARGET, 0, 4, 20, 1
 	createvisualtask AnimTask_ShakeMon, 3, ANIM_DEF_PARTNER, 0, 4, 20, 1
 	loopsewithpan SE_M_STRENGTH, SOUND_PAN_TARGET, 8, 2
+	call UnsetPsychicBackground
 	end
 
 Move_SKY_ATTACK:
@@ -6146,6 +6148,9 @@ Move_ACID:
 Move_BONEMERANG:
 	loadspritegfx ANIM_TAG_BONE
 	loadspritegfx ANIM_TAG_IMPACT
+	fadetobg BG_GHOST
+	waitbgfadein
+	delay 15
 	monbg ANIM_DEF_PARTNER
 	splitbgprio ANIM_TARGET
 	setalpha 12, 8
@@ -6159,6 +6164,8 @@ Move_BONEMERANG:
 	playsewithpan SE_M_VITAL_THROW, SOUND_PAN_ATTACKER
 	createsprite gHorizontalLungeSpriteTemplate, ANIM_ATTACKER, 2, 6, -4
 	waitforvisualfinish
+	restorebg
+	waitbgfadein
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
@@ -6166,6 +6173,9 @@ Move_BONEMERANG:
 Move_BONE_CLUB:
 	loadspritegfx ANIM_TAG_BONE
 	loadspritegfx ANIM_TAG_IMPACT
+	fadetobg BG_GHOST
+	waitbgfadein
+	delay 15
 	monbg ANIM_DEF_PARTNER
 	splitbgprio ANIM_TARGET
 	setalpha 12, 8
@@ -6177,6 +6187,8 @@ Move_BONE_CLUB:
 	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG | F_PAL_ATTACKER | F_PAL_TARGET, 5, 1, RGB_BLACK, 10, RGB_BLACK, 0
 	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
 	waitforvisualfinish
+	restorebg
+	waitbgfadein
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
@@ -6184,6 +6196,9 @@ Move_BONE_CLUB:
 Move_BONE_RUSH:
 	loadspritegfx ANIM_TAG_BONE
 	loadspritegfx ANIM_TAG_IMPACT
+	fadetobg BG_GHOST
+	waitbgfadein
+	delay 15
 	monbg ANIM_DEF_PARTNER
 	setalpha 12, 8
 	playsewithpan SE_M_BONEMERANG, SOUND_PAN_TARGET
@@ -6193,6 +6208,8 @@ Move_BONE_RUSH:
 	createvisualtask AnimTask_ShakeMon, 5, ANIM_TARGET, 0, 3, 5, 1
 	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
 	waitforvisualfinish
+	restorebg
+	waitbgfadein
 	clearmonbg ANIM_DEF_PARTNER
 	blendoff
 	end
