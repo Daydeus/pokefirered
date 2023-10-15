@@ -194,6 +194,17 @@ const struct SpriteTemplate gTailGlowOrbSpriteTemplate =
     .callback = AnimTailGlowOrb,
 };
 
+const struct SpriteTemplate gInfestationBubbleTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_BUBBLES,
+    .paletteTag = ANIM_TAG_HANDS_AND_FEET,
+    .oam = &gOamData_AffineOff_ObjNormal_8x8,
+    .anims = gAnims_WaterPulseBubble,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimParticleInVortex
+};
+
 static void AnimMegahornHorn(struct Sprite *sprite)
 {
     if (IsContest())

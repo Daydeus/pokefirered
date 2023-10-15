@@ -147,6 +147,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_ICICLE_SPEAR]  = _("ICICLE SPEAR"),
     [MOVE_ICY_WIND]      = _("ICY WIND"),
     [MOVE_IMPRISON]      = _("IMPRISON"),
+    [MOVE_INFESTATION]   = _("INFESTATION"),
     [MOVE_INGRAIN]       = _("INGRAIN"),
     [MOVE_IRON_DEFENSE]  = _("IRON DEFENSE"),
     [MOVE_IRON_TAIL]     = _("IRON TAIL"),

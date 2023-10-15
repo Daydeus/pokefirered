@@ -168,6 +168,7 @@ gBattleAnims_Moves::
 	.4byte Move_ICICLE_SPEAR
 	.4byte Move_ICY_WIND
 	.4byte Move_IMPRISON
+	.4byte Move_INFESTATION
 	.4byte Move_INGRAIN
 	.4byte Move_IRON_DEFENSE
 	.4byte Move_IRON_TAIL
@@ -10578,10 +10579,11 @@ General_ItemKnockoff:
 
 General_TurnTrap:
 	createvisualtask AnimTask_GetTrappedMoveAnimId, 5
-	jumpargeq 0, TRAP_ANIM_FIRE_SPIN, Status_FireSpin
-	jumpargeq 0, TRAP_ANIM_WHIRLPOOL, Status_Whirlpool
-	jumpargeq 0, TRAP_ANIM_CLAMP,     Status_Clamp
-	jumpargeq 0, TRAP_ANIM_SAND_TOMB, Status_SandTomb
+	jumpargeq 0, TRAP_ANIM_FIRE_SPIN,   Status_FireSpin
+	jumpargeq 0, TRAP_ANIM_WHIRLPOOL,   Status_Whirlpool
+	jumpargeq 0, TRAP_ANIM_CLAMP,       Status_Clamp
+	jumpargeq 0, TRAP_ANIM_INFESTATION, Status_Infestation
+	jumpargeq 0, TRAP_ANIM_SAND_TOMB,   Status_SandTomb
 	goto Status_BindWrap
 
 Status_BindWrap:
@@ -10641,6 +10643,22 @@ Status_Clamp:
 	clearmonbg ANIM_TARGET
 	blendoff
 	waitforvisualfinish
+	end
+
+Status_Infestation:
+	loadspritegfx ANIM_TAG_HANDS_AND_FEET @black color
+	loadspritegfx ANIM_TAG_SMALL_BUBBLES @circle particles
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0x2, 0x0, 0x9, 0x7320
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 30, 1
+	loopsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER, 0x0, 30
+	call InfestationVortex
+	call InfestationVortex
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xA, F_PAL_TARGET, 0x2, 0x9, 0x0, 0x7320
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
 	end
 
 Status_SandTomb:
@@ -11101,6 +11119,8 @@ Special_MonToSubstitute:
 	createvisualtask AnimTask_SwapMonSpriteToFromSubstitute, 2, FALSE
 	end
 
+@ New Move Animations
+
 Move_DRILL_RUN:
 	loadspritegfx ANIM_TAG_IMPACT
 	loadspritegfx ANIM_TAG_HORN_HIT
@@ -11156,6 +11176,78 @@ Move_DRILL_RUN:
 	call UnsetPsychicBackground
 	end
 
+Move_EARTH_AURA::
+	loadspritegfx ANIM_TAG_WATER_ORB @whirl motion
+	loadspritegfx ANIM_TAG_SPARK_2 @yellow color
+	monbg ANIM_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0xE, 0x0
+	waitforvisualfinish
+	call EarthAuraVortex
+	call EarthAuraVortex
+	call EarthAuraVortex
+	call EarthAuraVortex
+	waitforvisualfinish
+	fadetobg BG_FISSURE
+	waitbgfadeout
+	playsewithpan SE_M_EARTHQUAKE, 0x0
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 10, 0x32
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 10, 0x32
+	createvisualtask AnimTask_PositionFissureBgOnBattler, 5, ANIM_TARGET, 5, -1
+	waitbgfadein
+	waitforvisualfinish
+	call UnsetPsychicBackground
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0x0, 0x0
+	clearmonbg ANIM_ATTACKER
+	end
+EarthAuraVortex:
+	playsewithpan SE_M_SACRED_FIRE2 SOUND_PAN_TARGET
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x1c, 0x180, 0x32, 0x8, 0x32, 0x0
+	delay 0x2
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x20, 0xf0, 0x28, 0xb, 0xffd2, 0x0
+	delay 0x2
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x21, 0x1a0, 0x28, 0x4, 0x2a, 0x0
+	delay 0x2
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x1f, 0x120, 0x2d, 0x6, 0xffd6, 0x0
+	delay 0x2
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x1c, 0x1c0, 0x2d, 0xb, 0x2e, 0x0
+	delay 0x2
+	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x21, 0x1d0, 0x32, 0xa, 0xffce, 0x0
+	delay 0x2
+	return
+
+Move_INFESTATION::
+	loadspritegfx ANIM_TAG_HANDS_AND_FEET @black color
+	loadspritegfx ANIM_TAG_SMALL_BUBBLES @circle particles
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_TARGET, 0x2, 0x0, 0x9, 0x7320
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 3, 0, 79, 1
+	loopsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER, 0x0, 0x4F
+	call InfestationVortex
+	call InfestationVortex
+	call InfestationVortex
+	call InfestationVortex
+	call InfestationVortex
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xA, F_PAL_TARGET, 0x2, 0x9, 0x0, 0x7320
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	end
+InfestationVortex:
+	createsprite gInfestationBubbleTemplate, ANIM_TARGET, 2, 0x0, 0x1c, 0x210, 0x1e, 0xd, 0x32, 0x1
+	delay 0x1
+	createsprite gInfestationBubbleTemplate, ANIM_TARGET, 2, 0x0, 0x20, 0x1e0, 0x14, 0x10, 0xffd2, 0x1
+	delay 0x1
+	createsprite gInfestationBubbleTemplate, ANIM_TARGET, 2, 0x0, 0x21, 0x240, 0x14, 0x8, 0x2a, 0x1
+	delay 0x1
+	createsprite gInfestationBubbleTemplate, ANIM_TARGET, 2, 0x0, 0x1f, 0x190, 0x19, 0xb, 0xffd6, 0x1
+	delay 0x1
+	createsprite gInfestationBubbleTemplate, ANIM_TARGET, 2, 0x0, 0x1c, 0x200, 0x19, 0x10, 0x2e, 0x1
+	delay 0x1
+	createsprite gInfestationBubbleTemplate, ANIM_TARGET, 2, 0x0, 0x21, 0x1d0, 0x1e, 0xf, 0xffce, 0x1
+	delay 0x1
+	return
+
 Move_MUD_BOMB:
 	loadspritegfx ANIM_TAG_MUD_SAND
 	playsewithpan SE_M_BUBBLE3, SOUND_PAN_ATTACKER
@@ -11206,42 +11298,3 @@ Move_MUD_BOMB:
 	createsprite gMudBombSplash, ANIM_TARGET, 2, -16, 44, 20
 	waitforvisualfinish
 	end
-
-Move_EARTH_AURA::
-	loadspritegfx ANIM_TAG_WATER_ORB @whirl motion
-	loadspritegfx ANIM_TAG_SPARK_2 @yellow color
-	monbg ANIM_ATTACKER
-	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0xE, 0x0
-	waitforvisualfinish
-	call EarthAuraVortex
-	call EarthAuraVortex
-	call EarthAuraVortex
-	call EarthAuraVortex
-	waitforvisualfinish
-	fadetobg BG_FISSURE
-	waitbgfadeout
-	playsewithpan SE_M_EARTHQUAKE, 0x0
-	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 10, 0x32
-	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 10, 0x32
-	createvisualtask AnimTask_PositionFissureBgOnBattler, 5, ANIM_TARGET, 5, -1
-	waitbgfadein
-	waitforvisualfinish
-	call UnsetPsychicBackground
-	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0x0, 0x0
-	clearmonbg ANIM_ATTACKER
-	end
-EarthAuraVortex:
-	playsewithpan SE_M_SACRED_FIRE2 SOUND_PAN_TARGET
-	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x1c, 0x180, 0x32, 0x8, 0x32, 0x0
-	delay 0x2
-	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x20, 0xf0, 0x28, 0xb, 0xffd2, 0x0
-	delay 0x2
-	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x21, 0x1a0, 0x28, 0x4, 0x2a, 0x0
-	delay 0x2
-	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x1f, 0x120, 0x2d, 0x6, 0xffd6, 0x0
-	delay 0x2
-	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x1c, 0x1c0, 0x2d, 0xb, 0x2e, 0x0
-	delay 0x2
-	createsprite gEarthAuraVortexTemplate, ANIM_TARGET, 2, 0x0, 0x21, 0x1d0, 0x32, 0xa, 0xffce, 0x0
-	delay 0x2
-	return

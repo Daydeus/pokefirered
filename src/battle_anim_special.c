@@ -2288,6 +2288,8 @@ void AnimTask_GetTrappedMoveAnimId(u8 taskId)
         gBattleAnimArgs[0] = TRAP_ANIM_WHIRLPOOL;
     else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_CLAMP)
         gBattleAnimArgs[0] = TRAP_ANIM_CLAMP;
+    else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_INFESTATION)
+        gBattleAnimArgs[0] = TRAP_ANIM_INFESTATION;
     else if (gBattleSpritesDataPtr->animationData->animArg == MOVE_SAND_TOMB)
         gBattleAnimArgs[0] = TRAP_ANIM_SAND_TOMB;
     else
