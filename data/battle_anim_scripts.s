@@ -321,6 +321,7 @@ gBattleAnims_Moves::
 	.4byte Move_STRENGTH
 	.4byte Move_STRING_SHOT
 	.4byte Move_STRUGGLE
+	.4byte Move_STRUGGLE_BUG
 	.4byte Move_STUN_SPORE
 	.4byte Move_SUBMISSION
 	.4byte Move_SUBSTITUTE
@@ -11314,4 +11315,30 @@ Move_MUD_BOMB:
 	createsprite gMudBombSplash, ANIM_TARGET, 2, 16, -46, 20
 	createsprite gMudBombSplash, ANIM_TARGET, 2, -16, 44, 20
 	waitforvisualfinish
+	end
+
+Move_STRUGGLE_BUG:
+	loadspritegfx ANIM_TAG_MOVEMENT_WAVES
+	loadspritegfx ANIM_TAG_IMPACT
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 0, 9, 0x0a1f
+	waitforvisualfinish
+	createvisualtask AnimTask_FlailMovement, 2, ANIM_ATTACKER
+	createsprite gMovementWavesSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, 2
+	createsprite gMovementWavesSpriteTemplate, ANIM_ATTACKER, 2, 0, 1, 2
+	loopsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER, 0x8, 0x2
+	waitforvisualfinish
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 1
+	createvisualtask AnimTask_ShakeTargetBasedOnMovePowerOrDmg, 2, FALSE, 1, 0x1e, 1, 0
+	createvisualtask AnimTask_ShakeTargetPartnerBasedOnMovePowerOrDmg, 2, FALSE, 1, 0x1e, 1, 0
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_ATTACKER, 2, 9, 0, 0x0a1f
+	delay 5
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 1
+	delay 5
+	createsprite gRandomPosHitSplatSpriteTemplate, ANIM_TARGET, 3, ANIM_TARGET, 1
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
 	end

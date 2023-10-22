@@ -300,6 +300,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_STRENGTH]      = _("STRENGTH"),
     [MOVE_STRING_SHOT]   = _("STRING SHOT"),
     [MOVE_STRUGGLE]      = _("STRUGGLE"),
+    [MOVE_STRUGGLE_BUG]  = _("STRUGGLE BUG"),
     [MOVE_STUN_SPORE]    = _("STUN SPORE"),
     [MOVE_SUBMISSION]    = _("SUBMISSION"),
     [MOVE_SUBSTITUTE]    = _("SUBSTITUTE"),
