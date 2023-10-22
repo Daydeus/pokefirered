@@ -330,7 +330,7 @@ Help_Text_AnswerWhatIsStatusProblem::
 	.string "that is inflicted on a POKéMON by its\l"
 	.string "foe's attack. These include burns,\l"
 	.string "paralysis, poisoning, sleep, and\l"
-	.string "freezing. These can be healed by\l"
+	.string "frostbite. These are healed by\l"
 	.string "visiting a POKéMON CENTER or using\l"
 	.string "the appropriate item.$"
 
@@ -1474,7 +1474,7 @@ Help_Text_DefineStatusProblem::
 	.string "Poison: Causes steady HP loss.\l"
 	.string "Paralysis: May prevent moves.\l"
 	.string "Burn: HP loss and lowers ATTACK.\l"
-	.string "Freeze: Can't use moves.\l"
+	.string "Frostbite: HP loss and lowers SP.ATK.\l"
 	.string "These can be healed with items, etc.$"
 
 Help_Text_DefinePokemon::

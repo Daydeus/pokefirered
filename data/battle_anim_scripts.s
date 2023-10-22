@@ -389,7 +389,7 @@ gBattleAnims_StatusConditions::
 	.4byte Status_Infatuation               @ B_ANIM_STATUS_INFATUATION
 	.4byte Status_Sleep                     @ B_ANIM_STATUS_SLP
 	.4byte Status_Paralysis                 @ B_ANIM_STATUS_PRZ
-	.4byte Status_Freeze                    @ B_ANIM_STATUS_FRZ
+	.4byte Status_Frostbite                 @ B_ANIM_STATUS_FSB
 	.4byte Status_Curse                     @ B_ANIM_STATUS_CURSED
 	.4byte Status_Nightmare                 @ B_ANIM_STATUS_NIGHTMARE
 
@@ -10505,7 +10505,7 @@ Status_Paralysis:
 	call ElectricityEffect
 	end
 
-Status_Freeze:
+Status_Frostbite:
 	playsewithpan SE_M_ICY_WIND, 0
 	loadspritegfx ANIM_TAG_ICE_CUBE
 	monbg ANIM_DEF_PARTNER

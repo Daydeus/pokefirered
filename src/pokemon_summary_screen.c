@@ -414,7 +414,7 @@ static const union AnimCmd sStatusAilmentIconAnim_SLP[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sStatusAilmentIconAnim_FRZ[] = 
+static const union AnimCmd sStatusAilmentIconAnim_FSB[] =
 {
     ANIMCMD_FRAME(12, 20),
     ANIMCMD_JUMP(0),
@@ -449,7 +449,7 @@ static const union AnimCmd * const sStatusAilmentIconAnimTable[] =
     sStatusAilmentIconAnim_PSN,
     sStatusAilmentIconAnim_PRZ,
     sStatusAilmentIconAnim_SLP,
-    sStatusAilmentIconAnim_FRZ,
+    sStatusAilmentIconAnim_FSB,
     sStatusAilmentIconAnim_BRN,
     sStatusAilmentIconAnim_PKRS,
     sStatusAilmentIconAnim_FNT,
@@ -3485,8 +3485,8 @@ static u8 StatusToAilment(u32 status)
     if ((status & STATUS1_SLEEP) != 0)
         return AILMENT_SLP;
 
-    if ((status & STATUS1_FREEZE) != 0)
-        return AILMENT_FRZ;
+    if ((status & STATUS1_FROSTBITE) != 0)
+        return AILMENT_FSB;
 
     if ((status & STATUS1_BURN) != 0)
         return AILMENT_BRN;

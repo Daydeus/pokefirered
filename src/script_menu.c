@@ -96,7 +96,7 @@ static const struct MenuAction sMultichoiceList_TrainerSchoolWhiteboard[] = {
     { gText_Psn },
     { gText_Par },
     { gText_Brn },
-    { gText_Frz },
+    { gText_Fsb },
     { gOtherText_Exit }
 };
 

@@ -12,7 +12,7 @@ static const u8 sItemEffect_BurnHeal[6] = {
 };
 
 static const u8 sItemEffect_IceHeal[6] = {
-    [3] = ITEM3_FREEZE,
+    [3] = ITEM3_FROSTBITE,
 };
 
 static const u8 sItemEffect_Awakening[6] = {
@@ -309,7 +309,7 @@ static const u8 sItemEffect_RawstBerry[6] = {
 };
 
 static const u8 sItemEffect_AspearBerry[6] = {
-    [3] = ITEM3_FREEZE,
+    [3] = ITEM3_FROSTBITE,
 };
 
 static const u8 sItemEffect_LeppaBerry[7] = {

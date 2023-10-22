@@ -92,13 +92,13 @@
 #define STATUS1_SLEEP_TURN(num)  ((num) << 0) // Just for readability (or if rearranging statuses)
 #define STATUS1_POISON           (1 << 3)
 #define STATUS1_BURN             (1 << 4)
-#define STATUS1_FREEZE           (1 << 5)
+#define STATUS1_FROSTBITE        (1 << 5)
 #define STATUS1_PARALYSIS        (1 << 6)
 #define STATUS1_TOXIC_POISON     (1 << 7)
 #define STATUS1_TOXIC_COUNTER    (1 << 8 | 1 << 9 | 1 << 10 | 1 << 11)
 #define STATUS1_TOXIC_TURN(num)  ((num) << 8)
 #define STATUS1_PSN_ANY          (STATUS1_POISON | STATUS1_TOXIC_POISON)
-#define STATUS1_ANY              (STATUS1_SLEEP | STATUS1_POISON | STATUS1_BURN | STATUS1_FREEZE | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON)
+#define STATUS1_ANY              (STATUS1_SLEEP | STATUS1_POISON | STATUS1_BURN | STATUS1_FROSTBITE | STATUS1_PARALYSIS | STATUS1_TOXIC_POISON)
 
 // Volatile status ailments
 // These are removed after exiting the battle or switching out
@@ -221,7 +221,7 @@
 #define MOVE_EFFECT_SLEEP               1
 #define MOVE_EFFECT_POISON              2
 #define MOVE_EFFECT_BURN                3
-#define MOVE_EFFECT_FREEZE              4
+#define MOVE_EFFECT_FROSTBITE           4
 #define MOVE_EFFECT_PARALYSIS           5
 #define MOVE_EFFECT_TOXIC               6
 #define PRIMARY_STATUS_MOVE_EFFECT      MOVE_EFFECT_TOXIC // All above move effects apply primary status

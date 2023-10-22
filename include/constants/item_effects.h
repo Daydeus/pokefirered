@@ -18,14 +18,14 @@
 // field 3 masks
 #define ITEM3_CONFUSION         0x1
 #define ITEM3_PARALYSIS         0x2
-#define ITEM3_FREEZE            0x4
+#define ITEM3_FROSTBITE         0x4
 #define ITEM3_BURN              0x8
 #define ITEM3_POISON            0x10
 #define ITEM3_SLEEP             0x20
 #define ITEM3_LEVEL_UP          0x40
 #define ITEM3_GUARD_SPEC        0x80 // Works the same way as the move Mist.
 
-#define ITEM3_STATUS_ALL        (ITEM3_CONFUSION | ITEM3_PARALYSIS | ITEM3_FREEZE | ITEM3_BURN | ITEM3_POISON | ITEM3_SLEEP)
+#define ITEM3_STATUS_ALL        (ITEM3_CONFUSION | ITEM3_PARALYSIS | ITEM3_FROSTBITE | ITEM3_BURN | ITEM3_POISON | ITEM3_SLEEP)
 
 // field 4 masks
 #define ITEM4_EV_HP             0x1
@@ -71,7 +71,7 @@
 #define ITEM_EFFECT_CURE_POISON 3
 #define ITEM_EFFECT_CURE_SLEEP 4
 #define ITEM_EFFECT_CURE_BURN 5
-#define ITEM_EFFECT_CURE_FREEZE 6
+#define ITEM_EFFECT_CURE_FROSTBITE 6
 #define ITEM_EFFECT_CURE_PARALYSIS 7
 #define ITEM_EFFECT_CURE_CONFUSION 8
 #define ITEM_EFFECT_CURE_INFATUATION 9

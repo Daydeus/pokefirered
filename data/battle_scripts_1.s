@@ -26,7 +26,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectPoisonHit              @ EFFECT_POISON_HIT
 	.4byte BattleScript_EffectAbsorb                 @ EFFECT_ABSORB
 	.4byte BattleScript_EffectBurnHit                @ EFFECT_BURN_HIT
-	.4byte BattleScript_EffectFreezeHit              @ EFFECT_FREEZE_HIT
+	.4byte BattleScript_EffectFrostbiteHit           @ EFFECT_FROSTBITE_HIT
 	.4byte BattleScript_EffectParalyzeHit            @ EFFECT_PARALYZE_HIT
 	.4byte BattleScript_EffectExplosion              @ EFFECT_EXPLOSION
 	.4byte BattleScript_EffectDreamEater             @ EFFECT_DREAM_EATER
@@ -146,7 +146,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectPresent                @ EFFECT_PRESENT
 	.4byte BattleScript_EffectFrustration            @ EFFECT_FRUSTRATION
 	.4byte BattleScript_EffectSafeguard              @ EFFECT_SAFEGUARD
-	.4byte BattleScript_EffectThawHit                @ EFFECT_THAW_HIT
 	.4byte BattleScript_EffectMagnitude              @ EFFECT_MAGNITUDE
 	.4byte BattleScript_EffectBatonPass              @ EFFECT_BATON_PASS
 	.4byte BattleScript_EffectHit                    @ EFFECT_PURSUIT
@@ -235,6 +234,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCalmMind               @ EFFECT_CALM_MIND
 	.4byte BattleScript_EffectDragonDance            @ EFFECT_DRAGON_DANCE
 	.4byte BattleScript_EffectCamouflage             @ EFFECT_CAMOUFLAGE
+	.4byte BattleScript_EffectSheerCold              @ EFFECT_SHEER_COLD
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -365,8 +365,8 @@ BattleScript_EffectBurnHit::
 	setmoveeffect MOVE_EFFECT_BURN
 	goto BattleScript_EffectHit
 
-BattleScript_EffectFreezeHit::
-	setmoveeffect MOVE_EFFECT_FREEZE
+BattleScript_EffectFrostbiteHit::
+	setmoveeffect MOVE_EFFECT_FROSTBITE
 	goto BattleScript_EffectHit
 
 BattleScript_EffectParalyzeHit::
@@ -1672,10 +1672,6 @@ BattleScript_EffectSafeguard::
 	setsafeguard
 	goto BattleScript_PrintReflectLightScreenSafeguardString
 
-BattleScript_EffectThawHit::
-	setmoveeffect MOVE_EFFECT_BURN
-	goto BattleScript_EffectHit
-
 BattleScript_EffectMagnitude::
 	attackcanceler
 	attackstring
@@ -2196,6 +2192,28 @@ BattleScript_AlreadyBurned::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
+BattleScript_EffectSheerCold::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
+	jumpifstatus BS_TARGET, STATUS1_FROSTBITE, BattleScript_AlreadyFrostbitten
+	jumpiftype BS_TARGET, TYPE_ICE, BattleScript_NotAffected
+	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
+	attackanimation
+	waitanimation
+	setmoveeffect MOVE_EFFECT_FROSTBITE
+	seteffectprimary
+	goto BattleScript_MoveEnd
+
+BattleScript_AlreadyFrostbitten::
+	pause B_WAIT_TIME_SHORT
+	printstring STRINGID_PKMNALREADYHASFROSTBITE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectMemento::
 	attackcanceler
 	jumpifbyte CMP_EQUAL, cMISS_TYPE, B_MSG_PROTECTED, BattleScript_MementoTargetProtect
@@ -2516,7 +2534,7 @@ BattleScript_EffectRefresh::
 	attackcanceler
 	attackstring
 	ppreduce
-	cureifburnedparalysedorpoisoned BattleScript_ButItFailed
+	cureifnonvolatilestatus BattleScript_ButItFailed
 	attackanimation
 	waitanimation
 	printstring STRINGID_PKMNSTATUSNORMAL
@@ -3687,28 +3705,15 @@ BattleScript_DoTurnDmg::
 BattleScript_DoTurnDmgEnd::
 	end2
 
+BattleScript_FrostbiteTurnDmg::
+	printstring STRINGID_PKMNHURTBYFROSTBITE
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_DoStatusTurnDmg
+
 BattleScript_BurnTurnDmg::
 	printstring STRINGID_PKMNHURTBYBURN
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_DoStatusTurnDmg
-
-BattleScript_MoveUsedIsFrozen::
-	printstring STRINGID_PKMNISFROZEN
-	waitmessage B_WAIT_TIME_LONG
-	statusanimation BS_ATTACKER
-	goto BattleScript_MoveEnd
-
-BattleScript_MoveUsedUnfroze::
-	printfromtable gGotDefrostedStringIds
-	waitmessage B_WAIT_TIME_LONG
-	updatestatusicon BS_ATTACKER
-	return
-
-BattleScript_DefrostedViaFireMove::
-	printstring STRINGID_PKMNWASDEFROSTED
-	waitmessage B_WAIT_TIME_LONG
-	updatestatusicon BS_TARGET
-	return
 
 BattleScript_MoveUsedIsParalyzed::
 	printstring STRINGID_PKMNISPARALYZED
@@ -3857,9 +3862,9 @@ BattleScript_MoveEffectBurn::
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_UpdateEffectStatusIconRet
 
-BattleScript_MoveEffectFreeze::
+BattleScript_MoveEffectFrostbite::
 	statusanimation BS_EFFECT_BATTLER
-	printfromtable gGotFrozenStringIds
+	printfromtable gGotFrostbiteStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_UpdateEffectStatusIconRet
 
@@ -4245,13 +4250,13 @@ BattleScript_BerryCureBrnRet::
 	removeitem BS_SCRIPTING
 	return
 
-BattleScript_BerryCureFrzEnd2::
-	call BattleScript_BerryCureFrzRet
+BattleScript_BerryCureFsbEnd2::
+	call BattleScript_BerryCureFsbRet
 	end2
 
-BattleScript_BerryCureFrzRet::
+BattleScript_BerryCureFsbRet::
 	playanimation BS_SCRIPTING, B_ANIM_HELD_ITEM_EFFECT
-	printstring STRINGID_PKMNSITEMDEFROSTEDIT
+	printstring STRINGID_PKMNSITEMCUREDFROSTBITE
 	waitmessage B_WAIT_TIME_LONG
 	updatestatusicon BS_SCRIPTING
 	removeitem BS_SCRIPTING

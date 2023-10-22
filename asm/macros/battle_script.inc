@@ -1049,7 +1049,7 @@
 	.byte 0xcc
 	.endm
 
-	.macro cureifburnedparalysedorpoisoned param0:req
+	.macro cureifnonvolatilestatus param0:req
 	.byte 0xcd
 	.4byte \param0
 	.endm

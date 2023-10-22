@@ -374,7 +374,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_BLIZZARD] =
     {
-        .effect = EFFECT_FREEZE_HIT,
+        .effect = EFFECT_FROSTBITE_HIT,
         .power = 120,
         .type = TYPE_ICE,
         .accuracy = 70,
@@ -1454,7 +1454,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FLAME_WHEEL] =
     {
-        .effect = EFFECT_THAW_HIT,
+        .effect = EFFECT_BURN_HIT,
         .power = 60,
         .type = TYPE_FIRE,
         .accuracy = 100,
@@ -2028,7 +2028,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ICE_BEAM] =
     {
-        .effect = EFFECT_FREEZE_HIT,
+        .effect = EFFECT_FROSTBITE_HIT,
         .power = 95,
         .type = TYPE_ICE,
         .accuracy = 100,
@@ -2042,7 +2042,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ICE_PUNCH] =
     {
-        .effect = EFFECT_FREEZE_HIT,
+        .effect = EFFECT_FROSTBITE_HIT,
         .power = 75,
         .type = TYPE_ICE,
         .accuracy = 100,
@@ -3065,7 +3065,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_POWDER_SNOW] =
     {
-        .effect = EFFECT_FREEZE_HIT,
+        .effect = EFFECT_FROSTBITE_HIT,
         .power = 40,
         .type = TYPE_ICE,
         .accuracy = 100,
@@ -3517,7 +3517,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SACRED_FIRE] =
     {
-        .effect = EFFECT_THAW_HIT,
+        .effect = EFFECT_BURN_HIT,
         .power = 100,
         .type = TYPE_FIRE,
         .accuracy = 95,
@@ -3713,12 +3713,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SHEER_COLD] =
     {
-        .effect = EFFECT_OHKO,
-        .power = 1,
+        .effect = EFFECT_SHEER_COLD,
+        .power = 0,
         .type = TYPE_ICE,
-        .accuracy = 30,
-        .category = MOVE_CATEGORY_SPECIAL,
-        .pp = 5,
+        .accuracy = 75,
+        .category = MOVE_CATEGORY_STATUS,
+        .pp = 15,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
