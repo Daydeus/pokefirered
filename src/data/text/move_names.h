@@ -226,6 +226,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_PURSUIT]       = _("PURSUIT"),
     [MOVE_QUICK_ATTACK]  = _("QUICK ATTACK"),
     [MOVE_RAGE]          = _("RAGE"),
+    [MOVE_RAGE_POWDER]   = _("RAGE POWDER"),
     [MOVE_RAIN_DANCE]    = _("RAIN DANCE"),
     [MOVE_RAPID_SPIN]    = _("RAPID SPIN"),
     [MOVE_RAZOR_LEAF]    = _("RAZOR LEAF"),

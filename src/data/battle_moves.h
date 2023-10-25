@@ -3221,6 +3221,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },
 
+    [MOVE_RAGE_POWDER] =
+    {
+        .effect = EFFECT_FOLLOW_ME,
+        .power = 0,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .category = MOVE_CATEGORY_STATUS,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_USER,
+        .priority = 3,
+        .flags = 0,
+    },
+
     [MOVE_RAIN_DANCE] =
     {
         .effect = EFFECT_RAIN_DANCE,

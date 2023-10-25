@@ -247,6 +247,7 @@ gBattleAnims_Moves::
 	.4byte Move_PURSUIT
 	.4byte Move_QUICK_ATTACK
 	.4byte Move_RAGE
+	.4byte Move_RAGE_POWDER
 	.4byte Move_RAIN_DANCE
 	.4byte Move_RAPID_SPIN
 	.4byte Move_RAZOR_LEAF
@@ -11316,6 +11317,28 @@ Move_MUD_BOMB:
 	createsprite gMudBombSplash, ANIM_TARGET, 2, -16, 44, 20
 	waitforvisualfinish
 	end
+
+Move_RAGE_POWDER::
+	loadspritegfx ANIM_TAG_SPORE @Powder
+	loadspritegfx ANIM_TAG_HEART_STAMP @Red Colour
+	monbg ANIM_DEF_PARTNER
+	splitbgprio ANIM_TARGET
+	loopsewithpan SE_M_POISON_POWDER, SOUND_PAN_TARGET, 0x12, 0xa
+	call RagePowderSprinkle
+	call RagePowderSprinkle
+	call RagePowderSprinkle
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 2, 2, 0, 11, RGB_RED
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	end
+RagePowderSprinkle:
+	createsprite gRagePowderRedPowderTemplate, ANIM_ATTACKER, 0x2, 0x0, 0xffec, 0x55, 0x50, 0x0
+	delay 0xc
+	createsprite gRagePowderRedPowderTemplate, ANIM_ATTACKER, 0x2, 0x0, 0xfff6, 0xaa, 0x50, 0x0
+	delay 0xc
+	createsprite gRagePowderRedPowderTemplate, ANIM_ATTACKER, 0x2, 0x0, 0xfff1, 0x0, 0x50, 0x0
+	delay 0xc
+	return
 
 Move_STRUGGLE_BUG:
 	loadspritegfx ANIM_TAG_MOVEMENT_WAVES

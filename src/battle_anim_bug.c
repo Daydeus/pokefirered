@@ -205,6 +205,17 @@ const struct SpriteTemplate gInfestationBubbleTemplate =
     .callback = AnimParticleInVortex
 };
 
+const struct SpriteTemplate gRagePowderRedPowderTemplate =
+{
+    .tileTag = ANIM_TAG_SPORE,
+    .paletteTag = ANIM_TAG_HEART_STAMP,
+    .oam = &gOamData_AffineOff_ObjNormal_16x16,
+    .anims = gSporeParticleAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimSporeParticle
+};
+
 static void AnimMegahornHorn(struct Sprite *sprite)
 {
     if (IsContest())
