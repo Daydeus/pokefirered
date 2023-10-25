@@ -360,10 +360,11 @@
 #define MOVE_WISH                356
 #define MOVE_WITHDRAW            357
 #define MOVE_WRAP                358
-#define MOVE_YAWN                359
-#define MOVE_ZAP_CANNON          360
+#define MOVE_X_SCISSOR           359
+#define MOVE_YAWN                360
+#define MOVE_ZAP_CANNON          361
 
-#define MOVES_COUNT 361
+#define MOVES_COUNT              362
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

@@ -359,6 +359,7 @@ const u8 gMoveDescription_WingAttack[]      = _("The foe is struck\nwith large, 
 const u8 gMoveDescription_Wish[]            = _("A self-healing move\nthat restores half\nthe full HP on the\nnext turn.");
 const u8 gMoveDescription_Withdraw[]        = _("The user withdraws\nits body in its hard\nshell, raising both\nof its defenses.");
 const u8 gMoveDescription_Wrap[]            = _("A long body or\nvines are used to\nwrap the foe for\ntwo to five turns.");
+const u8 gMoveDescription_XScissor[]        = _("The user slices the\nfoe with crossed\nclaws. Has a high\ncritical-hit ratio.");
 const u8 gMoveDescription_Yawn[]            = _("A huge yawn lulls\nthe foe into falling\nasleep on the next\nturn.");
 const u8 gMoveDescription_ZapCannon[]       = _("An electric blast is\nfired like a cannon\nto inflict damage\nand paralyze.");
 
@@ -721,6 +722,7 @@ const u8 *const gMoveDescriptionPointers[MOVES_COUNT - 1] = {
     [MOVE_WISH          - 1] = gMoveDescription_Wish,
     [MOVE_WITHDRAW      - 1] = gMoveDescription_Withdraw,
     [MOVE_WRAP          - 1] = gMoveDescription_Wrap,
+    [MOVE_X_SCISSOR     - 1] = gMoveDescription_XScissor,
     [MOVE_YAWN          - 1] = gMoveDescription_Yawn,
     [MOVE_ZAP_CANNON    - 1] = gMoveDescription_ZapCannon,
 };

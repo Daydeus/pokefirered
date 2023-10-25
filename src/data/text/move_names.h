@@ -358,6 +358,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_WISH]          = _("WISH"),
     [MOVE_WITHDRAW]      = _("WITHDRAW"),
     [MOVE_WRAP]          = _("WRAP"),
+    [MOVE_X_SCISSOR]     = _("X-SCISSOR"),
     [MOVE_YAWN]          = _("YAWN"),
     [MOVE_ZAP_CANNON]    = _("ZAP CANNON")
 };
