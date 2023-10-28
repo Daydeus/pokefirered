@@ -341,6 +341,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_TWINEEDLE]     = _("TWINEEDLE"),
     [MOVE_TWISTER]       = _("TWISTER"),
     [MOVE_UPROAR]        = _("UPROAR"),
+    [MOVE_U_TURN]        = _("U-TURN"),
     [MOVE_VICE_GRIP]     = _("VICEGRIP"),
     [MOVE_VINE_WHIP]     = _("VINE WHIP"),
     [MOVE_VITAL_THROW]   = _("VITAL THROW"),
