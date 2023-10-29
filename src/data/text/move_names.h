@@ -35,6 +35,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_BRICK_BREAK]   = _("BRICK BREAK"),
     [MOVE_BUBBLE]        = _("BUBBLE"),
     [MOVE_BUBBLE_BEAM]   = _("BUBBLEBEAM"),
+    [MOVE_BUG_BUZZ]      = _("BUG BUZZ"),
     [MOVE_BULK_UP]       = _("BULK UP"),
     [MOVE_BULLET_SEED]   = _("BULLET SEED"),
     [MOVE_CALM_MIND]     = _("CALM MIND"),

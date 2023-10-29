@@ -56,6 +56,7 @@ gBattleAnims_Moves::
 	.4byte Move_BRICK_BREAK
 	.4byte Move_BUBBLE
 	.4byte Move_BUBBLE_BEAM
+	.4byte Move_BUG_BUZZ
 	.4byte Move_BULK_UP
 	.4byte Move_BULLET_SEED
 	.4byte Move_CALM_MIND
@@ -11141,6 +11142,38 @@ Special_MonToSubstitute:
 	end
 
 @ New Move Animations
+Move_BUG_BUZZ:
+	loadspritegfx ANIM_TAG_JAGGED_MUSIC_NOTE
+	loadspritegfx ANIM_TAG_THIN_RING
+	monbg ANIM_DEF_PARTNER
+	fadetobg BG_BUG_OPPONENT
+	waitbgfadeout
+	createvisualtask AnimTask_UproarDistortion, 2, 0
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
+	playsewithpan SE_M_UPROAR, SOUND_PAN_ATTACKER
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 29, -12, 0
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -12, -29, 1
+	delay 16
+	createvisualtask AnimTask_UproarDistortion, 2, 0
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
+	playsewithpan SE_M_UPROAR, SOUND_PAN_ATTACKER
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 12, -29, 1
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -29, -12, 0
+	delay 16
+	createvisualtask AnimTask_UproarDistortion, 2, 0
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 31, 8
+	playsewithpan SE_M_UPROAR, SOUND_PAN_ATTACKER
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, 24, -24, 1
+	createsprite gJaggedMusicNoteSpriteTemplate, ANIM_ATTACKER, 2, 0, -24, -24, 0
+	waitforvisualfinish
+	clearmonbg ANIM_DEF_PARTNER
+	delay 0
+	restorebg
+	waitbgfadeout
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, ANIM_TARGET, 0, 4, 0, RGB_BLACK
+	setarg 7, 0xFFFF
+	waitbgfadein
+	end
 
 Move_DRILL_RUN:
 	loadspritegfx ANIM_TAG_IMPACT
