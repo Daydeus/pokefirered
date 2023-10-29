@@ -80,6 +80,7 @@ gBattleAnims_Moves::
 	.4byte Move_CRUSH_CLAW
 	.4byte Move_CURSE
 	.4byte Move_CUT
+	.4byte Move_DARK_PULSE
 	.4byte Move_DEFENSE_CURL
 	.4byte Move_DESTINY_BOND
 	.4byte Move_DETECT
@@ -11172,6 +11173,34 @@ Move_BUG_BUZZ:
 	waitbgfadeout
 	createvisualtask AnimTask_BlendBattleAnimPalExclude, 10, ANIM_TARGET, 0, 4, 0, RGB_BLACK
 	setarg 7, 0xFFFF
+	waitbgfadein
+	end
+
+Move_DARK_PULSE:
+	loadspritegfx ANIM_TAG_THIN_RING
+	monbg ANIM_TARGET
+	fadetobg BG_DARK
+	waitbgfadein
+	delay 0
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 0x1D09, 12
+	createvisualtask AnimTask_SpiteTargetShadow, 2
+	loopsewithpan SE_M_PSYBEAM, SOUND_PAN_TARGET, 20, 3
+	delay 8
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 0x1D09, 12
+	delay 8
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 0x1D09, 12
+	delay 8
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 0x1D09, 12
+	delay 8
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 0x1D09, 12
+	delay 8
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 0x1D09, 12
+	delay 8
+	createsprite gUproarRingSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, 0, 0, 0x1D09, 12
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	delay 1
+	restorebg
 	waitbgfadein
 	end
 

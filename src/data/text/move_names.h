@@ -59,6 +59,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_CRUSH_CLAW]    = _("CRUSH CLAW"),
     [MOVE_CURSE]         = _("CURSE"),
     [MOVE_CUT]           = _("CUT"),
+    [MOVE_DARK_PULSE]    = _("DARK PULSE"),
     [MOVE_DEFENSE_CURL]  = _("DEFENSE CURL"),
     [MOVE_DESTINY_BOND]  = _("DESTINY BOND"),
     [MOVE_DETECT]        = _("DETECT"),
