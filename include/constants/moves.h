@@ -93,11 +93,11 @@
 #define MOVE_EXTRASENSORY        89
 #define MOVE_EXTREME_SPEED       90
 #define MOVE_FACADE              91
-#define MOVE_FAINT_ATTACK        92
-#define MOVE_FAKE_OUT            93
-#define MOVE_FAKE_TEARS          94
-#define MOVE_FALSE_SWIPE         95
-#define MOVE_FEATHER_DANCE       96
+#define MOVE_FAKE_OUT            92
+#define MOVE_FAKE_TEARS          93
+#define MOVE_FALSE_SWIPE         94
+#define MOVE_FEATHER_DANCE       95
+#define MOVE_FEINT_ATTACK        96
 #define MOVE_FIRE_BLAST          97
 #define MOVE_FIRE_PUNCH          98
 #define MOVE_FIRE_SPIN           99

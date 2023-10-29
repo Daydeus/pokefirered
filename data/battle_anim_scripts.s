@@ -112,11 +112,11 @@ gBattleAnims_Moves::
 	.4byte Move_EXTRASENSORY
 	.4byte Move_EXTREME_SPEED
 	.4byte Move_FACADE
-	.4byte Move_FAINT_ATTACK
 	.4byte Move_FAKE_OUT
 	.4byte Move_FAKE_TEARS
 	.4byte Move_FALSE_SWIPE
 	.4byte Move_FEATHER_DANCE
+	.4byte Move_FEINT_ATTACK
 	.4byte Move_FIRE_BLAST
 	.4byte Move_FIRE_PUNCH
 	.4byte Move_FIRE_SPIN
@@ -5253,7 +5253,7 @@ SmogCloud:
 	delay 7
 	return
 
-Move_FAINT_ATTACK:
+Move_FEINT_ATTACK:
 	loadspritegfx ANIM_TAG_IMPACT
 	monbg ANIM_ATTACKER
 	fadetobg BG_DARK
