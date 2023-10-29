@@ -284,6 +284,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_SMELLING_SALT] = _("SMELLINGSALT"),
     [MOVE_SMOG]          = _("SMOG"),
     [MOVE_SMOKESCREEN]   = _("SMOKESCREEN"),
+    [MOVE_SNARL]         = _("SNARL"),
     [MOVE_SNATCH]        = _("SNATCH"),
     [MOVE_SNORE]         = _("SNORE"),
     [MOVE_SOFT_BOILED]   = _("SOFTBOILED"),
