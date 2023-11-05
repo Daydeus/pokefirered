@@ -280,6 +280,7 @@ BattleScript_EffectHit_Ret::
 	ppreduce
 	critcalc
 	damagecalc
+	typecalc
 	adjustnormaldamage
 	attackanimation
 	waitanimation
