@@ -352,6 +352,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_VICE_GRIP]     = _("VICEGRIP"),
     [MOVE_VINE_WHIP]     = _("VINE WHIP"),
     [MOVE_VITAL_THROW]   = _("VITAL THROW"),
+    [MOVE_VOLT_SWITCH]   = _("VOLT SWITCH"),
     [MOVE_VOLT_TACKLE]   = _("VOLT TACKLE"),
     [MOVE_WATERFALL]     = _("WATERFALL"),
     [MOVE_WATER_GUN]     = _("WATER GUN"),

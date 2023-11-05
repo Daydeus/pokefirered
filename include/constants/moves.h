@@ -354,25 +354,26 @@
 #define MOVE_VICE_GRIP           350
 #define MOVE_VINE_WHIP           351
 #define MOVE_VITAL_THROW         352
-#define MOVE_VOLT_TACKLE         353
-#define MOVE_WATERFALL           354
-#define MOVE_WATER_GUN           355
-#define MOVE_WATER_PULSE         356
-#define MOVE_WATER_SPORT         357
-#define MOVE_WATER_SPOUT         358
-#define MOVE_WEATHER_BALL        359
-#define MOVE_WHIRLPOOL           360
-#define MOVE_WHIRLWIND           361
-#define MOVE_WILL_O_WISP         362
-#define MOVE_WING_ATTACK         363
-#define MOVE_WISH                364
-#define MOVE_WITHDRAW            365
-#define MOVE_WRAP                366
-#define MOVE_X_SCISSOR           367
-#define MOVE_YAWN                368
-#define MOVE_ZAP_CANNON          369
+#define MOVE_VOLT_SWITCH         353
+#define MOVE_VOLT_TACKLE         354
+#define MOVE_WATERFALL           355
+#define MOVE_WATER_GUN           356
+#define MOVE_WATER_PULSE         357
+#define MOVE_WATER_SPORT         358
+#define MOVE_WATER_SPOUT         359
+#define MOVE_WEATHER_BALL        360
+#define MOVE_WHIRLPOOL           361
+#define MOVE_WHIRLWIND           362
+#define MOVE_WILL_O_WISP         363
+#define MOVE_WING_ATTACK         364
+#define MOVE_WISH                365
+#define MOVE_WITHDRAW            366
+#define MOVE_WRAP                367
+#define MOVE_X_SCISSOR           368
+#define MOVE_YAWN                369
+#define MOVE_ZAP_CANNON          370
 
-#define MOVES_COUNT              370
+#define MOVES_COUNT              371
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF
