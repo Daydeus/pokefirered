@@ -146,6 +146,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_HYPNOSIS]      = _("HYPNOSIS"),
     [MOVE_ICE_BALL]      = _("ICE BALL"),
     [MOVE_ICE_BEAM]      = _("ICE BEAM"),
+    [MOVE_ICE_FANG]      = _("ICE FANG"),
     [MOVE_ICE_PUNCH]     = _("ICE PUNCH"),
     [MOVE_ICICLE_SPEAR]  = _("ICICLE SPEAR"),
     [MOVE_ICY_WIND]      = _("ICY WIND"),
