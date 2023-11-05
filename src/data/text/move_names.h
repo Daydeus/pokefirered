@@ -99,6 +99,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_FEATHER_DANCE] = _("FEATHERDANCE"),
     [MOVE_FEINT_ATTACK]  = _("FEINT ATTACK"),
     [MOVE_FIRE_BLAST]    = _("FIRE BLAST"),
+    [MOVE_FIRE_FANG]     = _("FIRE FANG"),
     [MOVE_FIRE_PUNCH]    = _("FIRE PUNCH"),
     [MOVE_FIRE_SPIN]     = _("FIRE SPIN"),
     [MOVE_FISSURE]       = _("FISSURE"),
