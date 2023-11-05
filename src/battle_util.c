@@ -3219,3 +3219,15 @@ u8 IsMonDisobedient(void)
         }
     }
 }
+
+bool32 IsBattlerAlive(u32 battler)
+{
+    if (gBattleMons[battler].hp == 0)
+        return FALSE;
+    else if (battler >= gBattlersCount)
+        return FALSE;
+    else if (gAbsentBattlerFlags & gBitTable[battler])
+        return FALSE;
+    else
+        return TRUE;
+}

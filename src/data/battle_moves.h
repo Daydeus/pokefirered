@@ -1102,6 +1102,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },
 
+    [MOVE_DRAGON_TAIL] =
+    {
+        .effect = EFFECT_HIT_SWITCH_TARGET,
+        .power = 50,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .category = MOVE_CATEGORY_PHYSICAL,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = -6,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+    },
+
     [MOVE_DREAM_EATER] =
     {
         .effect = EFFECT_DREAM_EATER,

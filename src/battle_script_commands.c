@@ -6116,7 +6116,7 @@ static void Cmd_various(void)
     u32 monToCheck, status;
     u16 species;
     u8 abilityNum;
-    const u8 *jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+    u8 *jumpPtr = NULL;
 
     gActiveBattler = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
 
@@ -6268,11 +6268,35 @@ static void Cmd_various(void)
         break;
     case VARIOUS_JUMP_IF_BATTLE_END:
         if (NoAliveMonsForEitherParty())
+        {
+            jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
             gBattlescriptCurrInstr = jumpPtr;
+        }
         else
             gBattlescriptCurrInstr += 7;
 
         return;
+    case VARIOUS_TRY_HIT_SWITCH_TARGET:
+    {
+        if (IsBattlerAlive(gBattlerAttacker)
+         && IsBattlerAlive(gBattlerTarget)
+         && !(gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
+         && TARGET_TURN_DAMAGED)
+        {
+            gBattleScripting.switchCase = B_SWITCH_HIT;
+            gBattlescriptCurrInstr += 4;
+        }
+        else
+        {
+            jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            gBattlescriptCurrInstr = jumpPtr;
+            return;
+        }
+        break;
+    }
+    case VARIOUS_HIT_SWITCH_TARGET_FAILED:
+        gBattleStruct->hitSwitchTargetFailed = TRUE;
+        break;
     }
     gBattlescriptCurrInstr += 3;
 }

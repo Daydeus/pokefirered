@@ -419,7 +419,8 @@ struct BattleStruct
     u8 field_8D; // unused
     u8 stringMoveType;
     u8 expGetterBattlerId;
-    u8 field_90; // unused
+    u8 field_90:7; // unused
+    u8 hitSwitchTargetFailed:1;
     u8 absentBattlerFlags;
     u8 AI_monToSwitchIntoId[2];
     u8 simulatedInputState[4];  // used by Oak/Old Man/Pokedude controllers
@@ -522,6 +523,7 @@ struct BattleScripting
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 levelUpHP;
+    u8 switchCase;  // Special switching conditions, eg. MOVE_DRAGON_TAIL
 };
 
 struct BattleSpriteInfo

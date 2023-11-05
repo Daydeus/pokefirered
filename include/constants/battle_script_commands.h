@@ -26,6 +26,7 @@
 #define sRESHOW_MAIN_STATE           gBattleScripting + 0x21 // reshowMainState
 #define sRESHOW_HELPER_STATE         gBattleScripting + 0x22 // reshowHelperState
 #define sLVLUP_HP                    gBattleScripting + 0x23 // levelUpHP
+#define sSWITCH_CASE                 gBattleScripting + 0x24 // switchCase
 
 // Array entries for battle communication
 #define MULTIUSE_STATE          0
@@ -90,6 +91,8 @@
 #define VARIOUS_CHECK_POKEFLUTE                 11
 #define VARIOUS_WAIT_FANFARE                    12
 #define VARIOUS_JUMP_IF_BATTLE_END              13
+#define VARIOUS_TRY_HIT_SWITCH_TARGET           14
+#define VARIOUS_HIT_SWITCH_TARGET_FAILED        15
 
 // Cmd_manipulatedmg
 #define DMG_CHANGE_SIGN            0
@@ -139,5 +142,9 @@
 #define MOVEEND_MIRROR_MOVE                     14
 #define MOVEEND_NEXT_TARGET                     15
 #define MOVEEND_COUNT                           16
+
+// switch cases
+#define B_SWITCH_NORMAL   0
+#define B_SWITCH_HIT      1   // MOVE_DRAGON_TAIL
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

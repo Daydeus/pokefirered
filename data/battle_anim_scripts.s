@@ -97,6 +97,7 @@ gBattleAnims_Moves::
 	.4byte Move_DRAGON_CLAW
 	.4byte Move_DRAGON_DANCE
 	.4byte Move_DRAGON_RAGE
+	.4byte Move_DRAGON_TAIL
 	.4byte Move_DREAM_EATER
 	.4byte Move_DRILL_PECK
 	.4byte Move_DRILL_RUN
@@ -11204,6 +11205,42 @@ Move_DARK_PULSE:
 	restorebg
 	waitbgfadein
 	end
+
+Move_DRAGON_TAIL:
+	loadspritegfx ANIM_TAG_ROCKS
+	loadspritegfx ANIM_TAG_SLAM_HIT
+	loadspritegfx ANIM_TAG_IMPACT
+	monbg ANIM_TARGET
+	createvisualtask AnimTask_BlendParticle, 0x5, ANIM_TAG_SLAM_HIT, 0x2, 0xD, 0xD, 0x5CAE
+	waitforvisualfinish
+	setalpha 12, 8
+	playsewithpan SE_M_COMET_PUNCH, SOUND_PAN_ATTACKER
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x14, 0x3, 0x0, 0x4
+	delay 0x1
+	createsprite gSlamHitSpriteTemplate, ANIM_ATTACKER, 2, 0x0, 0x0
+	delay 0x3
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0x0, 0x0, 0x1, 0x1
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, 0xfff4, 0xa, 0x0, 0x3
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x0, 0x5
+	call TailWhackDown
+	delay 0x3
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_TARGET, 0, 3, 6, 1
+	waitforvisualfinish
+	delay 0x5
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_TARGET, 0x0, 0x6
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
+TailWhackDown:
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_TARGET, 3, 0xfff6, 0xfff8, 1, 1
+	playsewithpan SE_M_STRENGTH, SOUND_PAN_TARGET
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, -12, 0x1b, 2, 3
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, 8, 28, 3, 4
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, -4, 30, 2, 3
+	createsprite gRockScatterSpriteTemplate, ANIM_TARGET, 2, 12, 25, 4, 4
+	return
 
 Move_DRILL_RUN:
 	loadspritegfx ANIM_TAG_IMPACT

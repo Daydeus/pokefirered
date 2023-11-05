@@ -236,6 +236,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCamouflage             @ EFFECT_CAMOUFLAGE
 	.4byte BattleScript_EffectSheerCold              @ EFFECT_SHEER_COLD
 	.4byte BattleScript_EffectHitEscape              @ EFFECT_HIT_ESCAPE
+	.4byte BattleScript_EffectHitSwitchTarget        @ EFFFECT_HIT_SWITCH_TARGET
 
 BattleScript_EffectHit::
 	jumpifnotmove MOVE_SURF, BattleScript_HitFromAtkCanceler
@@ -4434,3 +4435,18 @@ BattleScript_EffectHitEscape:
 	switchineffects BS_ATTACKER
 BattleScript_HitEscapeEnd:
 	end
+
+BattleScript_EffectHitSwitchTarget:
+	call BattleScript_EffectHit_Ret
+	tryfaintmon BS_TARGET
+	moveendall
+	jumpifability BS_TARGET, ABILITY_SUCTION_CUPS, BattleScript_AbilityPreventsPhasingOut
+	jumpifstatus3 BS_TARGET, STATUS3_ROOTED, BattleScript_PrintMonIsRooted
+	tryhitswitchtarget BattleScript_MoveEnd
+	forcerandomswitch BattleScript_HitSwitchTargetForceRandomSwitchFailed
+	goto BattleScript_MoveEnd
+
+BattleScript_HitSwitchTargetForceRandomSwitchFailed:
+	hitswitchtargetfailed
+	setbyte sSWITCH_CASE, B_SWITCH_NORMAL
+	goto BattleScript_MoveEnd

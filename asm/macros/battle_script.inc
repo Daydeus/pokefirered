@@ -1307,6 +1307,15 @@
 	.4byte \jumpptr
 	.endm
 
+	.macro tryhitswitchtarget jumpptr:req
+	various BS_ATTACKER, VARIOUS_TRY_HIT_SWITCH_TARGET
+	.4byte \jumpptr
+	.endm
+
+	.macro hitswitchtargetfailed
+	various 0, VARIOUS_HIT_SWITCH_TARGET_FAILED
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7
