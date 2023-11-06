@@ -596,6 +596,21 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_SNATCH_AFFECTED,
     },
 
+
+    [MOVE_CHARGE_BEAM] =
+    {
+        .effect = EFFECT_SP_ATTACK_UP_HIT,
+        .power = 45,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 100,
+        .category = MOVE_CATEGORY_SPECIAL,
+        .pp = 20,
+        .secondaryEffectChance = 100,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+
     [MOVE_CHARM] =
     {
         .effect = EFFECT_ATTACK_DOWN_2,
@@ -1665,7 +1680,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_FURY_CUTTER] =
     {
         .effect = EFFECT_ATTACK_UP_HIT,
-        .power = 40,
+        .power = 45,
         .type = TYPE_BUG,
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,

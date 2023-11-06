@@ -41,6 +41,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_CALM_MIND]     = _("CALM MIND"),
     [MOVE_CAMOUFLAGE]    = _("CAMOUFLAGE"),
     [MOVE_CHARGE]        = _("CHARGE"),
+    [MOVE_CHARGE_BEAM]   = _("CHARGE BEAM"),
     [MOVE_CHARM]         = _("CHARM"),
     [MOVE_CLAMP]         = _("CLAMP"),
     [MOVE_COMET_PUNCH]   = _("COMET PUNCH"),

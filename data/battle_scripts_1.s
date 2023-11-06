@@ -160,8 +160,8 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSunnyDay               @ EFFECT_SUNNY_DAY
 	.4byte BattleScript_EffectDefenseUpHit           @ EFFECT_DEFENSE_UP_HIT
 	.4byte BattleScript_EffectAttackUpHit            @ EFFECT_ATTACK_UP_HIT
+	.4byte BattleScript_EffectSpAttackUpHit          @ EFFECT_SP_ATTACK_UP_HIT
 	.4byte BattleScript_EffectAllStatsUpHit          @ EFFECT_ALL_STATS_UP_HIT
-	.4byte BattleScript_EffectHit                    @ EFFECT_UNUSED_8D
 	.4byte BattleScript_EffectBellyDrum              @ EFFECT_BELLY_DRUM
 	.4byte BattleScript_EffectPsychUp                @ EFFECT_PSYCH_UP
 	.4byte BattleScript_EffectMirrorCoat             @ EFFECT_MIRROR_COAT
@@ -1783,6 +1783,10 @@ BattleScript_EffectDefenseUpHit::
 
 BattleScript_EffectAttackUpHit::
 	setmoveeffect MOVE_EFFECT_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSpAttackUpHit::
+	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
 
 BattleScript_EffectAllStatsUpHit::
