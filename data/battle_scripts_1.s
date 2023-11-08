@@ -117,7 +117,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectConversion2            @ EFFECT_CONVERSION_2
 	.4byte BattleScript_EffectLockOn                 @ EFFECT_LOCK_ON
 	.4byte BattleScript_EffectSketch                 @ EFFECT_SKETCH
-	.4byte BattleScript_EffectHit                    @ EFFECT_UNUSED_60
+	.4byte BattleScript_EffectStringShot             @ EFFECT_STRING_SHOT
 	.4byte BattleScript_EffectSleepTalk              @ EFFECT_SLEEP_TALK
 	.4byte BattleScript_EffectDestinyBond            @ EFFECT_DESTINY_BOND
 	.4byte BattleScript_EffectFlail                  @ EFFECT_FLAIL
@@ -1326,6 +1326,34 @@ BattleScript_EffectSketch::
 	waitanimation
 	printstring STRINGID_PKMNSKETCHEDMOVE
 	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_EffectStringShot::
+	attackcanceler
+	attackstring
+	ppreduce
+	jumpifstat BS_TARGET, CMP_GREATER_THAN, STAT_SPEED, MIN_STAT_STAGE, BattleScript_StringShotDoMoveAnim
+	jumpifstat BS_TARGET, CMP_EQUAL, STAT_EVASION, MIN_STAT_STAGE, BattleScript_CantLowerMultipleStats
+BattleScript_StringShotDoMoveAnim::
+	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
+	attackanimation
+	waitanimation
+	setbyte sSTAT_ANIM_PLAYED, FALSE
+	playstatchangeanimation BS_TARGET, BIT_SPEED | BIT_EVASION, STAT_CHANGE_NEGATIVE | STAT_CHANGE_MULTIPLE_STATS
+	playstatchangeanimation BS_TARGET, BIT_SPEED, STAT_CHANGE_NEGATIVE
+	setstatchanger STAT_SPEED, 1, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_StringShotTryLowerEvasion
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_StringShotTryLowerEvasion
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_StringShotTryLowerEvasion::
+	playstatchangeanimation BS_TARGET, BIT_EVASION, STAT_CHANGE_NEGATIVE
+	setstatchanger STAT_EVASION, 1, TRUE
+	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_StringShotEnd
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_DECREASE, BattleScript_StringShotEnd
+	printfromtable gStatDownStringIds
+	waitmessage B_WAIT_TIME_LONG
+BattleScript_StringShotEnd::
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectSleepTalk::
