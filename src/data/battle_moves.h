@@ -5156,6 +5156,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
     },
 
+    [MOVE_WILD_CHARGE] =
+    {
+        .effect = EFFECT_SPEED_UP_HIT,
+        .power = 90,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 90,
+        .category = MOVE_CATEGORY_PHYSICAL,
+        .pp = 15,
+        .secondaryEffectChance = 20,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+
     [MOVE_WILL_O_WISP] =
     {
         .effect = EFFECT_WILL_O_WISP,

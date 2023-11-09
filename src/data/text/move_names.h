@@ -363,6 +363,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_WEATHER_BALL]  = _("WEATHER BALL"),
     [MOVE_WHIRLPOOL]     = _("WHIRLPOOL"),
     [MOVE_WHIRLWIND]     = _("WHIRLWIND"),
+    [MOVE_WILD_CHARGE]   = _("WILD CHARGE"),
     [MOVE_WILL_O_WISP]   = _("WILL-O-WISP"),
     [MOVE_WING_ATTACK]   = _("WING ATTACK"),
     [MOVE_WISH]          = _("WISH"),

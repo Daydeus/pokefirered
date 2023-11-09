@@ -384,6 +384,7 @@ gBattleAnims_Moves::
 	.4byte Move_WEATHER_BALL
 	.4byte Move_WHIRLPOOL
 	.4byte Move_WHIRLWIND
+	.4byte Move_WILD_CHARGE
 	.4byte Move_WILL_O_WISP
 	.4byte Move_WING_ATTACK
 	.4byte Move_WISH
@@ -11737,6 +11738,41 @@ VoltSwitchLast:
 VoltSwitchAgainstPartner:
 	createvisualtask AnimTask_SlideOffScreen, 5, ANIM_ATTACKER, 2
 	goto VoltSwitchContinue
+
+Move_WILD_CHARGE:
+	loadspritegfx ANIM_TAG_SPARK_2
+	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT
+	loadspritegfx ANIM_TAG_IMPACT
+	monbg ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_M_CHARGE, SOUND_PAN_ATTACKER
+	createsprite gGrowingShockWaveOrbSpriteTemplate, ANIM_ATTACKER, 2  @electric circle
+	delay 0x1e
+	waitforvisualfinish
+	loopsewithpan SE_M_HARDEN, SOUND_PAN_ATTACKER, 0x1c, 0x2
+	call ScreenFlash
+	waitforvisualfinish
+	call ScreenFlash
+	waitforvisualfinish
+	playsewithpan SE_M_TAKE_DOWN, SOUND_PAN_ATTACKER
+	createsprite gVerticalDipSpriteTemplate, ANIM_ATTACKER, 2, 0x6, 0x1, 0x0
+	waitforvisualfinish
+	delay 0xb
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x1a, 0x0, 0x0, 0x5
+	delay 0x6
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 4, 0xfff6, 0x0, 0x1, 0x0
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 16, 1
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	call ElectricityEffect
+	waitforvisualfinish
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x0, 0x5
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
+ScreenFlash:
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0xC, 0x0, 0x07FE
+	return
 
 Move_X_SCISSOR:
 	loadspritegfx ANIM_TAG_CUT

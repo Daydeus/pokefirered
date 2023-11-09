@@ -365,16 +365,17 @@
 #define MOVE_WEATHER_BALL        361
 #define MOVE_WHIRLPOOL           362
 #define MOVE_WHIRLWIND           363
-#define MOVE_WILL_O_WISP         364
-#define MOVE_WING_ATTACK         365
-#define MOVE_WISH                366
-#define MOVE_WITHDRAW            367
-#define MOVE_WRAP                368
-#define MOVE_X_SCISSOR           369
-#define MOVE_YAWN                370
-#define MOVE_ZAP_CANNON          371
+#define MOVE_WILD_CHARGE         364
+#define MOVE_WILL_O_WISP         365
+#define MOVE_WING_ATTACK         366
+#define MOVE_WISH                367
+#define MOVE_WITHDRAW            368
+#define MOVE_WRAP                369
+#define MOVE_X_SCISSOR           370
+#define MOVE_YAWN                371
+#define MOVE_ZAP_CANNON          372
 
-#define MOVES_COUNT              372
+#define MOVES_COUNT              373
 
 // Used for checks for moves affected by Disable, Mimic, etc.
 #define MOVE_UNAVAILABLE 0xFFFF

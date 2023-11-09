@@ -161,6 +161,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectDefenseUpHit           @ EFFECT_DEFENSE_UP_HIT
 	.4byte BattleScript_EffectAttackUpHit            @ EFFECT_ATTACK_UP_HIT
 	.4byte BattleScript_EffectSpAttackUpHit          @ EFFECT_SP_ATTACK_UP_HIT
+	.4byte BattleScript_EffectSpeedUpHit             @ EFFECT_SPEED_UP_HIT
 	.4byte BattleScript_EffectAllStatsUpHit          @ EFFECT_ALL_STATS_UP_HIT
 	.4byte BattleScript_EffectBellyDrum              @ EFFECT_BELLY_DRUM
 	.4byte BattleScript_EffectPsychUp                @ EFFECT_PSYCH_UP
@@ -1815,6 +1816,10 @@ BattleScript_EffectAttackUpHit::
 
 BattleScript_EffectSpAttackUpHit::
 	setmoveeffect MOVE_EFFECT_SP_ATK_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
+	goto BattleScript_EffectHit
+
+BattleScript_EffectSpeedUpHit::
+	setmoveeffect MOVE_EFFECT_SPD_PLUS_1 | MOVE_EFFECT_AFFECTS_USER
 	goto BattleScript_EffectHit
 
 BattleScript_EffectAllStatsUpHit::
