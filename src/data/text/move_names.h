@@ -79,6 +79,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_DRAGON_DANCE]  = _("DRAGON DANCE"),
     [MOVE_DRAGON_RAGE]   = _("DRAGON RAGE"),
     [MOVE_DRAGON_TAIL]   = _("DRAGON TAIL"),
+    [MOVE_DRAIN_KISS]    = _("DRAIN KISS"),
     [MOVE_DREAM_EATER]   = _("DREAM EATER"),
     [MOVE_DRILL_PECK]    = _("DRILL PECK"),
     [MOVE_DRILL_RUN]     = _("DRILL RUN"),

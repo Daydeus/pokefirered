@@ -1149,6 +1149,24 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
     },
 
+    [MOVE_DRAIN_KISS] =
+    {
+        .effect = EFFECT_ABSORB,
+        .power = 75,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
+        .type = TYPE_NORMAL,
+    #endif
+        .accuracy = 100,
+        .category = MOVE_CATEGORY_SPECIAL,
+        .pp = 10,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+    },
+
     [MOVE_DREAM_EATER] =
     {
         .effect = EFFECT_DREAM_EATER,
