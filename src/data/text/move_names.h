@@ -196,6 +196,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_MIRROR_MOVE]   = _("MIRROR MOVE"),
     [MOVE_MIST]          = _("MIST"),
     [MOVE_MIST_BALL]     = _("MIST BALL"),
+    [MOVE_MOONBLAST]     = _("MOONBLAST"),
     [MOVE_MOONLIGHT]     = _("MOONLIGHT"),
     [MOVE_MORNING_SUN]   = _("MORNING SUN"),
     [MOVE_MUDDY_WATER]   = _("MUDDY WATER"),

@@ -217,6 +217,7 @@ gBattleAnims_Moves::
 	.4byte Move_MIRROR_MOVE
 	.4byte Move_MIST
 	.4byte Move_MIST_BALL
+	.4byte Move_MOONBLAST
 	.4byte Move_MOONLIGHT
 	.4byte Move_MORNING_SUN
 	.4byte Move_MUDDY_WATER
@@ -11544,6 +11545,29 @@ InfestationVortex:
 	createsprite gInfestationBubbleTemplate, ANIM_TARGET, 2, 0x0, 0x21, 0x1d0, 0x1e, 0xf, 0xffce, 0x1
 	delay 0x1
 	return
+
+Move_MOONBLAST:
+	loadspritegfx ANIM_TAG_SMALL_BUBBLES
+	loadspritegfx ANIM_TAG_MOON
+	loadspritegfx ANIM_TAG_GREEN_SPARKLE
+	loadspritegfx ANIM_TAG_BLUE_STAR
+	setalpha 0, 16
+	createsprite gSimplePaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, 1, 1, 0, 16, 0
+	waitforvisualfinish
+	createsprite gMoonSpriteTemplate, ANIM_ATTACKER, 2, 120, 56
+	createvisualtask AnimTask_AlphaFadeIn, 3, 0, 16, 16, 0, 1
+	panse SE_M_BARRIER, SOUND_PAN_ATTACKER, SOUND_PAN_TARGET, 3, 0
+	delay 40
+	playsewithpan SE_M_STRING_SHOT, SOUND_PAN_ATTACKER
+	createsprite gMistBallSpriteTemplate, ANIM_ATTACKER, 5, 0, 0, 0, 0, 30, 0
+	delay 30
+	loopsewithpan SE_M_SUPERSONIC, SOUND_PAN_TARGET, 5, 4
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 10, 0
+	delay 4
+	createvisualtask AnimTask_MoonlightEndFade, 2
+	waitforvisualfinish
+	blendoff
+	end
 
 Move_MUD_BOMB:
 	loadspritegfx ANIM_TAG_MUD_SAND

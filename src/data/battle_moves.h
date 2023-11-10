@@ -2794,6 +2794,24 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
     },
 
+    [MOVE_MOONBLAST] =
+    {
+        .effect = EFFECT_SPECIAL_ATTACK_DOWN_HIT,
+        .power = 120,
+    #ifdef TYPE_FAIRY
+        .type = TYPE_FAIRY,
+    #else
+        .type = TYPE_NORMAL,
+    #endif
+        .accuracy = 90,
+        .category = MOVE_CATEGORY_SPECIAL,
+        .pp = 5,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+
     [MOVE_MOONLIGHT] =
     {
         .effect = EFFECT_MOONLIGHT,
