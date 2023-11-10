@@ -227,7 +227,7 @@ static const union AnimCmd sAnim_FlamethrowerFlame[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnims_FlamethrowerFlame[] =
+const union AnimCmd *const gAnims_FlamethrowerFlame[] =
 {
     sAnim_FlamethrowerFlame,
 };
@@ -237,7 +237,7 @@ const struct SpriteTemplate gFlamethrowerFlameSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_FlamethrowerFlame,
+    .anims = gAnims_FlamethrowerFlame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimToTargetInSinWave,

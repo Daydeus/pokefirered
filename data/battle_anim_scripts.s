@@ -127,6 +127,7 @@ gBattleAnims_Moves::
 	.4byte Move_FISSURE
 	.4byte Move_FLAIL
 	.4byte Move_FLAMETHROWER
+	.4byte Move_FLAME_CHARGE
 	.4byte Move_FLAME_WHEEL
 	.4byte Move_FLASH
 	.4byte Move_FLATTER
@@ -11423,6 +11424,39 @@ Move_FIRE_FANG:
 	blendoff
 	delay 1
 	end
+
+Move_FLAME_CHARGE:
+	loadspritegfx ANIM_TAG_SMALL_EMBER
+	loadspritegfx ANIM_TAG_IMPACT
+	monbg ANIM_TARGET
+	loopsewithpan SE_M_FLAME_WHEEL, SOUND_PAN_ATTACKER, 0x20, 0x6
+	createvisualtask AnimTask_TranslateMonEllipticalRespectSide, 2, ANIM_ATTACKER, 12, 6, 6, 3
+	call FlameChargeSwirl
+	delay 0x9
+	call FlameChargeSwirl
+	delay 0x9
+	call FlameChargeSwirl
+	delay 0x9
+	call FlameChargeSwirl
+	delay 0x9
+	call FlameChargeSwirl
+	waitforvisualfinish
+	createsprite gSlideMonToOffsetSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x18, 0x0, 0x0, 0x5
+	delay 0x3
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0x0, 0x0, 0x1, 0x0
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 6, 0, 8, 1
+	call FireSpreadEffect
+	playsewithpan SE_M_FIRE_PUNCH, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	delay 0x8
+	createsprite gSlideMonToOriginalPosSpriteTemplate, ANIM_ATTACKER, 2, ANIM_ATTACKER, 0x0, 0x7
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	end
+FlameChargeSwirl:
+	createsprite gFlameChargeEmberTemplate, ANIM_ATTACKER, 2, 0x0, 0xffe8, 0x8, 0x8c
+	return
 
 Move_ICE_FANG:
 	monbg ANIM_TARGET

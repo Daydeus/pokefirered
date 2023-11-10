@@ -106,6 +106,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_FISSURE]       = _("FISSURE"),
     [MOVE_FLAIL]         = _("FLAIL"),
     [MOVE_FLAMETHROWER]  = _("FLAMETHROWER"),
+    [MOVE_FLAME_CHARGE]  = _("FLAME CHARGE"),
     [MOVE_FLAME_WHEEL]   = _("FLAME WHEEL"),
     [MOVE_FLASH]         = _("FLASH"),
     [MOVE_FLATTER]       = _("FLATTER"),

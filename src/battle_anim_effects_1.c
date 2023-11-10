@@ -29,7 +29,6 @@ static void AnimLeechSeed(struct Sprite *);
 static void AnimLeechSeed_Step(struct Sprite *);
 static void AnimLeechSeedSprouts(struct Sprite *);
 static void AnimSporeParticle_Step(struct Sprite *);
-static void AnimPetalDanceBigFlower(struct Sprite *);
 static void AnimPetalDanceBigFlower_Step(struct Sprite *);
 static void AnimPetalDanceSmallFlower(struct Sprite *);
 static void AnimPetalDanceSmallFlower_Step(struct Sprite *);
@@ -2529,7 +2528,7 @@ void AnimTask_SporeDoubleBattle(u8 taskId)
 // arg 1: initial y pixel offset
 // arg 2: target y pixel offset
 // arg 3: duration
-static void AnimPetalDanceBigFlower(struct Sprite* sprite)
+void AnimPetalDanceBigFlower(struct Sprite* sprite)
 {
     InitSpritePosToAnimAttacker(sprite, FALSE);
     sprite->data[0] = gBattleAnimArgs[3];
