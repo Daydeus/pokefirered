@@ -173,8 +173,8 @@
 #define MOVE_LICK                169
 #define MOVE_LIGHT_SCREEN        170
 #define MOVE_LOCK_ON             171
-#define MOVE_LOVELY_KISS         172
-#define MOVE_LOW_KICK            173
+#define MOVE_LOW_KICK            172
+#define MOVE_LULLABY_KISS        173
 #define MOVE_LUSTER_PURGE        174
 #define MOVE_MACH_PUNCH          175
 #define MOVE_MAGICAL_LEAF        176

@@ -192,8 +192,8 @@ gBattleAnims_Moves::
 	.4byte Move_LICK
 	.4byte Move_LIGHT_SCREEN
 	.4byte Move_LOCK_ON
-	.4byte Move_LOVELY_KISS
 	.4byte Move_LOW_KICK
+	.4byte Move_LULLABY_KISS
 	.4byte Move_LUSTER_PURGE
 	.4byte Move_MACH_PUNCH
 	.4byte Move_MAGICAL_LEAF
@@ -7965,7 +7965,7 @@ Move_SWEET_KISS:
 	createsprite gRedHeartBurstSpriteTemplate, ANIM_TARGET, 3, -384, -31
 	end
 
-Move_LOVELY_KISS:
+Move_LULLABY_KISS:
 	loadspritegfx ANIM_TAG_PINK_HEART
 	loadspritegfx ANIM_TAG_DEVIL
 	createsprite gDevilSpriteTemplate, ANIM_TARGET, 2, 0, -24

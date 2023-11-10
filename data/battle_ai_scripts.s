@@ -871,7 +871,7 @@ AI_CV_MirrorMove_End::
 AI_CV_MirrorMove_EncouragedMovesToMirror::
 	.align 1
 	.2byte MOVE_SLEEP_POWDER
-	.2byte MOVE_LOVELY_KISS
+	.2byte MOVE_LULLABY_KISS
 	.2byte MOVE_SPORE
 	.2byte MOVE_HYPNOSIS
 	.2byte MOVE_SING

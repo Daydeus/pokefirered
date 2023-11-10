@@ -2441,7 +2441,21 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
     },
 
-    [MOVE_LOVELY_KISS] =
+    [MOVE_LOW_KICK] =
+    {
+        .effect = EFFECT_LOW_KICK,
+        .power = 1,
+        .type = TYPE_FIGHTING,
+        .accuracy = 100,
+        .category = MOVE_CATEGORY_PHYSICAL,
+        .pp = 20,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+
+    [MOVE_LULLABY_KISS] =
     {
         .effect = EFFECT_SLEEP,
         .power = 0,
@@ -2457,20 +2471,6 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MAGIC_COAT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
-    },
-
-    [MOVE_LOW_KICK] =
-    {
-        .effect = EFFECT_LOW_KICK,
-        .power = 1,
-        .type = TYPE_FIGHTING,
-        .accuracy = 100,
-        .category = MOVE_CATEGORY_PHYSICAL,
-        .pp = 20,
-        .secondaryEffectChance = 0,
-        .target = MOVE_TARGET_SELECTED,
-        .priority = 0,
-        .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },
 
     [MOVE_LUSTER_PURGE] =
@@ -3938,11 +3938,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     {
         .effect = EFFECT_SLEEP,
         .power = 0,
-    #ifdef TYPE_FAIRY
-        .type = TYPE_FAIRY,
-    #else
         .type = TYPE_NORMAL,
-    #endif
         .accuracy = 75,
         .category = MOVE_CATEGORY_STATUS,
         .pp = 15,
