@@ -87,6 +87,7 @@ gBattleAnims_Moves::
 	.4byte Move_DETECT
 	.4byte Move_DIG
 	.4byte Move_DISABLE
+	.4byte Move_DISARMING_CRY
 	.4byte Move_DIVE
 	.4byte Move_DIZZY_PUNCH
 	.4byte Move_DOOM_DESIRE
@@ -11264,6 +11265,22 @@ Move_DARK_PULSE:
 	delay 1
 	restorebg
 	waitbgfadein
+	end
+
+Move_DISARMING_CRY::
+	loadspritegfx ANIM_TAG_NOISE_LINE
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x0, 0x8, 0x6e7d
+	waitforvisualfinish
+	createvisualtask SoundTask_PlayDoubleCry, 2, ANIM_ATTACKER, DOUBLE_CRY_GROWL
+	call RoarEffect
+	delay 0xA
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 1, 0, 26, 1
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_DEF_PARTNER, 1, 0, 26, 1
+	waitforvisualfinish
+	createvisualtask SoundTask_WaitForCry, 0x5
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 0xa, F_PAL_BG, 0x1, 0x8, 0x0, 0x6e7d
+	waitforvisualfinish
 	end
 
 Move_DRAGON_TAIL:

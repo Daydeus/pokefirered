@@ -66,6 +66,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_DETECT]        = _("DETECT"),
     [MOVE_DIG]           = _("DIG"),
     [MOVE_DISABLE]       = _("DISABLE"),
+    [MOVE_DISARMING_CRY] = _("DISARMINGCRY"),
     [MOVE_DIVE]          = _("DIVE"),
     [MOVE_DIZZY_PUNCH]   = _("DIZZY PUNCH"),
     [MOVE_DOOM_DESIRE]   = _("DOOM DESIRE"),
