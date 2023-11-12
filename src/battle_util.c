@@ -211,7 +211,6 @@ void CancelMultiTurnMoves(u8 battler)
     gStatuses3[battler] &= ~STATUS3_SEMI_INVULNERABLE;
 
     gDisableStructs[battler].rolloutTimer = 0;
-    gDisableStructs[battler].furyCutterCounter = 0;
 }
 
 bool8 WasUnableToUseMove(u8 battler)
@@ -720,6 +719,7 @@ u8 DoFieldEndTurnEffects(void)
 
 enum
 {
+    ENDTURN_FOCUS_ENERGY,
     ENDTURN_INGRAIN,
     ENDTURN_ABILITIES,
     ENDTURN_ITEMS1,
@@ -759,16 +759,68 @@ u8 DoBattlerEndTurnEffects(void)
         {
             switch (gBattleStruct->turnEffectsTracker)
             {
-            case ENDTURN_INGRAIN:  // ingrain
-                if ((gStatuses3[gActiveBattler] & STATUS3_ROOTED)
-                 && gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP
-                 && gBattleMons[gActiveBattler].hp != 0)
+            case ENDTURN_FOCUS_ENERGY:  // focus energy
+                if (gDisableStructs[gActiveBattler].focusEnergyTimer > 0)
                 {
-                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
-                    gBattleMoveDamage *= -1;
-                    BattleScriptExecute(BattleScript_IngrainTurnHeal);
+                    gDisableStructs[gActiveBattler].focusEnergyTimer--;
+
+                    if (gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP
+                    && gBattleMons[gActiveBattler].hp != 0)
+                    {
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                        if (gBattleMons[gActiveBattler].hp + gBattleMoveDamage > gBattleMons[gActiveBattler].maxHP)
+                            gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp;
+                        gBattleMoveDamage *= -1;
+
+                        if (gDisableStructs[gActiveBattler].focusEnergyTimer == 0)
+                        {
+                            gBattleMons[gActiveBattler].status2 &= ~STATUS2_FOCUS_ENERGY;
+                            BattleScriptExecute(BattleScript_FocusEnergyFinalHeal);
+                        }
+                        else
+                            BattleScriptExecute(BattleScript_FocusEnergyTurnHeal);
+                    }
+                    else if (gDisableStructs[gActiveBattler].focusEnergyTimer == 0)
+                    {
+                        gBattleMons[gActiveBattler].status2 &= ~STATUS2_FOCUS_ENERGY;
+                        BattleScriptExecute(BattleScript_FocusEnergyRanOut);
+                    }
+
+                    effect++;
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_INGRAIN:  // ingrain
+                if (gDisableStructs[gActiveBattler].ingrainTimer > 0)
+                {
+                    gDisableStructs[gActiveBattler].ingrainTimer--;
+
+                    if (gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP
+                    && gBattleMons[gActiveBattler].hp != 0)
+                    {
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                        if (gBattleMons[gActiveBattler].hp + gBattleMoveDamage > gBattleMons[gActiveBattler].maxHP)
+                            gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp;
+                        gBattleMoveDamage *= -1;
+
+                        if (gDisableStructs[gActiveBattler].ingrainTimer == 0)
+                        {
+                            gStatuses3[gActiveBattler] &= ~STATUS3_ROOTED;
+                            BattleScriptExecute(BattleScript_IngrainFinalHeal);
+                        }
+                        else
+                            BattleScriptExecute(BattleScript_IngrainTurnHeal);
+                    }
+                    else if (gDisableStructs[gActiveBattler].ingrainTimer == 0)
+                    {
+                        gStatuses3[gActiveBattler] &= ~STATUS3_ROOTED;
+                        BattleScriptExecute(BattleScript_RetractedItsRoots);
+                    }
+
                     effect++;
                 }
                 gBattleStruct->turnEffectsTracker++;
@@ -3010,7 +3062,6 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 
 void ClearFuryCutterDestinyBondGrudge(u8 battlerId)
 {
-    gDisableStructs[battlerId].furyCutterCounter = 0;
     gBattleMons[battlerId].status2 &= ~STATUS2_DESTINY_BOND;
     gStatuses3[battlerId] &= ~STATUS3_GRUDGE;
 }

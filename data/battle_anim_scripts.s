@@ -434,6 +434,7 @@ gBattleAnims_General::
 	.4byte General_FutureSightHit           @ B_ANIM_FUTURE_SIGHT_HIT
 	.4byte General_DoomDesireHit            @ B_ANIM_DOOM_DESIRE_HIT
 	.4byte General_FocusPunchSetUp          @ B_ANIM_FOCUS_PUNCH_SETUP
+	.4byte General_FocusEnergyHeal          @ B_ANIM_FOCUS_ENERGY_HEAL
 	.4byte General_IngrainHeal              @ B_ANIM_INGRAIN_HEAL
 	.4byte General_WishHeal                 @ B_ANIM_WISH_HEAL
 	.4byte General_MonScared                @ B_ANIM_MON_SCARED
@@ -1477,18 +1478,7 @@ Move_FURY_CUTTER:
 	monbg ANIM_TARGET
 	setalpha 12, 8
 	playsewithpan SE_M_RAZOR_WIND, SOUND_PAN_TARGET
-	createvisualtask AnimTask_IsFuryCutterHitRight, 2
-	jumpretfalse FuryCutterLeft
-	goto FuryCutterRight
-
-FuryCutterContinue:
-	createvisualtask AnimTask_GetFuryCutterHitCount, 2
-	jumpreteq 1, FuryCutterContinue2
-	jumpreteq 2, FuryCutterMedium
-	jumpreteq 3, FuryCutterStrong
-	goto FuryCutterStrongest
-
-FuryCutterContinue2:
+	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0
 	delay 5
 	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 0, 3, 10, 1
 	waitforvisualfinish
@@ -1496,26 +1486,6 @@ FuryCutterContinue2:
 	blendoff
 	waitforvisualfinish
 	end
-
-FuryCutterLeft:
-	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 0
-	goto FuryCutterContinue
-
-FuryCutterRight:
-	createsprite gCuttingSliceSpriteTemplate, ANIM_ATTACKER, 2, 40, -32, 1
-	goto FuryCutterContinue
-
-FuryCutterMedium:
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG | F_PAL_BATTLERS, 3, 1, RGB(9, 8, 10), 4, RGB_BLACK, 0
-	goto FuryCutterContinue2
-
-FuryCutterStrong:
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG | F_PAL_BATTLERS, 3, 3, RGB(9, 8, 10), 4, RGB_BLACK, 0
-	goto FuryCutterContinue2
-
-FuryCutterStrongest:
-	createsprite gComplexPaletteBlendSpriteTemplate, ANIM_ATTACKER, 2, F_PAL_BG | F_PAL_BATTLERS, 3, 3, RGB(9, 8, 10), 4, RGB_BLACK, 0
-	goto FuryCutterContinue2
 
 Move_SELF_DESTRUCT:
 	loadspritegfx ANIM_TAG_EXPLOSION
@@ -10917,6 +10887,21 @@ General_FocusPunchSetUp:
 	call EndureEffect
 	delay 8
 	call EndureEffect
+	waitforvisualfinish
+	end
+
+General_FocusEnergyHeal:
+	loadspritegfx ANIM_TAG_ORBS
+	loadspritegfx ANIM_TAG_BLUE_STAR
+	loadspritegfx ANIM_TAG_FOCUS_ENERGY
+	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
+	call EndureEffect
+	delay 8
+	createvisualtask AnimTask_BlendColorCycle, 2, F_PAL_ATTACKER, 2, 2, 0, 11, RGB_RED
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 32, 1
+	call EndureEffect
+	delay 15
+	call HealingEffect
 	waitforvisualfinish
 	end
 

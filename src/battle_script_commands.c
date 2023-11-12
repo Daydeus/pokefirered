@@ -7467,13 +7467,14 @@ static void Cmd_setmist(void)
 
 static void Cmd_setfocusenergy(void)
 {
-    if (gBattleMons[gBattlerAttacker].status2 & STATUS2_FOCUS_ENERGY)
+    if (gDisableStructs[gBattlerAttacker].focusEnergyTimer != 0)
     {
         gMoveResultFlags |= MOVE_RESULT_FAILED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_FOCUS_ENERGY_FAILED;
     }
     else
     {
+        gDisableStructs[gBattlerAttacker].focusEnergyTimer = 5;
         gBattleMons[gBattlerAttacker].status2 |= STATUS2_FOCUS_ENERGY;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_GETTING_PUMPED;
     }
@@ -8291,20 +8292,13 @@ static void Cmd_furycuttercalc(void)
 {
     if (gMoveResultFlags & MOVE_RESULT_NO_EFFECT)
     {
-        gDisableStructs[gBattlerAttacker].furyCutterCounter = 0;
         gBattlescriptCurrInstr = BattleScript_MoveMissedPause;
     }
     else
     {
         s32 i;
 
-        if (gDisableStructs[gBattlerAttacker].furyCutterCounter != 5)
-            gDisableStructs[gBattlerAttacker].furyCutterCounter++;
-
         gDynamicBasePower = gBattleMoves[gCurrentMove].power;
-
-        for (i = 1; i < gDisableStructs[gBattlerAttacker].furyCutterCounter; i++)
-            gDynamicBasePower *= 2;
 
         gBattlescriptCurrInstr++;
     }
@@ -9023,6 +9017,7 @@ static void Cmd_trysetroots(void)
     }
     else
     {
+        gDisableStructs[gBattlerAttacker].ingrainTimer = 5;
         gStatuses3[gBattlerAttacker] |= STATUS3_ROOTED;
         gBattlescriptCurrInstr += 5;
     }

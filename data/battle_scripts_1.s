@@ -910,13 +910,33 @@ BattleScript_EffectFocusEnergy::
 	attackcanceler
 	attackstring
 	ppreduce
-	jumpifstatus2 BS_ATTACKER, STATUS2_FOCUS_ENERGY, BattleScript_ButItFailed
 	setfocusenergy
 	attackanimation
 	waitanimation
 	printfromtable gFocusEnergyUsedStringIds
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
+
+BattleScript_FocusEnergyTurnHeal::
+	playanimation BS_ATTACKER, B_ANIM_FOCUS_ENERGY_HEAL
+	printstring STRINGID_FOCUS_ENERGY_REGAINED_HEALTH
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+	end
+
+BattleScript_FocusEnergyFinalHeal::
+	playanimation BS_ATTACKER, B_ANIM_FOCUS_ENERGY_HEAL
+	printstring STRINGID_FOCUS_ENERGY_REGAINED_HEALTH
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+BattleScript_FocusEnergyRanOut::
+	printstring STRINGID_FOCUS_ENERGY_RAN_OUT
+	waitmessage B_WAIT_TIME_LONG
+	end2
 
 BattleScript_EffectRecoil::
 	setmoveeffect MOVE_EFFECT_RECOIL_25 | MOVE_EFFECT_AFFECTS_USER | MOVE_EFFECT_CERTAIN
@@ -3644,6 +3664,18 @@ BattleScript_IngrainTurnHeal::
 	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
 	healthbarupdate BS_ATTACKER
 	datahpupdate BS_ATTACKER
+	end2
+
+BattleScript_IngrainFinalHeal::
+	playanimation BS_ATTACKER, B_ANIM_INGRAIN_HEAL
+	printstring STRINGID_PKMNABSORBEDNUTRIENTS
+	waitmessage B_WAIT_TIME_LONG
+	orword gHitMarker, HITMARKER_IGNORE_SUBSTITUTE
+	healthbarupdate BS_ATTACKER
+	datahpupdate BS_ATTACKER
+BattleScript_RetractedItsRoots::
+	printstring STRINGID_RETRACTED_ITS_ROOTS
+	waitmessage B_WAIT_TIME_LONG
 	end2
 
 BattleScript_PrintMonIsRooted::

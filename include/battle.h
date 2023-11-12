@@ -152,7 +152,8 @@ struct DisableStruct
     /*0x0E*/ u8 encoreTimerStartValue : 4;
     /*0x0F*/ u8 perishSongTimer : 4;
     /*0x0F*/ u8 perishSongTimerStartValue : 4;
-    /*0x10*/ u8 furyCutterCounter;
+    /*0x10*/ u8 focusEnergyTimer : 4;
+    /*0x10*/ u8 ingrainTimer : 4;
     /*0x11*/ u8 rolloutTimer : 4;
     /*0x11*/ u8 rolloutTimerStartValue : 4;
     /*0x12*/ u8 chargeTimer : 4;
