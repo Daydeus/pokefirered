@@ -221,7 +221,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectSecretPower            @ EFFECT_SECRET_POWER
 	.4byte BattleScript_EffectDoubleEdge             @ EFFECT_DOUBLE_EDGE
 	.4byte BattleScript_EffectTeeterDance            @ EFFECT_TEETER_DANCE
-	.4byte BattleScript_EffectBurnHit                @ EFFECT_BLAZE_KICK
 	.4byte BattleScript_EffectMudSport               @ EFFECT_MUD_SPORT
 	.4byte BattleScript_EffectPoisonFang             @ EFFECT_POISON_FANG
 	.4byte BattleScript_EffectWeatherBall            @ EFFECT_WEATHER_BALL
@@ -230,7 +229,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectCosmicPower            @ EFFECT_COSMIC_POWER
 	.4byte BattleScript_EffectSkyUppercut            @ EFFECT_SKY_UPPERCUT
 	.4byte BattleScript_EffectBulkUp                 @ EFFECT_BULK_UP
-	.4byte BattleScript_EffectPoisonHit              @ EFFECT_POISON_TAIL
 	.4byte BattleScript_EffectWaterSport             @ EFFECT_WATER_SPORT
 	.4byte BattleScript_EffectCalmMind               @ EFFECT_CALM_MIND
 	.4byte BattleScript_EffectDragonDance            @ EFFECT_DRAGON_DANCE
