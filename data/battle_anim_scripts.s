@@ -35,6 +35,7 @@ gBattleAnims_Moves::
 	.4byte Move_ASSIST
 	.4byte Move_ASTONISH
 	.4byte Move_ATTRACT
+	.4byte Move_AURA_SPHERE
 	.4byte Move_AURORA_BEAM
 	.4byte Move_BARRAGE
 	.4byte Move_BARRIER
@@ -134,6 +135,7 @@ gBattleAnims_Moves::
 	.4byte Move_FLASH
 	.4byte Move_FLATTER
 	.4byte Move_FLY
+	.4byte Move_FOCUS_BLAST
 	.4byte Move_FOCUS_ENERGY
 	.4byte Move_FOCUS_PUNCH
 	.4byte Move_FOLLOW_ME
@@ -10443,6 +10445,26 @@ UnsetSolarBeamBg:
 	waitbgfadein
 	return
 
+SetHighSpeedBg:
+	createvisualtask AnimTask_GetAttackerSide, 2
+	jumprettrue SetHighSpeedBgPlayer
+	fadetobg BG_HIGHSPEED_OPPONENT
+	goto SetHighSpeedBgFade
+SetHighSpeedBgPlayer:
+	fadetobg BG_HIGHSPEED_PLAYER
+SetHighSpeedBgFade:
+	waitbgfadeout
+	createvisualtask AnimTask_StartSlidingBg, 5, -2304, 0, 1, -1
+	waitbgfadein
+	return
+
+UnsetHighSpeedBg:
+	restorebg
+	waitbgfadeout
+	setarg 7, -1
+	waitbgfadein
+	return
+
 Status_Poison:
 	loopsewithpan SE_M_TOXIC, SOUND_PAN_TARGET, 13, 6
 	createvisualtask AnimTask_ShakeMon2, 2, ANIM_ATTACKER, 1, 0, 18, 2
@@ -11141,6 +11163,27 @@ Special_MonToSubstitute:
 	end
 
 @ New Move Animations
+Move_AURA_SPHERE:
+	loadspritegfx ANIM_TAG_METEOR
+	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT
+	monbg ANIM_ATK_PARTNER
+	splitbgprio ANIM_ATTACKER
+	setalpha 12, 8
+	call SetFocusBlastBG
+	playsewithpan SE_M_SKY_UPPERCUT, 0
+	delay 60
+	createsprite gAuraSphereBlast, ANIM_TARGET, 3, 0
+	playsewithpan SE_M_SWAGGER, SOUND_PAN_ATTACKER
+	delay 16
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 8, 0, 16, 1
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	call UnsetHighSpeedBg
+	clearmonbg ANIM_ATK_PARTNER
+	blendoff
+	delay 1
+	end
+
 Move_BUG_BUZZ:
 	loadspritegfx ANIM_TAG_JAGGED_MUSIC_NOTE
 	loadspritegfx ANIM_TAG_THIN_RING
@@ -11491,6 +11534,30 @@ Move_FLAME_CHARGE:
 	end
 FlameChargeSwirl:
 	createsprite gFlameChargeEmberTemplate, ANIM_ATTACKER, 2, 0x0, 0xffe8, 0x8, 0x8c
+	return
+
+Move_FOCUS_BLAST:
+	loadspritegfx ANIM_TAG_CIRCLE_OF_LIGHT
+	loadspritegfx ANIM_TAG_METEOR
+	loadspritegfx ANIM_TAG_FLAT_ROCK
+	monbg ANIM_ATK_PARTNER
+	splitbgprio ANIM_ATTACKER
+	setalpha 12, 8
+	call SetFocusBlastBG
+	createsprite gSuperpowerOrbSpriteTemplate, ANIM_TARGET, 2, 0
+	playsewithpan SE_M_MEGA_KICK, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 8, 0, 16, 1
+	playsewithpan SE_M_MEGA_KICK2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	call UnsetHighSpeedBg
+	clearmonbg ANIM_ATK_PARTNER
+	blendoff
+	delay 1
+	end
+SetFocusBlastBG:
+	fadetobg BG_FOCUS_BLAST
+	goto SetHighSpeedBgFade
 	return
 
 Move_FORCE_PALM:

@@ -47,6 +47,17 @@ static const struct SpriteTemplate sUnusedHumanoidFootSpriteTemplate =
     .callback = AnimUnusedHumanoidFoot,
 };
 
+const struct SpriteTemplate gAuraSphereBlast =
+{
+	.tileTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+	.paletteTag = ANIM_TAG_CIRCLE_OF_LIGHT,
+	.oam = &gOamData_AffineOff_ObjNormal_64x64,
+	.anims = gDummySpriteAnimTable,
+	.images = NULL,
+	.affineAnims = gDummySpriteAffineAnimTable,
+	.callback = AnimSuperpowerFireball,
+};
+
 const union AffineAnimCmd gForcePalmAffineAnimCmd_1[] =
 {
     AFFINEANIMCMD_FRAME(0x0, 0x0, 0, 8),

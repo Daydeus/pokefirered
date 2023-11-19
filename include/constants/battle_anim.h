@@ -346,6 +346,7 @@
 #define BG_SOLAR_BEAM_OPPONENT 24
 #define BG_SOLAR_BEAM_PLAYER 25
 #define BG_SOLAR_BEAM_CONTESTS 26
+#define BG_FOCUS_BLAST 27
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0
