@@ -1589,13 +1589,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_FLAME_WHEEL] =
     {
-        .effect = EFFECT_BURN_HIT,
-        .power = 60,
+        .effect = EFFECT_HIT_ESCAPE,
+        .power = 55,
         .type = TYPE_FIRE,
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
-        .pp = 25,
-        .secondaryEffectChance = 10,
+        .pp = 10,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
@@ -4287,7 +4287,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_SPARK] =
     {
         .effect = EFFECT_PARALYZE_HIT,
-        .power = 55,
+        .power = 50,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
@@ -5069,7 +5069,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_U_TURN] =
     {
         .effect = EFFECT_HIT_ESCAPE,
-        .power = 70,
+        .power = 55,
         .type = TYPE_BUG,
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
@@ -5125,7 +5125,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_VOLT_SWITCH] =
     {
         .effect = EFFECT_HIT_ESCAPE,
-        .power = 70,
+        .power = 55,
         .type = TYPE_ELECTRIC,
         .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
