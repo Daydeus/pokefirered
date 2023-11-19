@@ -2906,13 +2906,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_MUDDY_WATER] =
     {
-        .effect = EFFECT_ACCURACY_DOWN_HIT,
-        .power = 95,
+        .effect = EFFECT_DUAL_TYPE,
+        .power = 75,
         .type = TYPE_WATER,
-        .accuracy = 85,
+        .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
-        .pp = 10,
-        .secondaryEffectChance = 30,
+        .pp = 15,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
@@ -5040,13 +5040,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_TWISTER] =
     {
-        .effect = EFFECT_TWISTER,
-        .power = 40,
+        .effect = EFFECT_DUAL_TYPE,
+        .power = 75,
         .type = TYPE_DRAGON,
         .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
-        .pp = 20,
-        .secondaryEffectChance = 20,
+        .pp = 15,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,

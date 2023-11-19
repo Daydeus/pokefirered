@@ -131,7 +131,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectNightmare              @ EFFECT_NIGHTMARE
 	.4byte BattleScript_EffectMinimize               @ EFFECT_MINIMIZE
 	.4byte BattleScript_EffectCurse                  @ EFFECT_CURSE
-	.4byte BattleScript_EffectHit                    @ EFFECT_UNUSED_6E
+	.4byte BattleScript_EffectHit                    @ EFFECT_DUAL_TYPE
 	.4byte BattleScript_EffectProtect                @ EFFECT_PROTECT
 	.4byte BattleScript_EffectSpikes                 @ EFFECT_SPIKES
 	.4byte BattleScript_EffectForesight              @ EFFECT_FORESIGHT
@@ -167,7 +167,6 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectPsychUp                @ EFFECT_PSYCH_UP
 	.4byte BattleScript_EffectMirrorCoat             @ EFFECT_MIRROR_COAT
 	.4byte BattleScript_EffectSkullBash              @ EFFECT_SKULL_BASH
-	.4byte BattleScript_EffectTwister                @ EFFECT_TWISTER
 	.4byte BattleScript_EffectEarthquake             @ EFFECT_EARTHQUAKE
 	.4byte BattleScript_EffectFutureSight            @ EFFECT_FUTURE_SIGHT
 	.4byte BattleScript_EffectGust                   @ EFFECT_GUST

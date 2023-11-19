@@ -1272,7 +1272,7 @@ static void ModulateDmgByType(u8 multiplier)
 static void Cmd_typecalc(void)
 {
     s32 i = 0;
-    u8 moveType;
+    u8 moveType, moveType2;
 
     if (gCurrentMove == MOVE_STRUGGLE)
     {
@@ -1282,6 +1282,19 @@ static void Cmd_typecalc(void)
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
+    // Set secondary typing for EFFECT_DUAL_TYPE moves
+    switch (gCurrentMove)
+    {
+    case MOVE_MUDDY_WATER:
+        moveType2 = TYPE_GROUND;
+        break;
+    case MOVE_TWISTER:
+        moveType2 = TYPE_FLYING;
+        break;
+    default:
+        moveType2 = TYPE_MYSTERY;
+    }
+
     // check stab
     if (IS_BATTLER_OF_TYPE(gBattlerAttacker, moveType))
     {
@@ -1289,7 +1302,7 @@ static void Cmd_typecalc(void)
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && (moveType == TYPE_GROUND || moveType2 == TYPE_GROUND))
     {
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
@@ -1309,7 +1322,7 @@ static void Cmd_typecalc(void)
                 i += 3;
                 continue;
             }
-            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
+            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType || (TYPE_EFFECT_ATK_TYPE(i) == moveType2 && moveType2 != TYPE_MYSTERY))
             {
                 // check type1
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
@@ -1344,14 +1357,27 @@ static void CheckWonderGuardAndLevitate(void)
 {
     u8 flags = 0;
     s32 i = 0;
-    u8 moveType;
+    u8 moveType, moveType2;
 
     if (gCurrentMove == MOVE_STRUGGLE || !gBattleMoves[gCurrentMove].power)
         return;
 
     GET_MOVE_TYPE(gCurrentMove, moveType);
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    // Set secondary typing for EFFECT_DUAL_TYPE moves
+    switch (gCurrentMove)
+    {
+    case MOVE_MUDDY_WATER:
+        moveType2 = TYPE_GROUND;
+        break;
+    case MOVE_TWISTER:
+        moveType2 = TYPE_FLYING;
+        break;
+    default:
+        moveType2 = TYPE_MYSTERY;
+    }
+
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && (moveType == TYPE_GROUND || moveType2 == TYPE_GROUND))
     {
         gLastUsedAbility = ABILITY_LEVITATE;
         gBattleCommunication[MISS_TYPE] = B_MSG_GROUND_MISS;
@@ -1368,7 +1394,7 @@ static void CheckWonderGuardAndLevitate(void)
             i += 3;
             continue;
         }
-        if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
+        if (TYPE_EFFECT_ATK_TYPE(i) == moveType || (TYPE_EFFECT_ATK_TYPE(i) == moveType2 && moveType2 != TYPE_MYSTERY))
         {
             // check no effect
             if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1
@@ -1386,7 +1412,7 @@ static void CheckWonderGuardAndLevitate(void)
             }
 
             // check super effective
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1 && TYPE_EFFECT_MULTIPLIER(i) == 20)
+            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1 && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
                 flags |= 1;
             if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
              && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
@@ -1394,7 +1420,7 @@ static void CheckWonderGuardAndLevitate(void)
                 flags |= 1;
 
             // check not very effective
-            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1 && TYPE_EFFECT_MULTIPLIER(i) == 5)
+            if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1 && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
                 flags |= 2;
             if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
              && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
@@ -1454,12 +1480,27 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
 {
     s32 i = 0;
     u8 flags = 0;
-    u8 moveType;
+    u8 moveType, moveType2;
 
     if (move == MOVE_STRUGGLE)
         return 0;
 
     moveType = gBattleMoves[move].type;
+
+    // Set secondary typing for EFFECT_DUAL_TYPE moves
+    switch (move)
+    {
+    case MOVE_MUDDY_WATER:
+        moveType2 = TYPE_GROUND;
+        break;
+    case MOVE_TWISTER:
+        moveType2 = TYPE_FLYING;
+        break;
+    default:
+        moveType2 = TYPE_MYSTERY;
+        break;
+    }
+
 
     // check stab
     if (IS_BATTLER_OF_TYPE(attacker, moveType))
@@ -1468,7 +1509,7 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
         gBattleMoveDamage = gBattleMoveDamage / 10;
     }
 
-    if (gBattleMons[defender].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    if (gBattleMons[defender].ability == ABILITY_LEVITATE && (moveType == TYPE_GROUND || moveType2 == TYPE_GROUND))
     {
         flags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
     }
@@ -1484,7 +1525,7 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
                 continue;
             }
 
-            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
+            else if (TYPE_EFFECT_ATK_TYPE(i) == moveType || (TYPE_EFFECT_ATK_TYPE(i) == moveType2 && moveType2 != TYPE_MYSTERY))
             {
                 // check type1
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type1)
@@ -1513,14 +1554,28 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
     s32 i = 0;
     u8 flags = 0;
     u8 type1 = gSpeciesInfo[targetSpecies].types[0], type2 = gSpeciesInfo[targetSpecies].types[1];
-    u8 moveType;
+    u8 moveType, moveType2;
 
     if (move == MOVE_STRUGGLE)
         return 0;
 
     moveType = gBattleMoves[move].type;
 
-    if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    // Set secondary typing for EFFECT_DUAL_TYPE moves
+    switch (move)
+    {
+    case MOVE_MUDDY_WATER:
+        moveType2 = TYPE_GROUND;
+        break;
+    case MOVE_TWISTER:
+        moveType2 = TYPE_FLYING;
+        break;
+    default:
+        moveType2 = TYPE_MYSTERY;
+        break;
+    }
+
+    if (targetAbility == ABILITY_LEVITATE && (moveType == TYPE_GROUND || moveType2 == TYPE_GROUND))
     {
         flags = MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE;
     }
@@ -1533,7 +1588,7 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
                 i += 3;
                 continue;
             }
-            if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
+            if (TYPE_EFFECT_ATK_TYPE(i) == moveType || (TYPE_EFFECT_ATK_TYPE(i) == moveType2 && moveType2 != TYPE_MYSTERY))
             {
                 // check type1
                 if (TYPE_EFFECT_DEF_TYPE(i) == type1)
@@ -4365,9 +4420,26 @@ static void Cmd_typecalc2(void)
 {
     u8 flags = 0;
     s32 i = 0;
-    u8 moveType = gBattleMoves[gCurrentMove].type;
+    u8 moveType, moveType2;
 
-    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    moveType = gBattleMoves[gCurrentMove].type;
+
+    // Set secondary typing for EFFECT_DUAL_TYPE moves
+    switch (gCurrentMove)
+    {
+    case MOVE_MUDDY_WATER:
+        moveType2 = TYPE_GROUND;
+        break;
+    case MOVE_TWISTER:
+        moveType2 = TYPE_FLYING;
+        break;
+    default:
+        moveType2 = TYPE_MYSTERY;
+        break;
+    }
+
+
+    if (gBattleMons[gBattlerTarget].ability == ABILITY_LEVITATE && (moveType == TYPE_GROUND || moveType2 == TYPE_GROUND))
     {
         gLastUsedAbility = gBattleMons[gBattlerTarget].ability;
         gMoveResultFlags |= (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE);
@@ -4392,7 +4464,7 @@ static void Cmd_typecalc2(void)
                 }
             }
 
-            if (TYPE_EFFECT_ATK_TYPE(i) == moveType)
+            if (TYPE_EFFECT_ATK_TYPE(i) == moveType || (TYPE_EFFECT_ATK_TYPE(i) == moveType2 && moveType2 != TYPE_MYSTERY))
             {
                 // check type1
                 if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
