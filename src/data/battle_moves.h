@@ -30,13 +30,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_ACID] =
     {
-        .effect = EFFECT_DEFENSE_DOWN_HIT,
-        .power = 70,
+        .effect = EFFECT_EXTRA_EFFECTIVENESS,
+        .power = 65,
         .type = TYPE_POISON,
         .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
         .pp = 15,
-        .secondaryEffectChance = 10,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
@@ -873,12 +873,12 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_CUT] =
     {
-        .effect = EFFECT_HIT,
-        .power = 60,
+        .effect = EFFECT_EXTRA_EFFECTIVENESS,
+        .power = 65,
         .type = TYPE_STEEL,
         .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
-        .pp = 20,
+        .pp = 15,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -4049,9 +4049,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_SKY_UPPERCUT] =
     {
         .effect = EFFECT_SKY_UPPERCUT,
-        .power = 85,
+        .power = 65,
         .type = TYPE_FIGHTING,
-        .accuracy = 90,
+        .accuracy = 100,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 15,
         .secondaryEffectChance = 0,

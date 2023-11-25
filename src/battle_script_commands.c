@@ -59,6 +59,7 @@ static void DrawLevelUpWindow2(void);
 static void PutMonIconOnLvlUpBanner(void);
 static void DrawLevelUpBannerText(void);
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite* sprite);
+static bool8 doesExtraEffectivenessApply(u16 moveUsed, u8 defenseType);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -1324,13 +1325,26 @@ static void Cmd_typecalc(void)
             }
             else if (TYPE_EFFECT_ATK_TYPE(i) == moveType || (TYPE_EFFECT_ATK_TYPE(i) == moveType2 && moveType2 != TYPE_MYSTERY))
             {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
-                    ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2 &&
-                    gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2)
-                    ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
+                // check extra effectiveness
+                if (doesExtraEffectivenessApply(gCurrentMove, gBattleMons[gBattlerTarget].type1) || (gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
+                  && doesExtraEffectivenessApply(gCurrentMove, gBattleMons[gBattlerTarget].type2)))
+                {
+                    ModulateDmgByType(TYPE_MUL_SUPER_EFFECTIVE);
+                }
+                else
+                {
+                    // check type1
+                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
+                    {
+                        ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
+                    }
+                    // check type2
+                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2 &&
+                      gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2)
+                    {
+                        ModulateDmgByType(TYPE_EFFECT_MULTIPLIER(i));
+                    }
+                }
             }
             i += 3;
         }
@@ -1417,6 +1431,12 @@ static void CheckWonderGuardAndLevitate(void)
             if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
              && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
              && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
+                flags |= 1;
+            // check EFFECT_EXTRA_EFFECTIVENESS
+            if (doesExtraEffectivenessApply(gCurrentMove, gBattleMons[gBattlerTarget].type1))
+                flags |= 1;
+            if (doesExtraEffectivenessApply(gCurrentMove, gBattleMons[gBattlerTarget].type2)
+              && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2)
                 flags |= 1;
 
             // check not very effective
@@ -1524,16 +1544,27 @@ u8 TypeCalc(u16 move, u8 attacker, u8 defender)
                 i += 3;
                 continue;
             }
-
             else if (TYPE_EFFECT_ATK_TYPE(i) == moveType || (TYPE_EFFECT_ATK_TYPE(i) == moveType2 && moveType2 != TYPE_MYSTERY))
             {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type1)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type2 &&
-                    gBattleMons[defender].type1 != gBattleMons[defender].type2)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
+                if (doesExtraEffectivenessApply(move, gBattleMons[defender].type1) || (gBattleMons[defender].type1 != gBattleMons[defender].type2
+                  && doesExtraEffectivenessApply(move, gBattleMons[defender].type2)))
+                {
+                    ModulateDmgByType2(TYPE_MUL_SUPER_EFFECTIVE, move, &flags);
+                }
+                else
+                {
+                    // check type1
+                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type1)
+                    {
+                        ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
+                    }
+                    // check type2
+                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[defender].type2 &&
+                        gBattleMons[defender].type1 != gBattleMons[defender].type2)
+                    {
+                        ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
+                    }
+                }
             }
             i += 3;
         }
@@ -1590,12 +1621,24 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
             }
             if (TYPE_EFFECT_ATK_TYPE(i) == moveType || (TYPE_EFFECT_ATK_TYPE(i) == moveType2 && moveType2 != TYPE_MYSTERY))
             {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == type1)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == type2 && type1 != type2)
-                    ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
+                if (doesExtraEffectivenessApply(move, type1) || (type1 != type2
+                  && doesExtraEffectivenessApply(move, type2)))
+                {
+                    ModulateDmgByType2(TYPE_MUL_SUPER_EFFECTIVE, move, &flags);
+                }
+                else
+                {
+                    // check type1
+                    if (TYPE_EFFECT_DEF_TYPE(i) == type1)
+                    {
+                        ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
+                    }
+                    // check type2
+                    if (TYPE_EFFECT_DEF_TYPE(i) == type2 && type1 != type2)
+                    {
+                        ModulateDmgByType2(TYPE_EFFECT_MULTIPLIER(i), move, &flags);
+                    }
+                }
             }
             i += 3;
         }
@@ -1605,6 +1648,19 @@ u8 AI_TypeCalc(u16 move, u16 targetSpecies, u8 targetAbility)
      && gBattleMoves[move].power)
         flags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
     return flags;
+}
+
+// Checks if move has extra super effectiveness outside standard type interactions.
+static bool8 doesExtraEffectivenessApply(u16 moveUsed, u8 defenseType)
+{
+    if (moveUsed == MOVE_ACID && defenseType == TYPE_STEEL)
+        return TRUE;
+    if (moveUsed == MOVE_CUT && defenseType == TYPE_GRASS)
+        return TRUE;
+    if (moveUsed == MOVE_SKY_UPPERCUT && defenseType == TYPE_FLYING)
+        return TRUE;
+
+    return FALSE;
 }
 
 // Multiplies the damage by a random factor between 85% to 100% inclusive
@@ -4466,43 +4522,51 @@ static void Cmd_typecalc2(void)
 
             if (TYPE_EFFECT_ATK_TYPE(i) == moveType || (TYPE_EFFECT_ATK_TYPE(i) == moveType2 && moveType2 != TYPE_MYSTERY))
             {
-                // check type1
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
+                if (doesExtraEffectivenessApply(gCurrentMove, gBattleMons[gBattlerTarget].type1) || (gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
+                  && doesExtraEffectivenessApply(gCurrentMove, gBattleMons[gBattlerTarget].type2)))
                 {
-                    if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
-                    {
-                        gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-                        break;
-                    }
-                    if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-                    }
-                    if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_SUPER_EFFECTIVE;
-                    }
+                    flags |= MOVE_RESULT_SUPER_EFFECTIVE;
                 }
-                // check type2
-                if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2)
+                else
                 {
-                    if (gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-                        && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
+                    // check type1
+                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type1)
                     {
-                        gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
-                        break;
+                        if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
+                        {
+                            gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
+                            break;
+                        }
+                        if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
+                        {
+                            flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
+                        }
+                        if (TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
+                        {
+                            flags |= MOVE_RESULT_SUPER_EFFECTIVE;
+                        }
                     }
-                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
-                        && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-                        && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
+                    // check type2
+                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2)
                     {
-                        flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
-                    }
-                    if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
-                        && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
-                        && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
-                    {
-                        flags |= MOVE_RESULT_SUPER_EFFECTIVE;
+                        if (gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
+                            && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NO_EFFECT)
+                        {
+                            gMoveResultFlags |= MOVE_RESULT_DOESNT_AFFECT_FOE;
+                            break;
+                        }
+                        if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
+                            && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
+                            && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_NOT_EFFECTIVE)
+                        {
+                            flags |= MOVE_RESULT_NOT_VERY_EFFECTIVE;
+                        }
+                        if (TYPE_EFFECT_DEF_TYPE(i) == gBattleMons[gBattlerTarget].type2
+                            && gBattleMons[gBattlerTarget].type1 != gBattleMons[gBattlerTarget].type2
+                            && TYPE_EFFECT_MULTIPLIER(i) == TYPE_MUL_SUPER_EFFECTIVE)
+                        {
+                            flags |= MOVE_RESULT_SUPER_EFFECTIVE;
+                        }
                     }
                 }
             }

@@ -3,7 +3,7 @@
 
 const u8 gMoveDescription_Absorb[]          = _("An attack that\nabsorbs half the\ndamage it inflicted\nto restore HP.");
 const u8 gMoveDescription_AcidArmor[]       = _("The user alters its\ncells to liquefy\nitself and sharply\nraise DEFENSE.");
-const u8 gMoveDescription_Acid[]            = _("The foe is sprayed\nwith a harsh, hide-\nmelting acid that\nmay lower DEFENSE.");
+const u8 gMoveDescription_Acid[]            = _("Foes are sprayed\nwith a harsh acid.\nSuper effective on\nSTEEL-types.");
 const u8 gMoveDescription_AerialAce[]       = _("An extremely fast\nattack against one\ntarget. It can't be\nevaded.");
 const u8 gMoveDescription_Aeroblast[]       = _("A vortex of air is\nshot at the foe.\nIt has a high\ncritical-hit ratio.");
 const u8 gMoveDescription_Agility[]         = _("The user relaxes\nand lightens its\nbody to sharply\nboost its SPEED.");
@@ -61,7 +61,7 @@ const u8 gMoveDescription_CrossChop[]       = _("The foe is hit with\ndouble cho
 const u8 gMoveDescription_Crunch[]          = _("The foe is crunched\nwith sharp fangs.\nIt may lower the\nfoe's DEF.");
 const u8 gMoveDescription_CrushClaw[]       = _("The foe is attacked\nwith sharp claws.\nIt may also lower\nthe foe's DEFENSE.");
 const u8 gMoveDescription_Curse[]           = _("A move that works\ndifferently for the\nGHOST-type and all\nthe other types.");
-const u8 gMoveDescription_Cut[]             = _("A basic attack.\nIt can be used to\ncut down thin trees\nand grass.");
+const u8 gMoveDescription_Cut[]             = _("Slices the foe with\nsharp blades/claws.\nSuper effective on\nGRASS-types.");
 const u8 gMoveDescription_DarkPulse[]       = _("The user releases\ntheir ill intent as\nan aura. May make\nthe foe flinch.");
 const u8 gMoveDescription_DefenseCurl[]     = _("The user curls up\nto conceal weak\nspots and raise its\nDEFENSE stat.");
 const u8 gMoveDescription_DestinyBond[]     = _("If the user faints,\nthe foe delivering\nthe final hit also\nfaints.");
@@ -285,7 +285,7 @@ const u8 gMoveDescription_Sketch[]          = _("This move copies\nthe move last
 const u8 gMoveDescription_SkillSwap[]       = _("The user employs\nits psychic power\nto swap abilities\nwith the foe.");
 const u8 gMoveDescription_SkullBash[]       = _("The user raises its\nDEFENSE in the 1st\nturn, then attacks\nin the 2nd turn.");
 const u8 gMoveDescription_SkyAttack[]       = _("A 2nd-turn attack\nmove with a high\ncritical-hit ratio.\nThe foe may flinch.");
-const u8 gMoveDescription_SkyUppercut[]     = _("The user attacks\nwith an uppercut\nthrown skywards\nwith force.");
+const u8 gMoveDescription_SkyUppercut[]     = _("An uppercut thrown\nskyward with force.\nSuper effective on\nFLYING-types.");
 const u8 gMoveDescription_SlackOff[]        = _("The user slacks off\nand restores its HP\nby half its full\nHP.");
 const u8 gMoveDescription_Slam[]            = _("The foe is struck\nwith a long tail,\nvines, etc.");
 const u8 gMoveDescription_Slash[]           = _("The foe is slashed\nwith claws, etc.\nIt has a high\ncritical-hit ratio.");

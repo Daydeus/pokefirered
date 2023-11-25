@@ -151,7 +151,7 @@ gBattleScriptsForMoveEffects::
 	.4byte BattleScript_EffectHit                    @ EFFECT_PURSUIT
 	.4byte BattleScript_EffectRapidSpin              @ EFFECT_RAPID_SPIN
 	.4byte BattleScript_EffectSonicboom              @ EFFECT_SONICBOOM
-	.4byte BattleScript_EffectHit                    @ EFFECT_UNUSED_83
+	.4byte BattleScript_EffectHit                    @ EFFECT_EXTRA_EFFECTIVENESS
 	.4byte BattleScript_EffectMorningSun             @ EFFECT_MORNING_SUN
 	.4byte BattleScript_EffectSynthesis              @ EFFECT_SYNTHESIS
 	.4byte BattleScript_EffectMoonlight              @ EFFECT_MOONLIGHT
