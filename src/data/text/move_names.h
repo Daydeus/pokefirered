@@ -167,6 +167,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_KARATE_CHOP]   = _("KARATE CHOP"),
     [MOVE_KINESIS]       = _("KINESIS"),
     [MOVE_KNOCK_OFF]     = _("KNOCK OFF"),
+    [MOVE_LAVA_PLUME]    = _("LAVA PLUME"),
     [MOVE_LEAF_BLADE]    = _("LEAF BLADE"),
     [MOVE_LEECH_LIFE]    = _("LEECH LIFE"),
     [MOVE_LEECH_SEED]    = _("LEECH SEED"),

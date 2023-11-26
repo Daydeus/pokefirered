@@ -1657,6 +1657,8 @@ static bool8 doesExtraEffectivenessApply(u16 moveUsed, u8 defenseType)
         return TRUE;
     if (moveUsed == MOVE_CUT && defenseType == TYPE_GRASS)
         return TRUE;
+    if (moveUsed == MOVE_HEAT_WAVE && defenseType == TYPE_WATER)
+        return TRUE;
     if (moveUsed == MOVE_SKY_UPPERCUT && defenseType == TYPE_FLYING)
         return TRUE;
 

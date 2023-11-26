@@ -1268,9 +1268,9 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_EGG_BOMB] =
     {
         .effect = EFFECT_HIT,
-        .power = 80,
+        .power = 115,
         .type = TYPE_FIRE,
-        .accuracy = 100,
+        .accuracy = 90,
         .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 10,
         .secondaryEffectChance = 0,
@@ -1995,13 +1995,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_HEAT_WAVE] =
     {
-        .effect = EFFECT_BURN_HIT,
-        .power = 100,
+        .effect = EFFECT_EXTRA_EFFECTIVENESS,
+        .power = 110,
         .type = TYPE_FIRE,
         .accuracy = 90,
         .category = MOVE_CATEGORY_SPECIAL,
-        .pp = 10,
-        .secondaryEffectChance = 10,
+        .pp = 5,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_BOTH,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
@@ -2383,6 +2383,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+    },
+
+    [MOVE_LAVA_PLUME] =
+    {
+        .effect = EFFECT_BURN_HIT,
+        .power = 80,
+        .type = TYPE_FIRE,
+        .accuracy = 90,
+        .category = MOVE_CATEGORY_SPECIAL,
+        .pp = 15,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_FOES_AND_ALLY,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },
 
     [MOVE_LEAF_BLADE] =

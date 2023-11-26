@@ -186,6 +186,7 @@ extern const union AnimCmd *const gAnims_WaterPulseBubble[];
 extern const union AnimCmd *const gAnims_FlamethrowerFlame[];
 extern const union AnimCmd *const gMusicNotesAnimTable[];
 extern const union AnimCmd *const gSporeParticleAnimTable[];
+extern const union AnimCmd *const gAnims_FirePlume[];
 extern const u8 *const gBattleAnims_StatusConditions[];
 extern const u8 *const gBattleAnims_Moves[];
 extern const u16 gMovesWithQuietBGM[];
