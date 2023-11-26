@@ -93,6 +93,8 @@
 #define VARIOUS_JUMP_IF_BATTLE_END              13
 #define VARIOUS_TRY_HIT_SWITCH_TARGET           14
 #define VARIOUS_HIT_SWITCH_TARGET_FAILED        15
+#define VARIOUS_JUMP_IF_TARGET_ALLY             16
+#define VARIOUS_TRY_HEAL_TARGET                 17
 
 // Cmd_manipulatedmg
 #define DMG_CHANGE_SIGN            0

@@ -1316,6 +1316,16 @@
 	various 0, VARIOUS_HIT_SWITCH_TARGET_FAILED
 	.endm
 
+	.macro jumpiftargetally jumpptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_TARGET_ALLY
+	.4byte \jumpptr
+	.endm
+
+	.macro tryhealtarget battler:req, jumpptr:req
+	various \battler, VARIOUS_TRY_HEAL_TARGET
+	.4byte \jumpptr
+	.endm
+
 @ helpful macros
 	.macro setstatchanger stat:req, stages:req, down:req
 	setbyte sSTATCHANGER \stat | \stages << 4 | \down << 7

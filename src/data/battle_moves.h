@@ -3274,16 +3274,16 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_PRESENT] =
     {
-        .effect = EFFECT_PRESENT,
-        .power = 1,
+        .effect = EFFECT_HIT_ENEMY_HEAL_ALLY,
+        .power = 90,
     #ifdef TYPE_FAIRY
         .type = TYPE_FAIRY,
     #else
         .type = TYPE_NORMAL,
     #endif
-        .accuracy = 90,
+        .accuracy = 95,
         .category = MOVE_CATEGORY_PHYSICAL,
-        .pp = 15,
+        .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -3726,13 +3726,13 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
 
     [MOVE_SACRED_FIRE] =
     {
-        .effect = EFFECT_BURN_HIT,
-        .power = 100,
+        .effect = EFFECT_HIT_ENEMY_HEAL_ALLY,
+        .power = 135,
         .type = TYPE_FIRE,
-        .accuracy = 95,
-        .category = MOVE_CATEGORY_SPECIAL,
+        .accuracy = 90,
+        .category = MOVE_CATEGORY_PHYSICAL,
         .pp = 5,
-        .secondaryEffectChance = 50,
+        .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,

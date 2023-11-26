@@ -6431,6 +6431,33 @@ static void Cmd_various(void)
     case VARIOUS_HIT_SWITCH_TARGET_FAILED:
         gBattleStruct->hitSwitchTargetFailed = TRUE;
         break;
+    case VARIOUS_JUMP_IF_TARGET_ALLY:
+        if (GetBattlerSide(gBattlerAttacker) == GetBattlerSide(gBattlerTarget))
+        {
+            jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            gBattlescriptCurrInstr = jumpPtr;
+            return;
+        }
+        else
+            gBattlescriptCurrInstr += 4;
+
+        break;
+    case VARIOUS_TRY_HEAL_TARGET:
+        if (BATTLER_MAX_HP(gBattlerTarget))
+        {
+            jumpPtr = T1_READ_PTR(gBattlescriptCurrInstr + 3);
+            gBattlescriptCurrInstr = jumpPtr;
+            return;
+        }
+        else
+        {
+            gBattleMoveDamage = -(gBattleMons[gBattlerTarget].maxHP / 2);
+
+            if (gBattleMoveDamage == 0)
+                gBattleMoveDamage = -1;
+            gBattlescriptCurrInstr += 4;
+        }
+        break;
     }
     gBattlescriptCurrInstr += 3;
 }

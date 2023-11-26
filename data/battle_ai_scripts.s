@@ -169,7 +169,6 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_SWAGGER, AI_CBM_Confuse
 	if_effect EFFECT_ATTRACT, AI_CBM_Attract
 	if_effect EFFECT_RETURN, AI_CBM_HighRiskForDamage
-	if_effect EFFECT_PRESENT, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_FRUSTRATION, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_SAFEGUARD, AI_CBM_Safeguard
 	if_effect EFFECT_MAGNITUDE, AI_CBM_Magnitude
@@ -188,6 +187,7 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_STOCKPILE, AI_CBM_Stockpile
 	if_effect EFFECT_SPIT_UP, AI_CBM_SpitUpAndSwallow
 	if_effect EFFECT_SWALLOW, AI_CBM_SpitUpAndSwallow
+	if_effect EFFECT_HEAL_TARGET, AI_CV_HealAlly
 	if_effect EFFECT_HAIL, AI_CBM_Hail
 	if_effect EFFECT_TORMENT, AI_CBM_Torment
 	if_effect EFFECT_FLATTER, AI_CBM_Confuse
@@ -1398,6 +1398,10 @@ AI_CV_HealWeather::
 
 AI_CV_HealWeather_ScoreDown2::
 	score -2
+
+AI_CV_HealAlly::
+	if_not_double_battle Score_Minus10
+	end
 
 AI_CV_Heal::
 	if_hp_equal AI_USER, 100, AI_CV_Heal3
@@ -2898,7 +2902,6 @@ AI_Risky_EffectsToEncourage::
 	.byte EFFECT_DESTINY_BOND
 	.byte EFFECT_SWAGGER
 	.byte EFFECT_ATTRACT
-	.byte EFFECT_PRESENT
 	.byte EFFECT_ALL_STATS_UP_HIT
 	.byte EFFECT_BELLY_DRUM
 	.byte EFFECT_MIRROR_COAT
