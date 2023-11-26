@@ -31,7 +31,7 @@ struct TestingBar
 #define B_INTERFACE_GFX_STATUS_PSN_BATTLER0     21 // BATTLER0: B_POSITION_PLAYER_LEFT
 #define B_INTERFACE_GFX_STATUS_PAR_BATTLER0     24
 #define B_INTERFACE_GFX_STATUS_SLP_BATTLER0     27
-#define B_INTERFACE_GFX_STATUS_FRZ_BATTLER0     30
+#define B_INTERFACE_GFX_STATUS_FSB_BATTLER0     30
 #define B_INTERFACE_GFX_STATUS_BRN_BATTLER0     33
 // tiles 36 through 38 are unused
 #define B_INTERFACE_GFX_STATUS_NONE             39
@@ -48,17 +48,17 @@ struct TestingBar
 #define B_INTERFACE_GFX_STATUS_PSN_BATTLER1     71 // BATTLER1: B_POSITION_OPPONENT_LEFT
 #define B_INTERFACE_GFX_STATUS_PAR_BATTLER1     74
 #define B_INTERFACE_GFX_STATUS_SLP_BATTLER1     77
-#define B_INTERFACE_GFX_STATUS_FRZ_BATTLER1     80
+#define B_INTERFACE_GFX_STATUS_FSB_BATTLER1     80
 #define B_INTERFACE_GFX_STATUS_BRN_BATTLER1     83
 #define B_INTERFACE_GFX_STATUS_PSN_BATTLER2     86 // BATTLER2: B_POSITION_PLAYER_RIGHT
 #define B_INTERFACE_GFX_STATUS_PAR_BATTLER2     89
 #define B_INTERFACE_GFX_STATUS_SLP_BATTLER2     92
-#define B_INTERFACE_GFX_STATUS_FRZ_BATTLER2     95
+#define B_INTERFACE_GFX_STATUS_FSB_BATTLER2     95
 #define B_INTERFACE_GFX_STATUS_BRN_BATTLER2     98
 #define B_INTERFACE_GFX_STATUS_PSN_BATTLER3     101 // BATTLER3: B_POSITION_OPPONENT_RIGHT
 #define B_INTERFACE_GFX_STATUS_PAR_BATTLER3     104
 #define B_INTERFACE_GFX_STATUS_SLP_BATTLER3     107
-#define B_INTERFACE_GFX_STATUS_FRZ_BATTLER3     110
+#define B_INTERFACE_GFX_STATUS_FSB_BATTLER3     110
 #define B_INTERFACE_GFX_STATUS_BRN_BATTLER3     113
 #define B_INTERFACE_GFX_BOTTOM_RIGHT_CORNER_HP_AS_TEXT 116 // Used in the player's
 #define B_INTERFACE_GFX_BOTTOM_RIGHT_CORNER_HP_AS_BAR  117 // healthbox in double battles
@@ -1583,7 +1583,7 @@ enum
     PAL_STATUS_PSN,
     PAL_STATUS_PAR,
     PAL_STATUS_SLP,
-    PAL_STATUS_FRZ,
+    PAL_STATUS_FSB,
     PAL_STATUS_BRN
 };
 
@@ -1591,7 +1591,7 @@ static const u16 sStatusIconColors[] = {
     [PAL_STATUS_PSN] = RGB(24, 12, 24),
     [PAL_STATUS_PAR] = RGB(23, 23, 3),
     [PAL_STATUS_SLP] = RGB(20, 20, 17),
-    [PAL_STATUS_FRZ] = RGB(17, 22, 28),
+    [PAL_STATUS_FSB] = RGB(17, 22, 28),
     [PAL_STATUS_BRN] = RGB(28, 14, 10)
 };
 
@@ -1635,10 +1635,10 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
         statusGfxPtr = GetBattleInterfaceGfxPtr(GetStatusIconForBattlerId(B_INTERFACE_GFX_STATUS_BRN_BATTLER0, battlerId));
         statusPalId = PAL_STATUS_BRN;
     }
-    else if (status & STATUS1_FREEZE)
+    else if (status & STATUS1_FROSTBITE)
     {
-        statusGfxPtr = GetBattleInterfaceGfxPtr(GetStatusIconForBattlerId(B_INTERFACE_GFX_STATUS_FRZ_BATTLER0, battlerId));
-        statusPalId = PAL_STATUS_FRZ;
+        statusGfxPtr = GetBattleInterfaceGfxPtr(GetStatusIconForBattlerId(B_INTERFACE_GFX_STATUS_FSB_BATTLER0, battlerId));
+        statusPalId = PAL_STATUS_FSB;
     }
     else if (status & STATUS1_PARALYSIS)
     {
@@ -1720,15 +1720,15 @@ static u8 GetStatusIconForBattlerId(u8 statusElementId, u8 battlerId)
         else
             ret = B_INTERFACE_GFX_STATUS_SLP_BATTLER3;
         break;
-    case B_INTERFACE_GFX_STATUS_FRZ_BATTLER0:
+    case B_INTERFACE_GFX_STATUS_FSB_BATTLER0:
         if (battlerId == 0)
-            ret = B_INTERFACE_GFX_STATUS_FRZ_BATTLER0;
+            ret = B_INTERFACE_GFX_STATUS_FSB_BATTLER0;
         else if (battlerId == 1)
-            ret = B_INTERFACE_GFX_STATUS_FRZ_BATTLER1;
+            ret = B_INTERFACE_GFX_STATUS_FSB_BATTLER1;
         else if (battlerId == 2)
-            ret = B_INTERFACE_GFX_STATUS_FRZ_BATTLER2;
+            ret = B_INTERFACE_GFX_STATUS_FSB_BATTLER2;
         else
-            ret = B_INTERFACE_GFX_STATUS_FRZ_BATTLER3;
+            ret = B_INTERFACE_GFX_STATUS_FSB_BATTLER3;
         break;
     case B_INTERFACE_GFX_STATUS_BRN_BATTLER0:
         if (battlerId == 0)

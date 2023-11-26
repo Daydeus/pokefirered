@@ -2379,6 +2379,7 @@ void SwitchInClearSetData(void)
     else
     {
         gBattleMons[gActiveBattler].status2 = 0;
+        gDisableStructs[gActiveBattler].focusEnergyTimer = 0;
         gStatuses3[gActiveBattler] = 0;
     }
 
@@ -2404,6 +2405,7 @@ void SwitchInClearSetData(void)
         gDisableStructs[gActiveBattler].perishSongTimer = disableStructCopy.perishSongTimer;
         gDisableStructs[gActiveBattler].perishSongTimerStartValue = disableStructCopy.perishSongTimerStartValue;
         gDisableStructs[gActiveBattler].battlerPreventingEscape = disableStructCopy.battlerPreventingEscape;
+        gDisableStructs[gActiveBattler].focusEnergyTimer = disableStructCopy.focusEnergyTimer;
     }
 
     gMoveResultFlags = 0;

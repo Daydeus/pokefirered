@@ -414,7 +414,7 @@ static const union AnimCmd sStatusAilmentIconAnim_SLP[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd sStatusAilmentIconAnim_FRZ[] = 
+static const union AnimCmd sStatusAilmentIconAnim_FSB[] =
 {
     ANIMCMD_FRAME(12, 20),
     ANIMCMD_JUMP(0),
@@ -449,7 +449,7 @@ static const union AnimCmd * const sStatusAilmentIconAnimTable[] =
     sStatusAilmentIconAnim_PSN,
     sStatusAilmentIconAnim_PRZ,
     sStatusAilmentIconAnim_SLP,
-    sStatusAilmentIconAnim_FRZ,
+    sStatusAilmentIconAnim_FSB,
     sStatusAilmentIconAnim_BRN,
     sStatusAilmentIconAnim_PKRS,
     sStatusAilmentIconAnim_FNT,
@@ -2859,7 +2859,9 @@ static void PokeSum_PrintSelectedMoveStats(void)
         if (sMonSummaryScreen->mode != PSS_MODE_SELECT_MOVE && sMoveSelectionCursorPos == 4)
             return;
 
-        AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], FONT_NORMAL,
+        BlitMenuInfoIcon(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO],
+                                     gBattleMoves[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].category +24, 88, 2);
+		AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], 2,
                                      57, 1,
                                      sLevelNickTextColors[0], TEXT_SKIP_DRAW,
                                      sMonSummaryScreen->summary.movePowerStrBufs[sMoveSelectionCursorPos]);
@@ -2874,6 +2876,8 @@ static void PokeSum_PrintSelectedMoveStats(void)
                                      0, 0,
                                      sLevelNickTextColors[0], TEXT_SKIP_DRAW,
                                      gMoveDescriptionPointers[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos] - 1]);
+
+        PutWindowTilemap(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO]);
     }
 }
 
@@ -3481,8 +3485,8 @@ static u8 StatusToAilment(u32 status)
     if ((status & STATUS1_SLEEP) != 0)
         return AILMENT_SLP;
 
-    if ((status & STATUS1_FREEZE) != 0)
-        return AILMENT_FRZ;
+    if ((status & STATUS1_FROSTBITE) != 0)
+        return AILMENT_FSB;
 
     if ((status & STATUS1_BURN) != 0)
         return AILMENT_BRN;
@@ -3765,13 +3769,6 @@ static void UpdateCurrentMonBufferFromPartyOrBox(struct Pokemon * mon)
 
 static u8 PokeSum_CanForgetSelectedMove(void)
 {
-    u16 move;
-
-    move = GetMonMoveBySlotId(&sMonSummaryScreen->currentMon, sMoveSelectionCursorPos);
-
-    if (IsMoveHm(move) == TRUE && sMonSummaryScreen->mode != PSS_MODE_FORGET_MOVE)
-        return FALSE;
-
     return TRUE;
 }
 

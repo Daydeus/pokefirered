@@ -77,13 +77,11 @@ ViridianCity_School_Text_ExplainPoison::
     .string "Poison lingers after battles.\n"
     .string "Use an ANTIDOTE to cure poison!$"
 
-ViridianCity_School_Text_ExplainFreeze::
-    .string "A frozen POKéMON becomes\n"
-    .string "helplessly immobile.\p"
-    .string "It stays frozen even after the\n"
-    .string "battle ends.\p"
-    .string "Use ICE HEAL to thaw out the\n"
-    .string "suffering POKéMON.$"
+ViridianCity_School_Text_ExplainFrostbite::
+    .string "Frostbite reduces SP.ATTACK\n"
+    .string "and causes ongoing HP loss.\p"
+    .string "It remains after battle too!\n"
+    .string "ICE HEAL can cure frostbite.$"
 
 ViridianCity_School_Text_ExplainParalysis::
     .string "Paralysis reduces SPEED and may\n"

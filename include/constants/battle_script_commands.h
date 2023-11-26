@@ -26,6 +26,7 @@
 #define sRESHOW_MAIN_STATE           gBattleScripting + 0x21 // reshowMainState
 #define sRESHOW_HELPER_STATE         gBattleScripting + 0x22 // reshowHelperState
 #define sLVLUP_HP                    gBattleScripting + 0x23 // levelUpHP
+#define sSWITCH_CASE                 gBattleScripting + 0x24 // switchCase
 
 // Array entries for battle communication
 #define MULTIUSE_STATE          0
@@ -89,6 +90,11 @@
 #define VARIOUS_RETURN_OPPONENT_MON2            10
 #define VARIOUS_CHECK_POKEFLUTE                 11
 #define VARIOUS_WAIT_FANFARE                    12
+#define VARIOUS_JUMP_IF_BATTLE_END              13
+#define VARIOUS_TRY_HIT_SWITCH_TARGET           14
+#define VARIOUS_HIT_SWITCH_TARGET_FAILED        15
+#define VARIOUS_JUMP_IF_TARGET_ALLY             16
+#define VARIOUS_TRY_HEAL_TARGET                 17
 
 // Cmd_manipulatedmg
 #define DMG_CHANGE_SIGN            0
@@ -122,22 +128,25 @@
 
 // cases for Cmd_moveend
 #define MOVEEND_RAGE                            0
-#define MOVEEND_DEFROST                         1
-#define MOVEEND_SYNCHRONIZE_TARGET              2
-#define MOVEEND_ON_DAMAGE_ABILITIES             3
-#define MOVEEND_IMMUNITY_ABILITIES              4
-#define MOVEEND_SYNCHRONIZE_ATTACKER            5
-#define MOVEEND_CHOICE_MOVE                     6
-#define MOVEEND_CHANGED_ITEMS                   7
-#define MOVEEND_ATTACKER_INVISIBLE              8
-#define MOVEEND_ATTACKER_VISIBLE                9
-#define MOVEEND_TARGET_VISIBLE                  10
-#define MOVEEND_ITEM_EFFECTS_ALL                11
-#define MOVEEND_KINGSROCK_SHELLBELL             12
-#define MOVEEND_SUBSTITUTE                      13
-#define MOVEEND_UPDATE_LAST_MOVES               14
-#define MOVEEND_MIRROR_MOVE                     15
-#define MOVEEND_NEXT_TARGET                     16
-#define MOVEEND_COUNT                           17
+#define MOVEEND_SYNCHRONIZE_TARGET              1
+#define MOVEEND_ON_DAMAGE_ABILITIES             2
+#define MOVEEND_IMMUNITY_ABILITIES              3
+#define MOVEEND_SYNCHRONIZE_ATTACKER            4
+#define MOVEEND_CHOICE_MOVE                     5
+#define MOVEEND_CHANGED_ITEMS                   6
+#define MOVEEND_ATTACKER_INVISIBLE              7
+#define MOVEEND_ATTACKER_VISIBLE                8
+#define MOVEEND_TARGET_VISIBLE                  9
+#define MOVEEND_ITEM_EFFECTS_ALL                10
+#define MOVEEND_KINGSROCK_SHELLBELL             11
+#define MOVEEND_SUBSTITUTE                      12
+#define MOVEEND_UPDATE_LAST_MOVES               13
+#define MOVEEND_MIRROR_MOVE                     14
+#define MOVEEND_NEXT_TARGET                     15
+#define MOVEEND_COUNT                           16
+
+// switch cases
+#define B_SWITCH_NORMAL   0
+#define B_SWITCH_HIT      1   // MOVE_DRAGON_TAIL
 
 #endif // GUARD_CONSTANTS_BATTLE_SCRIPT_COMMANDS_H

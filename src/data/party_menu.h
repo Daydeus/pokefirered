@@ -893,7 +893,7 @@ static const union AnimCmd sSpriteAnim_StatusSleep[] =
     ANIMCMD_END
 };
 
-static const union AnimCmd sSpriteAnim_StatusFrozen[] =
+static const union AnimCmd sSpriteAnim_StatusFrostbite[] =
 {
     ANIMCMD_FRAME(12, 0),
     ANIMCMD_END
@@ -928,7 +928,7 @@ static const union AnimCmd *const sSpriteTemplate_StatusCondition[] =
     sSpriteAnim_StatusPoison,
     sSpriteAnim_StatusParalyzed,
     sSpriteAnim_StatusSleep,
-    sSpriteAnim_StatusFrozen,
+    sSpriteAnim_StatusFrostbite,
     sSpriteAnim_StatusBurn,
     sSpriteAnim_StatusPokerus,
     sSpriteAnim_StatusFaint,

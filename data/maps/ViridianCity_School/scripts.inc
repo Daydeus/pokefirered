@@ -62,7 +62,7 @@ ViridianCity_School_EventScript_ChooseBlackboardTopic::
 	case 1, ViridianCity_School_EventScript_ReadPoison
 	case 2, ViridianCity_School_EventScript_ReadParalysis
 	case 3, ViridianCity_School_EventScript_ReadBurn
-	case 4, ViridianCity_School_EventScript_ReadFreeze
+	case 4, ViridianCity_School_EventScript_ReadFrostbite
 	case 5, ViridianCity_School_EventScript_ExitBlackboard
 	case 127, ViridianCity_School_EventScript_ExitBlackboard
 	end
@@ -82,8 +82,8 @@ ViridianCity_School_EventScript_ReadPoison::
 	goto ViridianCity_School_EventScript_ChooseBlackboardTopic
 	end
 
-ViridianCity_School_EventScript_ReadFreeze::
-	msgbox ViridianCity_School_Text_ExplainFreeze
+ViridianCity_School_EventScript_ReadFrostbite::
+	msgbox ViridianCity_School_Text_ExplainFrostbite
 	goto ViridianCity_School_EventScript_ChooseBlackboardTopic
 	end
 

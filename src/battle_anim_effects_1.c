@@ -28,9 +28,7 @@ static void AnimMimicOrb(struct Sprite *);
 static void AnimLeechSeed(struct Sprite *);
 static void AnimLeechSeed_Step(struct Sprite *);
 static void AnimLeechSeedSprouts(struct Sprite *);
-static void AnimSporeParticle(struct Sprite *);
 static void AnimSporeParticle_Step(struct Sprite *);
-static void AnimPetalDanceBigFlower(struct Sprite *);
 static void AnimPetalDanceBigFlower_Step(struct Sprite *);
 static void AnimPetalDanceSmallFlower(struct Sprite *);
 static void AnimPetalDanceSmallFlower_Step(struct Sprite *);
@@ -415,7 +413,7 @@ static const union AnimCmd sSporeParticleAnimCmds2[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sSporeParticleAnimTable[] =
+const union AnimCmd *const gSporeParticleAnimTable[] =
 {
     sSporeParticleAnimCmds1,
     sSporeParticleAnimCmds2,
@@ -426,7 +424,7 @@ const struct SpriteTemplate gSporeParticleSpriteTemplate =
     .tileTag = ANIM_TAG_SPORE,
     .paletteTag = ANIM_TAG_SPORE,
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
-    .anims = sSporeParticleAnimTable,
+    .anims = gSporeParticleAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimSporeParticle,
@@ -2468,7 +2466,7 @@ static void AnimLeechSeedSprouts(struct Sprite* sprite)
 // arg 2: initial wave offset
 // arg 3: duration
 // arg 4: blend (0 = off, 1 = on)
-static void AnimSporeParticle(struct Sprite* sprite)
+void AnimSporeParticle(struct Sprite* sprite)
 {
     InitSpritePosToAnimTarget(sprite, TRUE);
     StartSpriteAnim(sprite, gBattleAnimArgs[4]);
@@ -2530,7 +2528,7 @@ void AnimTask_SporeDoubleBattle(u8 taskId)
 // arg 1: initial y pixel offset
 // arg 2: target y pixel offset
 // arg 3: duration
-static void AnimPetalDanceBigFlower(struct Sprite* sprite)
+void AnimPetalDanceBigFlower(struct Sprite* sprite)
 {
     InitSpritePosToAnimAttacker(sprite, FALSE);
     sprite->data[0] = gBattleAnimArgs[3];

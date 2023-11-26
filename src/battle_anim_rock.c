@@ -15,7 +15,6 @@ static void AnimRolloutParticle(struct Sprite *sprite);
 static void AnimRockTomb(struct Sprite *sprite);
 static void AnimRockBlastRock(struct Sprite *sprite);
 static void AnimRockScatter(struct Sprite *sprite);
-static void AnimParticleInVortex(struct Sprite *sprite);
 static void AnimFallingRock_Step(struct Sprite *sprite);
 static void AnimParticleInVortex_Step(struct Sprite *sprite);
 static void AnimTask_LoadSandstormBackground_Step(u8 taskId);
@@ -82,7 +81,7 @@ const struct SpriteTemplate gSwirlingDirtSpriteTemplate =
     .callback = AnimParticleInVortex,
 };
 
-static const union AffineAnimCmd sAffineAnim_Whirlpool[] =
+const union AffineAnimCmd gAffineAnim_Whirlpool[] =
 {
     AFFINEANIMCMD_FRAME(0xC0, 0xC0, 0, 0),
     AFFINEANIMCMD_FRAME(0x2, -0x3, 0, 5),
@@ -90,9 +89,9 @@ static const union AffineAnimCmd sAffineAnim_Whirlpool[] =
     AFFINEANIMCMD_JUMP(1),
 };
 
-static const union AffineAnimCmd *const sAffineAnims_Whirlpool[] =
+const union AffineAnimCmd *const gAffineAnims_Whirlpool[] =
 {
-    sAffineAnim_Whirlpool,
+    gAffineAnim_Whirlpool,
 };
 
 const struct SpriteTemplate gWhirlpoolSpriteTemplate =
@@ -102,7 +101,7 @@ const struct SpriteTemplate gWhirlpoolSpriteTemplate =
     .oam = &gOamData_AffineNormal_ObjBlend_16x16,
     .anims = gAnims_WaterMudOrb,
     .images = NULL,
-    .affineAnims = sAffineAnims_Whirlpool,
+    .affineAnims = gAffineAnims_Whirlpool,
     .callback = AnimParticleInVortex,
 };
 
@@ -360,7 +359,7 @@ static void AnimRockFragment(struct Sprite *sprite)
 }
 
 // Swirls particle in vortex. Used for moves like Fire Spin or Sand Tomb
-static void AnimParticleInVortex(struct Sprite *sprite)
+void AnimParticleInVortex(struct Sprite *sprite)
 {
     if (gBattleAnimArgs[6] == 0)
         InitSpritePosToAnimAttacker(sprite, 0);

@@ -31,7 +31,8 @@
 static const u16 sSoundMovesTable[] =
 {
     MOVE_GROWL, MOVE_ROAR, MOVE_SING, MOVE_SUPERSONIC, MOVE_SCREECH, MOVE_SNORE,
-    MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, SOUND_MOVES_END
+    MOVE_UPROAR, MOVE_METAL_SOUND, MOVE_GRASS_WHISTLE, MOVE_HYPER_VOICE, MOVE_BUG_BUZZ,
+    MOVE_DISARMING_CRY, SOUND_MOVES_END
 };
 
 u8 GetBattlerForBattleScript(u8 caseId)
@@ -210,7 +211,6 @@ void CancelMultiTurnMoves(u8 battler)
     gStatuses3[battler] &= ~STATUS3_SEMI_INVULNERABLE;
 
     gDisableStructs[battler].rolloutTimer = 0;
-    gDisableStructs[battler].furyCutterCounter = 0;
 }
 
 bool8 WasUnableToUseMove(u8 battler)
@@ -719,6 +719,7 @@ u8 DoFieldEndTurnEffects(void)
 
 enum
 {
+    ENDTURN_FOCUS_ENERGY,
     ENDTURN_INGRAIN,
     ENDTURN_ABILITIES,
     ENDTURN_ITEMS1,
@@ -726,6 +727,7 @@ enum
     ENDTURN_POISON,
     ENDTURN_BAD_POISON,
     ENDTURN_BURN,
+    ENDTURN_FROSTBITE,
     ENDTURN_NIGHTMARES,
     ENDTURN_CURSE,
     ENDTURN_WRAP,
@@ -757,16 +759,68 @@ u8 DoBattlerEndTurnEffects(void)
         {
             switch (gBattleStruct->turnEffectsTracker)
             {
-            case ENDTURN_INGRAIN:  // ingrain
-                if ((gStatuses3[gActiveBattler] & STATUS3_ROOTED)
-                 && gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP
-                 && gBattleMons[gActiveBattler].hp != 0)
+            case ENDTURN_FOCUS_ENERGY:  // focus energy
+                if (gDisableStructs[gActiveBattler].focusEnergyTimer > 0)
                 {
-                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
-                    if (gBattleMoveDamage == 0)
-                        gBattleMoveDamage = 1;
-                    gBattleMoveDamage *= -1;
-                    BattleScriptExecute(BattleScript_IngrainTurnHeal);
+                    gDisableStructs[gActiveBattler].focusEnergyTimer--;
+
+                    if (gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP
+                    && gBattleMons[gActiveBattler].hp != 0)
+                    {
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                        if (gBattleMons[gActiveBattler].hp + gBattleMoveDamage > gBattleMons[gActiveBattler].maxHP)
+                            gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp;
+                        gBattleMoveDamage *= -1;
+
+                        if (gDisableStructs[gActiveBattler].focusEnergyTimer == 0)
+                        {
+                            gBattleMons[gActiveBattler].status2 &= ~STATUS2_FOCUS_ENERGY;
+                            BattleScriptExecute(BattleScript_FocusEnergyFinalHeal);
+                        }
+                        else
+                            BattleScriptExecute(BattleScript_FocusEnergyTurnHeal);
+                    }
+                    else if (gDisableStructs[gActiveBattler].focusEnergyTimer == 0)
+                    {
+                        gBattleMons[gActiveBattler].status2 &= ~STATUS2_FOCUS_ENERGY;
+                        BattleScriptExecute(BattleScript_FocusEnergyRanOut);
+                    }
+
+                    effect++;
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_INGRAIN:  // ingrain
+                if (gDisableStructs[gActiveBattler].ingrainTimer > 0)
+                {
+                    gDisableStructs[gActiveBattler].ingrainTimer--;
+
+                    if (gBattleMons[gActiveBattler].hp != gBattleMons[gActiveBattler].maxHP
+                    && gBattleMons[gActiveBattler].hp != 0)
+                    {
+                        gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                        if (gBattleMons[gActiveBattler].hp + gBattleMoveDamage > gBattleMons[gActiveBattler].maxHP)
+                            gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP - gBattleMons[gActiveBattler].hp;
+                        gBattleMoveDamage *= -1;
+
+                        if (gDisableStructs[gActiveBattler].ingrainTimer == 0)
+                        {
+                            gStatuses3[gActiveBattler] &= ~STATUS3_ROOTED;
+                            BattleScriptExecute(BattleScript_IngrainFinalHeal);
+                        }
+                        else
+                            BattleScriptExecute(BattleScript_IngrainTurnHeal);
+                    }
+                    else if (gDisableStructs[gActiveBattler].ingrainTimer == 0)
+                    {
+                        gStatuses3[gActiveBattler] &= ~STATUS3_ROOTED;
+                        BattleScriptExecute(BattleScript_RetractedItsRoots);
+                    }
+
                     effect++;
                 }
                 gBattleStruct->turnEffectsTracker++;
@@ -830,10 +884,21 @@ u8 DoBattlerEndTurnEffects(void)
             case ENDTURN_BURN:  // burn
                 if ((gBattleMons[gActiveBattler].status1 & STATUS1_BURN) && gBattleMons[gActiveBattler].hp != 0)
                 {
-                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 8;
+                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
                     if (gBattleMoveDamage == 0)
                         gBattleMoveDamage = 1;
                     BattleScriptExecute(BattleScript_BurnTurnDmg);
+                    effect++;
+                }
+                gBattleStruct->turnEffectsTracker++;
+                break;
+            case ENDTURN_FROSTBITE:  // frostbite
+                if ((gBattleMons[gActiveBattler].status1 & STATUS1_FROSTBITE) && gBattleMons[gActiveBattler].hp != 0)
+                {
+                    gBattleMoveDamage = gBattleMons[gActiveBattler].maxHP / 16;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    BattleScriptExecute(BattleScript_FrostbiteTurnDmg);
                     effect++;
                 }
                 gBattleStruct->turnEffectsTracker++;
@@ -1234,7 +1299,6 @@ enum
 {
     CANCELLER_FLAGS,
     CANCELLER_ASLEEP,
-    CANCELLER_FROZEN,
     CANCELLER_TRUANT,
     CANCELLER_RECHARGE,
     CANCELLER_FLINCH,
@@ -1246,7 +1310,6 @@ enum
     CANCELLER_GHOST,
     CANCELLER_IN_LOVE,
     CANCELLER_BIDE,
-    CANCELLER_THAW,
     CANCELLER_END,
 };
 
@@ -1304,33 +1367,6 @@ u8 AtkCanceller_UnableToUseMove(void)
                         effect = 2;
                     }
                 }
-            }
-            gBattleStruct->atkCancellerTracker++;
-            break;
-        case CANCELLER_FROZEN: // check being frozen
-            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE)
-            {
-                if (Random() % 5)
-                {
-                    if (gBattleMoves[gCurrentMove].effect != EFFECT_THAW_HIT) // unfreezing via a move effect happens in case 13
-                    {
-                        gBattlescriptCurrInstr = BattleScript_MoveUsedIsFrozen;
-                        gHitMarker |= HITMARKER_NO_ATTACKSTRING;
-                    }
-                    else
-                    {
-                        gBattleStruct->atkCancellerTracker++;
-                        break;
-                    }
-                }
-                else // unfreeze
-                {
-                    gBattleMons[gBattlerAttacker].status1 &= ~STATUS1_FREEZE;
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED;
-                }
-                effect = 2;
             }
             gBattleStruct->atkCancellerTracker++;
             break;
@@ -1507,20 +1543,6 @@ u8 AtkCanceller_UnableToUseMove(void)
                     }
                 }
                 effect = 1;
-            }
-            gBattleStruct->atkCancellerTracker++;
-            break;
-        case CANCELLER_THAW: // move thawing
-            if (gBattleMons[gBattlerAttacker].status1 & STATUS1_FREEZE)
-            {
-                if (gBattleMoves[gCurrentMove].effect == EFFECT_THAW_HIT)
-                {
-                    gBattleMons[gBattlerAttacker].status1 &= ~STATUS1_FREEZE;
-                    BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_MoveUsedUnfroze;
-                    gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DEFROSTED_BY_MOVE;
-                }
-                effect = 2;
             }
             gBattleStruct->atkCancellerTracker++;
             break;
@@ -1843,7 +1865,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                             StringCopy(gBattleTextBuff1, gStatusConditionString_ParalysisJpn);
                         if (gBattleMons[battler].status1 & STATUS1_BURN)
                             StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
-                        if (gBattleMons[battler].status1 & STATUS1_FREEZE)
+                        if (gBattleMons[battler].status1 & STATUS1_FROSTBITE)
                             StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
                         gBattleMons[battler].status1 = 0;
                         gBattleMons[battler].status2 &= ~STATUS2_NIGHTMARE;  // fix nightmare glitch
@@ -1916,7 +1938,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                     break;
                 case ABILITY_FLASH_FIRE:
-                    if (moveType == TYPE_FIRE && !(gBattleMons[battler].status1 & STATUS1_FREEZE))
+                    if (moveType == TYPE_FIRE && !(gBattleMons[battler].status1 & STATUS1_FROSTBITE))
                     {
                         if (!(gBattleResources->flags->flags[battler] & RESOURCE_FLAG_FLASH_FIRE))
                         {
@@ -2127,7 +2149,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                     }
                     break;
                 case ABILITY_MAGMA_ARMOR:
-                    if (gBattleMons[battler].status1 & STATUS1_FREEZE)
+                    if (gBattleMons[battler].status1 & STATUS1_FROSTBITE)
                     {
                         StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
                         effect = 1;
@@ -2746,11 +2768,11 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
-            case HOLD_EFFECT_CURE_FRZ:
-                if (gBattleMons[battlerId].status1 & STATUS1_FREEZE)
+            case HOLD_EFFECT_CURE_FSB:
+                if (gBattleMons[battlerId].status1 & STATUS1_FROSTBITE)
                 {
-                    gBattleMons[battlerId].status1 &= ~STATUS1_FREEZE;
-                    BattleScriptExecute(BattleScript_BerryCureFrzEnd2);
+                    gBattleMons[battlerId].status1 &= ~STATUS1_FROSTBITE;
+                    BattleScriptExecute(BattleScript_BerryCureFsbEnd2);
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -2796,7 +2818,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                         StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
                         i++;
                     }
-                    if (gBattleMons[battlerId].status1 & STATUS1_FREEZE)
+                    if (gBattleMons[battlerId].status1 & STATUS1_FROSTBITE)
                     {
                         StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
                         i++;
@@ -2891,12 +2913,12 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
-            case HOLD_EFFECT_CURE_FRZ:
-                if (gBattleMons[battlerId].status1 & STATUS1_FREEZE)
+            case HOLD_EFFECT_CURE_FSB:
+                if (gBattleMons[battlerId].status1 & STATUS1_FROSTBITE)
                 {
-                    gBattleMons[battlerId].status1 &= ~STATUS1_FREEZE;
+                    gBattleMons[battlerId].status1 &= ~STATUS1_FROSTBITE;
                     BattleScriptPushCursor();
-                    gBattlescriptCurrInstr = BattleScript_BerryCureFrzRet;
+                    gBattlescriptCurrInstr = BattleScript_BerryCureFsbRet;
                     effect = ITEM_STATUS_CHANGE;
                 }
                 break;
@@ -2948,7 +2970,7 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
                     if (gBattleMons[battlerId].status1 & STATUS1_BURN)
                         StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
 
-                    if (gBattleMons[battlerId].status1 & STATUS1_FREEZE)
+                    if (gBattleMons[battlerId].status1 & STATUS1_FROSTBITE)
                         StringCopy(gBattleTextBuff1, gStatusConditionString_IceJpn);
 
                     if (gBattleMons[battlerId].status2 & STATUS2_CONFUSION)
@@ -3040,7 +3062,6 @@ u8 ItemBattleEffects(u8 caseID, u8 battlerId, bool8 moveTurn)
 
 void ClearFuryCutterDestinyBondGrudge(u8 battlerId)
 {
-    gDisableStructs[battlerId].furyCutterCounter = 0;
     gBattleMons[battlerId].status2 &= ~STATUS2_DESTINY_BOND;
     gStatuses3[battlerId] &= ~STATUS3_GRUDGE;
 }
@@ -3249,4 +3270,16 @@ u8 IsMonDisobedient(void)
             return 1;
         }
     }
+}
+
+bool32 IsBattlerAlive(u32 battler)
+{
+    if (gBattleMons[battler].hp == 0)
+        return FALSE;
+    else if (battler >= gBattlersCount)
+        return FALSE;
+    else if (gAbsentBattlerFlags & gBitTable[battler])
+        return FALSE;
+    else
+        return TRUE;
 }

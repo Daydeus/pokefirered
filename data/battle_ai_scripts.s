@@ -169,7 +169,6 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_SWAGGER, AI_CBM_Confuse
 	if_effect EFFECT_ATTRACT, AI_CBM_Attract
 	if_effect EFFECT_RETURN, AI_CBM_HighRiskForDamage
-	if_effect EFFECT_PRESENT, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_FRUSTRATION, AI_CBM_HighRiskForDamage
 	if_effect EFFECT_SAFEGUARD, AI_CBM_Safeguard
 	if_effect EFFECT_MAGNITUDE, AI_CBM_Magnitude
@@ -188,6 +187,7 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_STOCKPILE, AI_CBM_Stockpile
 	if_effect EFFECT_SPIT_UP, AI_CBM_SpitUpAndSwallow
 	if_effect EFFECT_SWALLOW, AI_CBM_SpitUpAndSwallow
+	if_effect EFFECT_HEAL_TARGET, AI_CV_HealAlly
 	if_effect EFFECT_HAIL, AI_CBM_Hail
 	if_effect EFFECT_TORMENT, AI_CBM_Torment
 	if_effect EFFECT_FLATTER, AI_CBM_Confuse
@@ -211,6 +211,7 @@ AI_CheckBadMove_CheckEffect::
 	if_effect EFFECT_WATER_SPORT, AI_CBM_WaterSport
 	if_effect EFFECT_CALM_MIND, AI_CBM_CalmMind
 	if_effect EFFECT_DRAGON_DANCE, AI_CBM_DragonDance
+	if_effect EFFECT_SHEER_COLD, AI_CBM_SheerCold
 	end
 
 AI_CBM_Sleep::
@@ -601,6 +602,14 @@ AI_CBM_DragonDance::
 	if_stat_level_equal AI_USER, STAT_SPEED, 12, Score_Minus8
 	end
 
+AI_CBM_SheerCold::
+	if_status AI_TARGET, STATUS1_ANY, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0_5, Score_Minus10
+	if_type_effectiveness AI_EFFECTIVENESS_x0_25, Score_Minus10
+@	if_side_affecting AI_TARGET, SIDE_STATUS_SAFEGUARD, Score_Minus10  @ Improvement in Emerald
+	end
+
 Score_Minus1::
 	score -1
 	end
@@ -704,7 +713,6 @@ AI_CheckViability::
 	if_effect EFFECT_PARALYZE, AI_CV_Paralyze
 	@ if_effect EFFECT_SWAGGER, AI_CV_Swagger  @ Improvement in Emerald
 	if_effect EFFECT_SPEED_DOWN_HIT, AI_CV_SpeedDownFromChance
-	if_effect EFFECT_SKY_ATTACK, AI_CV_ChargeUpMove
 	if_effect EFFECT_VITAL_THROW, AI_CV_VitalThrow
 	if_effect EFFECT_SUBSTITUTE, AI_CV_Substitute
 	if_effect EFFECT_RECHARGE, AI_CV_Recharge
@@ -763,13 +771,11 @@ AI_CheckViability::
 	if_effect EFFECT_IMPRISON, AI_CV_Imprison
 	if_effect EFFECT_REFRESH, AI_CV_Refresh
 	if_effect EFFECT_SNATCH, AI_CV_Snatch
-	if_effect EFFECT_BLAZE_KICK, AI_CV_HighCrit
 	if_effect EFFECT_MUD_SPORT, AI_CV_MudSport
 	if_effect EFFECT_OVERHEAT, AI_CV_Overheat
 	if_effect EFFECT_TICKLE, AI_CV_DefenseDown
 	if_effect EFFECT_COSMIC_POWER, AI_CV_SpDefUp
 	if_effect EFFECT_BULK_UP, AI_CV_DefenseUp
-	if_effect EFFECT_POISON_TAIL, AI_CV_HighCrit
 	if_effect EFFECT_WATER_SPORT, AI_CV_WaterSport
 	if_effect EFFECT_CALM_MIND, AI_CV_SpDefUp
 	if_effect EFFECT_DRAGON_DANCE, AI_CV_DragonDance
@@ -862,7 +868,7 @@ AI_CV_MirrorMove_End::
 AI_CV_MirrorMove_EncouragedMovesToMirror::
 	.align 1
 	.2byte MOVE_SLEEP_POWDER
-	.2byte MOVE_LOVELY_KISS
+	.2byte MOVE_LULLABY_KISS
 	.2byte MOVE_SPORE
 	.2byte MOVE_HYPNOSIS
 	.2byte MOVE_SING
@@ -1392,6 +1398,10 @@ AI_CV_HealWeather::
 AI_CV_HealWeather_ScoreDown2::
 	score -2
 
+AI_CV_HealAlly::
+	if_not_double_battle Score_Minus10
+	end
+
 AI_CV_Heal::
 	if_hp_equal AI_USER, 100, AI_CV_Heal3
 	if_target_faster AI_CV_Heal4
@@ -1669,6 +1679,7 @@ AI_CV_Substitute4::
 	if_equal EFFECT_POISON, AI_CV_Substitute5
 	if_equal EFFECT_PARALYZE, AI_CV_Substitute5
 	if_equal EFFECT_WILL_O_WISP, AI_CV_Substitute5
+	if_equal EFFECT_SHEER_COLD, AI_CV_Substitute5
 	if_equal EFFECT_CONFUSE, AI_CV_Substitute6
 	if_equal EFFECT_LEECH_SEED, AI_CV_Substitute7
 	goto AI_CV_Substitute_End
@@ -1871,6 +1882,7 @@ AI_CV_Encore_EncouragedMovesToEncore::
 	.byte EFFECT_WATER_SPORT
 	.byte EFFECT_DRAGON_DANCE
 	.byte EFFECT_CAMOUFLAGE
+	.byte EFFECT_SHEER_COLD
 	.byte -1
 
 AI_CV_PainSplit::
@@ -2855,6 +2867,7 @@ AI_SetupFirstTurn_SetupEffectsToEncourage::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_CAMOUFLAGE
+	.byte EFFECT_SHEER_COLD
 	.byte -1
 
 AI_PreferStrongestMove::
@@ -2888,7 +2901,6 @@ AI_Risky_EffectsToEncourage::
 	.byte EFFECT_DESTINY_BOND
 	.byte EFFECT_SWAGGER
 	.byte EFFECT_ATTRACT
-	.byte EFFECT_PRESENT
 	.byte EFFECT_ALL_STATS_UP_HIT
 	.byte EFFECT_BELLY_DRUM
 	.byte EFFECT_MIRROR_COAT
@@ -3211,6 +3223,7 @@ AI_HPAware_DiscouragedEffectsWhenTargetLowHP::
 	.byte EFFECT_BULK_UP
 	.byte EFFECT_CALM_MIND
 	.byte EFFECT_DRAGON_DANCE
+	.byte EFFECT_SHEER_COLD
 	.byte -1
 
 AI_Unknown::

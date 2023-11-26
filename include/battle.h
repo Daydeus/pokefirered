@@ -152,7 +152,8 @@ struct DisableStruct
     /*0x0E*/ u8 encoreTimerStartValue : 4;
     /*0x0F*/ u8 perishSongTimer : 4;
     /*0x0F*/ u8 perishSongTimerStartValue : 4;
-    /*0x10*/ u8 furyCutterCounter;
+    /*0x10*/ u8 focusEnergyTimer : 4;
+    /*0x10*/ u8 ingrainTimer : 4;
     /*0x11*/ u8 rolloutTimer : 4;
     /*0x11*/ u8 rolloutTimerStartValue : 4;
     /*0x12*/ u8 chargeTimer : 4;
@@ -419,7 +420,8 @@ struct BattleStruct
     u8 field_8D; // unused
     u8 stringMoveType;
     u8 expGetterBattlerId;
-    u8 field_90; // unused
+    u8 field_90:7; // unused
+    u8 hitSwitchTargetFailed:1;
     u8 absentBattlerFlags;
     u8 AI_monToSwitchIntoId[2];
     u8 simulatedInputState[4];  // used by Oak/Old Man/Pokedude controllers
@@ -472,9 +474,11 @@ extern struct BattleStruct *gBattleStruct;
         typeArg = gBattleMoves[move].type;                            \
 }
 
-#define IS_TYPE_PHYSICAL(moveType)(moveType < TYPE_MYSTERY)
-#define IS_TYPE_SPECIAL(moveType)(moveType > TYPE_MYSTERY)
+#define IS_MOVE_PHYSICAL(move)(gBattleMoves[move].category == MOVE_CATEGORY_PHYSICAL)
+#define IS_MOVE_SPECIAL(move)(gBattleMoves[move].category == MOVE_CATEGORY_SPECIAL)
+#define IS_MOVE_STATUS(move)(gBattleMoves[move].category == MOVE_CATEGORY_STATUS)
 
+#define BATTLER_MAX_HP(battlerId)(gBattleMons[battlerId].hp == gBattleMons[battlerId].maxHP)
 #define TARGET_TURN_DAMAGED ((gSpecialStatuses[gBattlerTarget].physicalDmg != 0 || gSpecialStatuses[gBattlerTarget].specialDmg != 0))
 
 #define IS_BATTLER_OF_TYPE(battlerId, type)((gBattleMons[battlerId].type1 == type || gBattleMons[battlerId].type2 == type))
@@ -521,6 +525,7 @@ struct BattleScripting
     u8 reshowMainState;
     u8 reshowHelperState;
     u8 levelUpHP;
+    u8 switchCase;  // Special switching conditions, eg. MOVE_DRAGON_TAIL
 };
 
 struct BattleSpriteInfo

@@ -227,7 +227,7 @@ static const union AnimCmd sAnim_FlamethrowerFlame[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnims_FlamethrowerFlame[] =
+const union AnimCmd *const gAnims_FlamethrowerFlame[] =
 {
     sAnim_FlamethrowerFlame,
 };
@@ -237,7 +237,7 @@ const struct SpriteTemplate gFlamethrowerFlameSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_FlamethrowerFlame,
+    .anims = gAnims_FlamethrowerFlame,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimToTargetInSinWave,
@@ -396,7 +396,7 @@ static const union AnimCmd sAnim_WeatherBallWaterDown[] =
     ANIMCMD_END,
 };
 
-static const union AnimCmd *const sAnims_WaterPulseBubble[] =
+const union AnimCmd *const gAnims_WaterPulseBubble[] =
 {
     sAnim_WaterPulseBubble_0,
     sAnim_WaterPulseBubble_1,
@@ -444,7 +444,7 @@ const struct SpriteTemplate gWaterPulseBubbleSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_AffineOff_ObjNormal_8x8,
-    .anims = sAnims_WaterPulseBubble,
+    .anims = gAnims_WaterPulseBubble,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimWaterPulseBubble,
@@ -455,7 +455,7 @@ const struct SpriteTemplate gWaterPulseRingBubbleSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_BUBBLES,
     .paletteTag = ANIM_TAG_SMALL_BUBBLES,
     .oam = &gOamData_AffineNormal_ObjNormal_8x8,
-    .anims = sAnims_WaterPulseBubble,
+    .anims = gAnims_WaterPulseBubble,
     .images = NULL,
     .affineAnims = sAffineAnims_WaterPulseRingBubble,
     .callback = AnimWaterPulseRingBubble,

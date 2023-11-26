@@ -296,6 +296,8 @@
 #define ANIM_TAG_SLASH_2                    (ANIM_SPRITES_START + 286)
 #define ANIM_TAG_WHIP_HIT                   (ANIM_SPRITES_START + 287)
 #define ANIM_TAG_BLUE_RING_2                (ANIM_SPRITES_START + 288)
+#define ANIM_TAG_HEART_STAMP                (ANIM_SPRITES_START + 289)
+#define ANIM_TAG_LAVA_PLUME                 (ANIM_SPRITES_START + 290)
 
 // battlers
 #define ANIM_ATTACKER    0
@@ -345,6 +347,7 @@
 #define BG_SOLAR_BEAM_OPPONENT 24
 #define BG_SOLAR_BEAM_PLAYER 25
 #define BG_SOLAR_BEAM_CONTESTS 26
+#define BG_FOCUS_BLAST 27
 
 // table ids for general animations (gBattleAnims_General)
 #define B_ANIM_CASTFORM_CHANGE          0
@@ -368,13 +371,14 @@
 #define B_ANIM_FUTURE_SIGHT_HIT         18
 #define B_ANIM_DOOM_DESIRE_HIT          19
 #define B_ANIM_FOCUS_PUNCH_SETUP        20
-#define B_ANIM_INGRAIN_HEAL             21
-#define B_ANIM_WISH_HEAL                22
-#define B_ANIM_MON_SCARED               23
-#define B_ANIM_GHOST_GET_OUT            24
-#define B_ANIM_SILPH_SCOPED             25
-#define B_ANIM_ROCK_THROW               26
-#define B_ANIM_SAFARI_REACTION          27
+#define B_ANIM_FOCUS_ENERGY_HEAL        21
+#define B_ANIM_INGRAIN_HEAL             22
+#define B_ANIM_WISH_HEAL                23
+#define B_ANIM_MON_SCARED               24
+#define B_ANIM_GHOST_GET_OUT            25
+#define B_ANIM_SILPH_SCOPED             26
+#define B_ANIM_ROCK_THROW               27
+#define B_ANIM_SAFARI_REACTION          28
 
 // special animations table (gBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0
@@ -392,7 +396,7 @@
 #define B_ANIM_STATUS_INFATUATION       3
 #define B_ANIM_STATUS_SLP               4
 #define B_ANIM_STATUS_PRZ               5
-#define B_ANIM_STATUS_FRZ               6
+#define B_ANIM_STATUS_FSB               6
 #define B_ANIM_STATUS_CURSED            7
 #define B_ANIM_STATUS_NIGHTMARE         8
 #define B_ANIM_STATUS_WRAPPED           9 // does not actually exist
@@ -409,7 +413,8 @@
 #define TRAP_ANIM_FIRE_SPIN 1
 #define TRAP_ANIM_WHIRLPOOL 2
 #define TRAP_ANIM_CLAMP 3
-#define TRAP_ANIM_SAND_TOMB 4
+#define TRAP_ANIM_INFESTATION 4
+#define TRAP_ANIM_SAND_TOMB 5
 
 // Weather defines for battle animation scripts.
 #define ANIM_WEATHER_NONE 0

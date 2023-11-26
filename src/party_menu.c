@@ -1748,8 +1748,8 @@ u8 GetAilmentFromStatus(u32 status)
         return AILMENT_PRZ;
     if (status & STATUS1_SLEEP)
         return AILMENT_SLP;
-    if (status & STATUS1_FREEZE)
-        return AILMENT_FRZ;
+    if (status & STATUS1_FROSTBITE)
+        return AILMENT_FSB;
     if (status & STATUS1_BURN)
         return AILMENT_BRN;
     return AILMENT_NONE;
@@ -4350,8 +4350,8 @@ static void GetMedicineItemEffectMessage(u16 item)
     case ITEM_EFFECT_CURE_BURN:
         StringExpandPlaceholders(gStringVar4, gText_PkmnBurnHealed);
         break;
-    case ITEM_EFFECT_CURE_FREEZE:
-        StringExpandPlaceholders(gStringVar4, gText_PkmnThawedOut);
+    case ITEM_EFFECT_CURE_FROSTBITE:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfFrostbite);
         break;
     case ITEM_EFFECT_CURE_PARALYSIS:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCuredOfParalysis);
@@ -4719,16 +4719,6 @@ u16 ItemIdToBattleMoveId(u16 item)
     u16 tmNumber = item - ITEM_TM01_FOCUS_PUNCH;
 
     return sTMHMMoves[tmNumber];
-}
-
-bool8 IsMoveHm(u16 move)
-{
-    u8 i;
-
-    for (i = 0; i < NUM_HIDDEN_MACHINES - 1; ++i) // no dive
-        if (sTMHMMoves[i + NUM_TECHNICAL_MACHINES] == move)
-            return TRUE;
-    return FALSE;
 }
 
 bool8 MonKnowsMove(struct Pokemon *mon, u16 move)
@@ -5351,8 +5341,8 @@ u8 GetItemEffectType(u16 item)
             return ITEM_EFFECT_CURE_POISON;
         else if (statusCure == ITEM3_BURN)
             return ITEM_EFFECT_CURE_BURN;
-        else if (statusCure == ITEM3_FREEZE)
-            return ITEM_EFFECT_CURE_FREEZE;
+        else if (statusCure == ITEM3_FROSTBITE)
+            return ITEM_EFFECT_CURE_FROSTBITE;
         else if (statusCure == ITEM3_PARALYSIS)
             return ITEM_EFFECT_CURE_PARALYSIS;
         else if (statusCure == ITEM3_CONFUSION)

@@ -38,6 +38,8 @@ static void UpdateEruptionLaunchRockPos(struct Sprite *sprite);
 static void AnimEruptionFallingRock_Step(struct Sprite *sprite);
 static void AnimWillOWispOrb_Step(struct Sprite *sprite);
 static void AnimTask_MoveHeatWaveTargets_Step(u8 taskId);
+static void AnimLavaPlumeOrbitScatter(struct Sprite *);
+static void AnimLavaPlumeOrbitScatterStep(struct Sprite *);
 
 static const union AnimCmd sAnim_FireSpiralSpread_0[] =
 {
@@ -101,7 +103,7 @@ static const union AnimCmd *const sAnims_LargeFlame[] =
     sAnim_LargeFlame,
 };
 
-static const union AnimCmd sAnim_FirePlume[] =
+static const union AnimCmd gAnim_FirePlume[] =
 {
     ANIMCMD_FRAME(0, 5),
     ANIMCMD_FRAME(16, 5),
@@ -111,9 +113,9 @@ static const union AnimCmd sAnim_FirePlume[] =
     ANIMCMD_JUMP(0),
 };
 
-static const union AnimCmd *const sAnims_FirePlume[] =
+const union AnimCmd *const gAnims_FirePlume[] =
 {
-    sAnim_FirePlume,
+    gAnim_FirePlume,
 };
 
 static const union AffineAnimCmd sAffineAnim_LargeFlame[] =
@@ -155,7 +157,7 @@ const struct SpriteTemplate gFirePlumeSpriteTemplate =
     .tileTag = ANIM_TAG_FIRE_PLUME,
     .paletteTag = ANIM_TAG_FIRE_PLUME,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_FirePlume,
+    .anims = gAnims_FirePlume,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFirePlume,
@@ -166,7 +168,7 @@ static const struct SpriteTemplate sUnusedEmberFirePlumeSpriteTemplate =
     .tileTag = ANIM_TAG_SMALL_EMBER,
     .paletteTag = ANIM_TAG_SMALL_EMBER,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
-    .anims = sAnims_FirePlume,
+    .anims = gAnims_FirePlume,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimFirePlume,
@@ -444,6 +446,57 @@ const struct SpriteTemplate gWillOWispFireSpriteTemplate =
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = AnimWillOWispFire,
 };
+
+const struct SpriteTemplate gFlameChargeEmberTemplate =
+{
+    .tileTag = ANIM_TAG_SMALL_EMBER,
+    .paletteTag = ANIM_TAG_SMALL_EMBER,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_FlamethrowerFlame,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = AnimPetalDanceBigFlower
+};
+
+const union AffineAnimCmd gLavaPlumeAffineAnimCmd[] =
+{
+    AFFINEANIMCMD_FRAME(0x80, 0x80, 0, 0),
+    AFFINEANIMCMD_FRAME(0x8, 0x8, 0, 1),
+    AFFINEANIMCMD_JUMP(1),
+};
+
+const union AffineAnimCmd *const gLavaPlumeAffineAnims[] =
+{
+    gLavaPlumeAffineAnimCmd,
+};
+
+const struct SpriteTemplate gLavaPlumeSpriteTemplate =
+{
+    .tileTag = ANIM_TAG_FIRE_PLUME,
+    .paletteTag = ANIM_TAG_FIRE_PLUME,
+    .oam = &gOamData_AffineOff_ObjNormal_32x32,
+    .anims = gAnims_FirePlume,
+    .images = NULL,
+    .affineAnims = gLavaPlumeAffineAnims,
+    .callback = AnimLavaPlumeOrbitScatter,
+};
+
+static void AnimLavaPlumeOrbitScatter(struct Sprite *sprite)
+{
+    sprite->x = GetBattlerSpriteCoord(gBattleAnimAttacker, 2);
+    sprite->y = GetBattlerSpriteCoord(gBattleAnimAttacker, 3);
+    sprite->data[0] = Sin(gBattleAnimArgs[0], 10);
+    sprite->data[1] = Cos(gBattleAnimArgs[0], 7);
+    sprite->callback = AnimLavaPlumeOrbitScatterStep;
+}
+
+static void AnimLavaPlumeOrbitScatterStep(struct Sprite *sprite)
+{
+    sprite->x2 += sprite->data[0];
+    sprite->y2 += sprite->data[1];
+    if (sprite->x + sprite->x2 + 16 > 272u || sprite->y + sprite->y2 > 160 || sprite->y + sprite->y2 < -16)
+        DestroyAnimSprite(sprite);
+}
 
 // Directions for shaking up/down or left/right in AnimTask_ShakeTargetInPattern
 // Only first 10 values are ever accessed.

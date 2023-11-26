@@ -1049,7 +1049,7 @@
 	.byte 0xcc
 	.endm
 
-	.macro cureifburnedparalysedorpoisoned param0:req
+	.macro cureifnonvolatilestatus param0:req
 	.byte 0xcd
 	.4byte \param0
 	.endm
@@ -1300,6 +1300,30 @@
 
 	.macro waitfanfare battler:req
 	various \battler, VARIOUS_WAIT_FANFARE
+	.endm
+
+    .macro jumpifbattleend jumpptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_BATTLE_END
+	.4byte \jumpptr
+	.endm
+
+	.macro tryhitswitchtarget jumpptr:req
+	various BS_ATTACKER, VARIOUS_TRY_HIT_SWITCH_TARGET
+	.4byte \jumpptr
+	.endm
+
+	.macro hitswitchtargetfailed
+	various 0, VARIOUS_HIT_SWITCH_TARGET_FAILED
+	.endm
+
+	.macro jumpiftargetally jumpptr:req
+	various BS_ATTACKER, VARIOUS_JUMP_IF_TARGET_ALLY
+	.4byte \jumpptr
+	.endm
+
+	.macro tryhealtarget battler:req, jumpptr:req
+	various \battler, VARIOUS_TRY_HEAL_TARGET
+	.4byte \jumpptr
 	.endm
 
 @ helpful macros
