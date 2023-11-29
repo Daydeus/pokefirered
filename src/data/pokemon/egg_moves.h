@@ -33,6 +33,17 @@ const u16 gEggMoves[] = {
               MOVE_MUD_SPORT,
               MOVE_YAWN),
 
+    egg_moves(CATERPIE,
+            MOVE_AGILITY,
+            MOVE_BATON_PASS,
+            MOVE_CAMOUFLAGE,
+            MOVE_CONFUSE_RAY,
+            MOVE_LEECH_LIFE,
+            MOVE_MAGICAL_LEAF,
+            MOVE_MEGA_DRAIN,
+            MOVE_NIGHT_SHADE,
+            MOVE_SIGNAL_BEAM),
+
     egg_moves(PIDGEY,
               MOVE_PURSUIT,
               MOVE_FEINT_ATTACK,
