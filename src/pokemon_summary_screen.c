@@ -2860,7 +2860,7 @@ static void PokeSum_PrintSelectedMoveStats(void)
             return;
 
         BlitMenuInfoIcon(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO],
-                                     gBattleMoves[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].category +24, 88, 2);
+                                     CATEGORY_PHYSICAL + gBattleMoves[sMonSummaryScreen->moveIds[sMoveSelectionCursorPos]].category, 88, 2);
 		AddTextPrinterParameterized3(sMonSummaryScreen->windowIds[POKESUM_WIN_TRAINER_MEMO], 2,
                                      57, 1,
                                      sLevelNickTextColors[0], TEXT_SKIP_DRAW,
