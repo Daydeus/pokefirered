@@ -9,6 +9,7 @@
 #include "battle_anim.h"
 #include "item.h"
 #include "event_data.h"
+#include "daycare.h"
 #include "util.h"
 #include "pokemon_storage_system.h"
 #include "battle_gfx_sfx_util.h"
@@ -28,6 +29,7 @@
 #include "constants/item_effects.h"
 #include "constants/hoenn_cries.h"
 #include "constants/pokemon.h"
+#include "constants/daycare.h"
 #include "constants/abilities.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -60,6 +62,7 @@ EWRAM_DATA u8 gPlayerPartyCount = 0;
 EWRAM_DATA u8 gEnemyPartyCount = 0;
 EWRAM_DATA struct Pokemon gEnemyParty[PARTY_SIZE] = {};
 EWRAM_DATA struct Pokemon gPlayerParty[PARTY_SIZE] = {};
+EWRAM_DATA static u16 sMonEggMoves[EGG_MOVES_ARRAY_COUNT] = {0}; // Added for wild/gift pokemon egg moves
 EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 static EWRAM_DATA struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
 
@@ -75,6 +78,7 @@ static u8 SendMonToPC(struct Pokemon* mon);
 static void EncryptBoxMon(struct BoxPokemon *boxMon);
 static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
+static void GiveBoxMonEggMove(struct BoxPokemon *boxMon);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
@@ -1859,6 +1863,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     }
 
     GiveBoxMonInitialMoveset(boxMon);
+
+    if (Random() % 100 <= 33 && otIdType == OT_ID_PLAYER_ID)
+        GiveBoxMonEggMove(boxMon);
 }
 
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
@@ -2286,6 +2293,21 @@ static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon)
         if (GiveMoveToBoxMon(boxMon, move) == MON_HAS_MAX_MOVES)
             DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, move);
     }
+}
+
+static void GiveBoxMonEggMove(struct BoxPokemon *boxMon)
+{
+    u16 eggSpecies = GetEggSpecies(GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL));
+    u16 numEggMoves = GetEggMoves(eggSpecies, sMonEggMoves);
+    u16 moveToLearn;
+
+    if (numEggMoves == 0)
+        return;
+    else
+        moveToLearn = Random() % numEggMoves;
+
+    if (GiveMoveToBoxMon(boxMon, sMonEggMoves[0]) == MON_HAS_MAX_MOVES)
+        DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, sMonEggMoves[moveToLearn]);
 }
 
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)

@@ -23,6 +23,8 @@ void SetDaycareCompatibilityString(void);
 bool8 NameHasGenderSymbol(const u8 *name, u8 genderRatio);
 void ShowDaycareLevelMenu(void);
 void ChooseSendDaycareMon(void);
+u16 GetEggSpecies(u16 species); // Added for wild egg moves
+u8 GetEggMoves(u16 species, u16 *eggMoves); // added for wild egg moves
 
 void ScriptHatchMon(void);
 void EggHatch(void);
