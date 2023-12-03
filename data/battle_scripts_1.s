@@ -2249,7 +2249,6 @@ BattleScript_EffectWillOWisp::
 	jumpifstatus2 BS_TARGET, STATUS2_SUBSTITUTE, BattleScript_ButItFailed
 	jumpifstatus BS_TARGET, STATUS1_BURN, BattleScript_AlreadyBurned
 	jumpiftype BS_TARGET, TYPE_FIRE, BattleScript_NotAffected
-	jumpifability BS_TARGET, ABILITY_WATER_VEIL, BattleScript_WaterVeilPrevents
 	jumpifstatus BS_TARGET, STATUS1_ANY, BattleScript_ButItFailed
 	accuracycheck BattleScript_ButItFailed, ACC_CURR_MOVE
 	jumpifsideaffecting BS_TARGET, SIDE_STATUS_SAFEGUARD, BattleScript_SafeguardProtected
@@ -4444,6 +4443,12 @@ BattleScript_SelectingNotAllowedMoveChoiceItem::
 BattleScript_FocusBandActivates::
 	playanimation BS_TARGET, B_ANIM_FOCUS_BAND
 	printstring STRINGID_PKMNHUNGONWITHX
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_EnduredWithAbility::
+	playanimation BS_TARGET, B_ANIM_FOCUS_BAND
+	printstring STRINGID_PKMNENDUREDWITHABILITY
 	waitmessage B_WAIT_TIME_LONG
 	return
 

@@ -2141,13 +2141,6 @@ u8 AbilityBattleEffects(u8 caseID, u8 battler, u8 ability, u8 special, u16 moveA
                         effect = 1;
                     }
                     break;
-                case ABILITY_WATER_VEIL:
-                    if (gBattleMons[battler].status1 & STATUS1_BURN)
-                    {
-                        StringCopy(gBattleTextBuff1, gStatusConditionString_BurnJpn);
-                        effect = 1;
-                    }
-                    break;
                 case ABILITY_MAGMA_ARMOR:
                     if (gBattleMons[battler].status1 & STATUS1_FROSTBITE)
                     {

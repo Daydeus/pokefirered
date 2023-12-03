@@ -387,8 +387,9 @@
 #define STRINGID_FOCUS_ENERGY_REGAINED_HEALTH   386
 #define STRINGID_FOCUS_ENERGY_RAN_OUT           387
 #define STRINGID_RETRACTED_ITS_ROOTS            388
+#define STRINGID_PKMNENDUREDWITHABILITY         389
 
-#define BATTLESTRINGS_COUNT                     389
+#define BATTLESTRINGS_COUNT                     390
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

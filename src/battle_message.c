@@ -502,6 +502,7 @@ static const u8 sText_PkmnsItemRestoredStatus[] = _("{B_SCR_ACTIVE_NAME_WITH_PRE
 static const u8 sText_PkmnsItemRestoredHPALittle[] = _("{B_SCR_ACTIVE_NAME_WITH_PREFIX}'s {B_LAST_ITEM}\nrestored its HP a little!");
 static const u8 sText_ItemAllowsOnlyYMove[] = _("{B_LAST_ITEM}'s effect allows only\n{B_CURRENT_MOVE} to be used!\p");
 static const u8 sText_PkmnHungOnWithX[] = _("{B_DEF_NAME_WITH_PREFIX} hung on\nusing its {B_LAST_ITEM}!");
+static const u8 sText_PkmnEnduredWithAbility[] = _("{B_DEF_NAME_WITH_PREFIX} endured\nthanks to its {B_LAST_ABILITY}!");
 const u8 gText_EmptyString3[] = _("");
 static const u8 sText_PlayedFluteCatchyTune[] = _("{B_PLAYER_NAME} played the {B_LAST_ITEM}.\pNow, that's a catchy tune!");
 static const u8 sText_PlayedThe[] = _("{B_PLAYER_NAME} played the\n{B_LAST_ITEM}.");
@@ -895,6 +896,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_FOCUS_ENERGY_REGAINED_HEALTH - BATTLESTRINGS_TABLE_START]  = sText_FocusEnergyRegainedHealth,
     [STRINGID_FOCUS_ENERGY_RAN_OUT - BATTLESTRINGS_TABLE_START]          = sText_FocusEnergyRanOut,
     [STRINGID_RETRACTED_ITS_ROOTS - BATTLESTRINGS_TABLE_START]           = sText_RetractedItsRoots,
+    [STRINGID_PKMNENDUREDWITHABILITY - BATTLESTRINGS_TABLE_START]        = sText_PkmnEnduredWithAbility,
 };
 
 const u16 gMissStringIds[] =
