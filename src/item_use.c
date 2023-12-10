@@ -899,6 +899,27 @@ void ItemUseInBattle_EnigmaBerry(u8 taskId)
     }
 }
 
+void FieldUseFunc_ExpShare(u8 taskId)
+{
+    if (IsExpShareEnabled())
+    {
+        PlaySE(SE_PC_OFF);
+        if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+            DisplayItemMessageOnField(taskId, 1, gText_ExpShareOff, Task_ItemUse_CloseMessageBoxAndReturnToField);
+        else
+            DisplayItemMessageInBag(taskId, 1, gText_ExpShareOff, Task_ReturnToBagFromContextMenu);
+    }
+    else
+    {
+        PlaySE(SE_EXP_MAX);
+        if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+            DisplayItemMessageOnField(taskId, 1, gText_ExpShareOn, Task_ItemUse_CloseMessageBoxAndReturnToField);
+        else
+            DisplayItemMessageInBag(taskId, 1, gText_ExpShareOn, Task_ReturnToBagFromContextMenu);
+    }
+    FlagToggle(FLAG_EXP_SHARE_ON);
+}
+
 void FieldUseFunc_OakStopsYou(u8 taskId)
 {
     if (GetPocketByItemId(gSpecialVar_ItemId) == POCKET_BERRY_POUCH)

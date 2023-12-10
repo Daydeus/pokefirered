@@ -126,29 +126,19 @@ PewterCity_Text_AskedToDeliverThis::
     .string "I've been asked to deliver this,\n"
     .string "so here you go.$"
 
-PewterCity_Text_ReceivedRunningShoesFromAide::
-    .string "{PLAYER} received the\n"
-    .string "RUNNING SHOES from the AIDE.$"
-
-PewterCity_Text_SwitchedShoesWithRunningShoes::
-    .string "{PLAYER} switched shoes with the\n"
-    .string "RUNNING SHOES.$"
-
-PewterCity_Text_ExplainRunningShoes::
-    .string "Press the B Button to run.\n"
-    .string "But only where there's room to run!$"
-
 PewterCity_Text_MustBeGoingBackToLab::
     .string "Well, I must be going back to\n"
     .string "the LAB.\p"
     .string "Bye-bye!$"
 
-PewterCity_Text_RunningShoesLetterFromMom::
+PewterCity_Text_ExpShareLetterFromProfOak::
     .string "There's a letter attached…\p"
-    .string "Dear {PLAYER},\p"
-    .string "Here is a pair of RUNNING SHOES\n"
-    .string "for my beloved challenger.\p"
-    .string "Remember, I'll always cheer for\n"
-    .string "you! Don't ever give up!\p"
-    .string "From Mom$"
-
+    .string "Hello {PLAYER}, I heard you managed\n"
+    .string "to earn your very first gym badge.\p"
+    .string "Great job! Some POKéMON can only\n"
+    .string "evolve when trained with care.\p"
+    .string "To that end, I'm sending you a tool\n"
+    .string "to aide in training up new POKéMON.\p"
+    .string "It's a relic from my younger days\n"
+    .string "as a trainer. Use it well!\p"
+    .string "From PROF. OAK$"

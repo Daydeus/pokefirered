@@ -492,6 +492,10 @@ extern const u8 gText_ItemfinderResponding[];
 extern const u8 gText_ItemfinderShakingWildly[];
 extern const u8 gText_NopeTheresNoResponse[];
 
+// exp_share
+extern const u8 gText_ExpShareOn[];
+extern const u8 gText_ExpShareOff[];
+
 // link
 extern const u8 gText_CommErrorEllipsis[];
 extern const u8 gText_MoveCloserToLinkPartner[];

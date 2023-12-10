@@ -3276,3 +3276,8 @@ bool32 IsBattlerAlive(u32 battler)
     else
         return TRUE;
 }
+
+bool32 IsExpShareEnabled(void)
+{
+    return FlagGet(FLAG_EXP_SHARE_ON);
+}

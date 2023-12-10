@@ -20,12 +20,11 @@ Route15_WestEntrance_2F_Text_ReceivedItemFromAide::
     .string "{PLAYER} received the {STR_VAR_2}\n"
     .string "from the AIDE.$"
 
-Route15_WestEntrance_2F_Text_ExplainExpShare::
-    .string "EXP. SHARE is an item to be held\n"
-    .string "by a POKéMON.\p"
-    .string "The POKéMON will receive a share\n"
-    .string "of the EXP. Points without having\l"
-    .string "to battle.$"
+Route15_WestEntrance_2F_Text_ExplainLuckyEgg::
+    .string "The LUCKY EGG is an item to be\n"
+    .string "held by a POKéMON.\p"
+    .string "It lets the POKéMON in your party\n"
+    .string "receive increased EXP. Points!$"
 
 Route15_WestEntrance_2F_Text_LargeShiningBird::
     .string "Let's see what the binoculars have\n"

@@ -376,7 +376,6 @@ struct BattleStruct
 {
     u8 turnEffectsTracker;
     u8 turnEffectsBattlerId;
-    u8 filler2; // unused
     u8 turnCountersTracker;
     u8 wrappedMove[MAX_BATTLERS_COUNT * 2]; // Leftover from Ruby's ewram access.
     u8 moveTarget[MAX_BATTLERS_COUNT];
@@ -395,6 +394,8 @@ struct BattleStruct
     u8 faintedActionsBattlerId;
     // balign 2
     u16 expValue;
+    u8 partyWideExpBonus:1;
+    u8 lowestLevelPartySlot;
     u8 scriptPartyIdx; // for printing the nickname
     u8 sentInPokes;
     bool8 selectionScriptFinished[MAX_BATTLERS_COUNT];
@@ -421,7 +422,7 @@ struct BattleStruct
     u8 field_8D; // unused
     u8 stringMoveType;
     u8 expGetterBattlerId;
-    u8 field_90:7; // unused
+    u8 field_90:6; // unused
     u8 hitSwitchTargetFailed:1;
     u8 absentBattlerFlags;
     u8 AI_monToSwitchIntoId[2];

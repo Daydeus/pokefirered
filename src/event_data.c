@@ -292,6 +292,14 @@ bool8 FlagSet(u16 idx)
     return FALSE;
 }
 
+u8 FlagToggle(u16 idx)
+{
+    u8 *ptr = GetFlagAddr(idx);
+    if (ptr != NULL)
+        *ptr ^= 1 << (idx & 7);
+    return FALSE;
+}
+
 bool8 FlagClear(u16 idx)
 {
     u8 *ptr = GetFlagAddr(idx);

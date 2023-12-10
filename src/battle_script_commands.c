@@ -60,6 +60,7 @@ static void PutMonIconOnLvlUpBanner(void);
 static void DrawLevelUpBannerText(void);
 static void SpriteCB_MonIconOnLvlUpBanner(struct Sprite* sprite);
 static bool8 doesExtraEffectivenessApply(u16 moveUsed, u8 defenseType);
+static void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBattler, bool32 partyWideExpBonus);
 
 static void Cmd_attackcanceler(void);
 static void Cmd_accuracycheck(void);
@@ -3242,7 +3243,7 @@ static void Cmd_getexp(void)
     s32 i; // also used as stringId
     u8 holdEffect;
     s32 sentIn;
-    s32 viaExpShare = 0;
+    bool32 expMonWasSentOut;
     u16 *exp = &gBattleStruct->expValue;
 
     gBattlerFainted = GetBattlerForBattleScript(gBattlescriptCurrInstr[1]);
@@ -3270,44 +3271,33 @@ static void Cmd_getexp(void)
         {
             u16 calculatedExp;
             s32 viaSentIn;
+            u8 lowestPartyLevel = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL);
 
             for (viaSentIn = 0, i = 0; i < PARTY_SIZE; i++)
             {
+                // Check if any party member, even a fainted one, is holding a Lucky Egg
+                item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+                if (item == ITEM_LUCKY_EGG)
+                    gBattleStruct->partyWideExpBonus= TRUE;
+
                 if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[i], MON_DATA_HP) == 0)
                     continue;
                 if (gBitTable[i] & sentIn)
                     viaSentIn++;
 
-                item = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-
-                if (item == ITEM_ENIGMA_BERRY)
-                    holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
-                else
-                    holdEffect = ItemId_GetHoldEffect(item);
-
-                if (holdEffect == HOLD_EFFECT_EXP_SHARE)
-                    viaExpShare++;
+                // Find the party slot of the lowest leveled un-fainted party member for the Exp Share
+                if (GetMonData(&gPlayerParty[i], MON_DATA_LEVEL) <= lowestPartyLevel)
+                {
+                    lowestPartyLevel = GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+                    gBattleStruct->lowestLevelPartySlot = i;
+                }
             }
 
             calculatedExp = gSpeciesInfo[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
 
-            if (viaExpShare) // at least one mon is getting exp via exp share
-            {
-                *exp = SAFE_DIV(calculatedExp / 2, viaSentIn);
-                if (*exp == 0)
-                    *exp = 1;
-
-                gExpShareExp = calculatedExp / 2 / viaExpShare;
-                if (gExpShareExp == 0)
-                    gExpShareExp = 1;
-            }
-            else
-            {
-                *exp = SAFE_DIV(calculatedExp, viaSentIn);
-                if (*exp == 0)
-                    *exp = 1;
-                gExpShareExp = 0;
-            }
+            *exp = SAFE_DIV(calculatedExp, viaSentIn);
+            if (*exp == 0)
+                *exp = 1;
 
             gBattleScripting.getexpState++;
             gBattleStruct->expGetterMonId = 0;
@@ -3317,6 +3307,7 @@ static void Cmd_getexp(void)
     case 2: // set exp value to the poke in expgetter_id and print message
         if (gBattleControllerExecFlags == 0)
         {
+            bool32 expMonIsLowestLevel = (gBattleStruct->expGetterMonId == gBattleStruct->lowestLevelPartySlot) ? TRUE : FALSE;
             item = GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HELD_ITEM);
 
             if (item == ITEM_ENIGMA_BERRY)
@@ -3324,7 +3315,11 @@ static void Cmd_getexp(void)
             else
                 holdEffect = ItemId_GetHoldEffect(item);
 
-            if (holdEffect != HOLD_EFFECT_EXP_SHARE && !(gBattleStruct->sentInPokes & 1))
+            expMonWasSentOut = (gBattleStruct->sentInPokes & 1);
+
+            // Set Exp. Points to zero
+            if ((!expMonWasSentOut && !IsExpShareEnabled()) || (!expMonWasSentOut && IsExpShareEnabled() && !expMonIsLowestLevel)
+              || GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPECIES_OR_EGG) == SPECIES_EGG)
             {
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.getexpState = 5;
@@ -3335,6 +3330,8 @@ static void Cmd_getexp(void)
                 *(&gBattleStruct->sentInPokes) >>= 1;
                 gBattleScripting.getexpState = 5;
                 gBattleMoveDamage = 0; // used for exp
+
+                MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
             }
             else
             {
@@ -3348,21 +3345,19 @@ static void Cmd_getexp(void)
 
                 if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_HP))
                 {
-                    if (gBattleStruct->sentInPokes & 1)
+                    if (expMonWasSentOut)
                         gBattleMoveDamage = *exp;
                     else
                         gBattleMoveDamage = 0;
 
-                    if (holdEffect == HOLD_EFFECT_EXP_SHARE)
-                        gBattleMoveDamage += gExpShareExp;
-                    if (holdEffect == HOLD_EFFECT_LUCKY_EGG)
-                        gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
-                    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-                        gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
-                    if (IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId])
-                     && !(gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
+                    if (IsExpShareEnabled() && expMonIsLowestLevel)
+                        gBattleMoveDamage += gSpeciesInfo[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
+
+                    ApplyExperienceMultipliers(&gBattleMoveDamage, gBattleStruct->expGetterMonId, gBattlerFainted, gBattleStruct->partyWideExpBonus);
+
+                    if ((IsTradedMon(&gPlayerParty[gBattleStruct->expGetterMonId]) || gBattleStruct->partyWideExpBonus
+                      || holdEffect == HOLD_EFFECT_PREVENT_EVOLVE) && !(gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
                     {
-                        gBattleMoveDamage = (gBattleMoveDamage * 150) / 100;
                         i = STRINGID_ABOOSTED;
                     }
                     else
@@ -3393,8 +3388,15 @@ static void Cmd_getexp(void)
                     PREPARE_STRING_BUFFER(gBattleTextBuff2, i);
                     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gBattleMoveDamage);
 
-                    PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
-                    MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
+                    if (expMonWasSentOut && !(IsExpShareEnabled() && expMonIsLowestLevel))
+                    {
+                        PrepareStringBattle(STRINGID_PKMNGAINEDEXP, gBattleStruct->expGetterBattlerId);
+                        MonGainEVs(&gPlayerParty[gBattleStruct->expGetterMonId], gBattleMons[gBattlerFainted].species);
+                    }
+                    else if (IsExpShareEnabled() && expMonIsLowestLevel)
+                    {
+                        PrepareStringBattle(STRINGID_EXPSHAREGRANTED, 0);
+                    }
                 }
                 gBattleStruct->sentInPokes >>= 1;
                 gBattleScripting.getexpState++;
@@ -3496,6 +3498,8 @@ static void Cmd_getexp(void)
     case 6: // increment instruction
         if (gBattleControllerExecFlags == 0)
         {
+            gBattleStruct->partyWideExpBonus = FALSE;
+            gBattleStruct->lowestLevelPartySlot = 0;
             // not sure why gf clears the item and ability here
             gBattleMons[gBattlerFainted].item = ITEM_NONE;
             gBattleMons[gBattlerFainted].ability = ABILITY_NONE;
@@ -3503,6 +3507,22 @@ static void Cmd_getexp(void)
         }
         break;
     }
+}
+
+static void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBattler, bool32 partyWideExpBonus)
+{
+    u16 item = GetMonData(&gPlayerParty[expGetterMonId], MON_DATA_HELD_ITEM);
+    u8 holdEffect;
+
+    if (item == ITEM_ENIGMA_BERRY)
+        holdEffect = gSaveBlock1Ptr->enigmaBerry.holdEffect;
+    else
+        holdEffect = ItemId_GetHoldEffect(item);
+
+    if (IsTradedMon(&gPlayerParty[expGetterMonId]) || partyWideExpBonus)
+        *expAmount = (*expAmount * 150) / 100;
+    if (holdEffect == HOLD_EFFECT_PREVENT_EVOLVE)
+        *expAmount = *expAmount * 2;
 }
 
 static bool32 NoAliveMonsForPlayer(void)
