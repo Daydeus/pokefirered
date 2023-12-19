@@ -4,6 +4,7 @@
 #include "util.h"
 #include "item.h"
 #include "random.h"
+#include "event_data.h"
 #include "battle_ai_script_commands.h"
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
@@ -356,7 +357,20 @@ void BattleAI_SetupAIData(void)
         AI_THINKING_STRUCT->aiFlags = (AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_CHECK_VIABILITY);
         return;
     }
-    AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags;
+
+    if (FlagGet(FLAG_STRONG_AI) && !(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+    {
+        if (gTrainers[gTrainerBattleOpponent_A].aiFlags & AI_SCRIPT_SETUP_FIRST_TURN || gTrainers[gTrainerBattleOpponent_A].aiFlags & AI_SCRIPT_PREFER_BATON_PASS)
+            AI_THINKING_STRUCT->aiFlags = (AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_SETUP_FIRST_TURN | AI_SCRIPT_PREFER_STRONGEST_MOVE | AI_SCRIPT_PREFER_BATON_PASS | AI_SCRIPT_HP_AWARE);
+        else
+            AI_THINKING_STRUCT->aiFlags = (AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_RISKY | AI_SCRIPT_PREFER_STRONGEST_MOVE | AI_SCRIPT_HP_AWARE);
+    }
+    else if (FlagGet(FLAG_STRONG_AI) && (gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+    {
+        AI_THINKING_STRUCT->aiFlags = (AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_TRY_TO_FAINT | AI_SCRIPT_SETUP_FIRST_TURN | AI_SCRIPT_PREFER_STRONGEST_MOVE | AI_SCRIPT_DOUBLE_BATTLE | AI_SCRIPT_HP_AWARE);
+    }
+    else
+        AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags;
 }
 
 u8 BattleAI_ChooseMoveOrAction(void)

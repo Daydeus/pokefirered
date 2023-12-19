@@ -565,6 +565,9 @@ static bool8 ShouldUseItem(void)
     u8 validMons = 0;
     bool8 shouldUse = FALSE;
 
+    if (gSaveBlock2Ptr->optionsBattleItemBan  == OPTIONS_BATTLEITEM_BAN_FOE || gSaveBlock2Ptr->optionsBattleItemBan == OPTIONS_BATTLEITEM_BAN_BOTH)
+        return FALSE;
+
     for (i = 0; i < PARTY_SIZE; ++i)
         if (GetMonData(&gEnemyParty[i], MON_DATA_HP) != 0
          && GetMonData(&gEnemyParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE

@@ -3195,7 +3195,8 @@ static void HandleTurnActionSelectionState(void)
                     }
                     break;
                 case B_ACTION_USE_ITEM:
-                    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER))
+                    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_EREADER_TRAINER) || ((gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                      && (gSaveBlock2Ptr->optionsBattleItemBan == OPTIONS_BATTLEITEM_BAN_PLAYER || gSaveBlock2Ptr->optionsBattleItemBan == OPTIONS_BATTLEITEM_BAN_BOTH)))
                     {
                         gSelectionBattleScripts[gActiveBattler] = BattleScript_ActionSelectionItemsCantBeUsed;
                         gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT;
