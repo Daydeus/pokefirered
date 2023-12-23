@@ -379,6 +379,7 @@ gBattleAnims_Moves::
 	.4byte Move_TWISTER
 	.4byte Move_UPROAR
 	.4byte Move_U_TURN
+	.4byte Move_VENOM_JAB
 	.4byte Move_VICE_GRIP
 	.4byte Move_VINE_WHIP
 	.4byte Move_VITAL_THROW
@@ -11851,6 +11852,27 @@ UTurnLast:
 UTurnVisible:
 	createsprite gFlyBallAttackSpriteTemplate, ANIM_ATTACKER, 2, 20, FALSE
 	goto UTurnContinue
+
+Move_VENOM_JAB:
+	loadspritegfx ANIM_TAG_HORN_HIT
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_POISON_BUBBLE
+	monbg ANIM_TARGET
+	splitbgprio ANIM_TARGET
+	setalpha 12, 8
+	playsewithpan SE_M_RAZOR_WIND2, SOUND_PAN_ATTACKER
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 1
+	createsprite gHornHitSpriteTemplate, ANIM_TARGET, 4, 0, 0, 10
+	waitforvisualfinish
+	createsprite gBasicHitSplatSpriteTemplate, ANIM_ATTACKER, 3, 0, 0, ANIM_TARGET, 2
+	createvisualtask AnimTask_ShakeMon2, 2, ANIM_TARGET, 2, 0, 5, 1
+	playsewithpan SE_M_HORN_ATTACK, SOUND_PAN_TARGET
+	waitforvisualfinish
+	call PoisonBubblesEffect
+	waitforvisualfinish
+	clearmonbg ANIM_TARGET
+	blendoff
+	end
 
 Move_VOLT_SWITCH:
 	loadspritegfx ANIM_TAG_SPARK
