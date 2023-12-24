@@ -3582,6 +3582,7 @@ extern const u32 gBattleAnimSpriteGfx_Bird[];
 extern const u32 gBattleAnimSpriteGfx_CrossImpact[];
 extern const u32 gBattleAnimSpriteGfx_HeartStamp[];
 extern const u32 gBattleAnimSpriteGfx_StoneSurge[];
+extern const u32 gBattleAnimSpriteGfx_FlashCannonBall[];
 
 // battle anim particle pals
 extern const u32 gBattleAnimSpritePal_Bone[];
@@ -3832,6 +3833,7 @@ extern const u32 gBattleAnimSpritePal_WhipHit[];
 extern const u32 gBattleAnimSpritePal_BlueRing2[];
 extern const u32 gBattleAnimSpritePal_HeartStamp[];
 extern const u32 gBattleAnimSpritePal_StoneSurge[];
+extern const u32 gBattleAnimSpritePal_FlashCannonBall[];
 
 // battle anim task
 extern const u32 gUnusedLevelupAnimationGfx[];
