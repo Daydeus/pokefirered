@@ -4453,6 +4453,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
     },
 
+    [MOVE_STONE_SURGE] =
+    {
+        .effect = EFFECT_HIT,
+        .power = 120,
+        .type = TYPE_ROCK,
+        .accuracy = 90,
+        .category = MOVE_CATEGORY_SPECIAL,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+
     [MOVE_STRENGTH] =
     {
         .effect = EFFECT_ATTACK_UP_HIT,

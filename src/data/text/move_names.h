@@ -313,6 +313,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_STEEL_WING]    = _("STEEL WING"),
     [MOVE_STOCKPILE]     = _("STOCKPILE"),
     [MOVE_STOMP]         = _("STOMP"),
+    [MOVE_STONE_SURGE]   = _("STONE SURGE"),
     [MOVE_STRENGTH]      = _("STRENGTH"),
     [MOVE_STRING_SHOT]   = _("STRING SHOT"),
     [MOVE_STRUGGLE]      = _("STRUGGLE"),
