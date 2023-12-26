@@ -44,6 +44,17 @@ const u16 gEggMoves[] = {
             MOVE_NIGHT_SHADE,
             MOVE_SIGNAL_BEAM),
 
+    egg_moves(WEEDLE,
+            MOVE_DRILL_RUN,
+            MOVE_FEINT_ATTACK,
+            MOVE_LEECH_LIFE,
+            MOVE_PIN_MISSILE,
+            MOVE_QUICK_ATTACK,
+            MOVE_REVERSAL,
+            MOVE_SCREECH,
+            MOVE_SUPERSONIC,
+            MOVE_SWORDS_DANCE),
+
     egg_moves(PIDGEY,
               MOVE_PURSUIT,
               MOVE_FEINT_ATTACK,
