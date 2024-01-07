@@ -872,6 +872,7 @@ const u8 gText_ButtonMode[] = _("BUTTON MODE");
 const u8 gText_Frame[] = _("FRAME");
 const u8 gText_StrongAI[] = _("STRONG AI");
 const u8 gText_BattleItemBan[] = _("BATTLE ITEM BAN");
+const u8 gText_ExpShare[] = _("EXP SHARE");
 const u8 gText_OptionMenuCancel[] = _("CANCEL");
 const u8 gText_TextSpeedSlow[] = _("SLOW");
 const u8 gText_TextSpeedMid[] = _("MID");

@@ -45,6 +45,7 @@ enum
     PAGE2_BATTLESTYLE,
     PAGE2_BATTLEITEMBAN,
     PAGE2_BATTLESCENE,
+    PAGE2_EXPSHARE,
     PAGE2_CANCEL,
     PAGE2_COUNT
 };
@@ -200,7 +201,7 @@ static const u8 *const sButtonTypeOptions[] =
 };
 
 // Page 2 Options
-static const u16 sOptionMenuPage2ItemCounts[PAGE2_COUNT] = {2, 2, 4, 2, 0};
+static const u16 sOptionMenuPage2ItemCounts[PAGE2_COUNT] = {2, 2, 4, 2, 2, 0};
 
 static const u8 *const sOptionMenuPage2ItemsNames[PAGE2_COUNT] =
 {
@@ -208,6 +209,7 @@ static const u8 *const sOptionMenuPage2ItemsNames[PAGE2_COUNT] =
     [PAGE2_BATTLESTYLE]   = gText_BattleStyle,
     [PAGE2_BATTLEITEMBAN] = gText_BattleItemBan,
     [PAGE2_BATTLESCENE]   = gText_BattleScene,
+    [PAGE2_EXPSHARE]      = gText_ExpShare,
     [PAGE2_CANCEL]        = gText_OptionMenuCancel,
 };
 
@@ -235,6 +237,12 @@ static const u8 *const sBattleSceneOptions[] =
 {
     gText_BattleSceneOn,
     gText_BattleSceneOff
+};
+
+static const u8 *const sExpShareOptions[] =
+{
+    gText_BattleSceneOff,
+    gText_BattleSceneOn
 };
 
 static const u8 sOptionMenuPickSwitchCancelTextColor[] = {TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY};
@@ -285,6 +293,7 @@ void CB2_OptionsMenuFromStartMenu(void)
     sOptionMenuPtr->optionPage2[PAGE2_BATTLESTYLE ]  = gSaveBlock2Ptr->optionsBattleStyle;
     sOptionMenuPtr->optionPage2[PAGE2_BATTLEITEMBAN] = gSaveBlock2Ptr->optionsBattleItemBan;
     sOptionMenuPtr->optionPage2[PAGE2_BATTLESCENE]   = gSaveBlock2Ptr->optionsBattleSceneOff;
+    sOptionMenuPtr->optionPage2[PAGE2_EXPSHARE]      = FlagGet(FLAG_EXP_SHARE_ON);
     for (i = 0; i < PAGE2_COUNT - 1; i++)
     {
         if (sOptionMenuPtr->optionPage2[i] > (sOptionMenuPage2ItemCounts[i]) - 1)
@@ -624,6 +633,9 @@ static void BufferOptionMenuString(u8 selection)
         case PAGE2_BATTLESCENE:
             AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, dst, -1, sBattleSceneOptions[sOptionMenuPtr->optionPage2[selection]]);
             break;
+        case PAGE2_EXPSHARE:
+            AddTextPrinterParameterized3(1, FONT_NORMAL, x, y, dst, -1, sExpShareOptions[sOptionMenuPtr->optionPage2[selection]]);
+            break;
         default:
             break;
         }
@@ -662,6 +674,7 @@ static void CloseAndSaveOptionMenu(u8 taskId)
     gSaveBlock2Ptr->optionsBattleStyle = sOptionMenuPtr->optionPage2[PAGE2_BATTLESTYLE];
     gSaveBlock2Ptr->optionsBattleItemBan = sOptionMenuPtr->optionPage2[PAGE2_BATTLEITEMBAN];
     gSaveBlock2Ptr->optionsBattleSceneOff = sOptionMenuPtr->optionPage2[PAGE2_BATTLESCENE];
+    (sOptionMenuPtr->optionPage2[PAGE2_EXPSHARE] == 1) ? FlagSet(FLAG_EXP_SHARE_ON) : FlagClear(FLAG_EXP_SHARE_ON);
 
     SetPokemonCryStereo(gSaveBlock2Ptr->optionsSound);
     FREE_AND_SET_NULL(sOptionMenuPtr);

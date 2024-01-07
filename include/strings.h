@@ -929,6 +929,7 @@ extern const u8 gText_ButtonMode[];
 extern const u8 gText_Frame[];
 extern const u8 gText_StrongAI[];
 extern const u8 gText_BattleItemBan[];
+extern const u8 gText_ExpShare[];
 extern const u8 gText_OptionMenuCancel[];
 extern const u8 gText_TextSpeedSlow[];
 extern const u8 gText_TextSpeedMid[];
