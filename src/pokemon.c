@@ -79,6 +79,7 @@ static void EncryptBoxMon(struct BoxPokemon *boxMon);
 static void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
 static void GiveBoxMonEggMove(struct BoxPokemon *boxMon);
+static void GiveBoxMonTMHMMove(struct BoxPokemon *boxMon);
 static u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
 static u8 GetLevelFromMonExp(struct Pokemon *mon);
 static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
@@ -1864,8 +1865,16 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
 
     GiveBoxMonInitialMoveset(boxMon);
 
-    if (Random() % 100 <= 33 && otIdType == OT_ID_PLAYER_ID)
-        GiveBoxMonEggMove(boxMon);
+    // Give wild, gift, and egg mons a chance of special moves
+    if (otIdType == OT_ID_PLAYER_ID)
+    {
+        int chance = Random() % 100;
+
+        if (chance < 35)
+            GiveBoxMonEggMove(boxMon);
+        else if (chance < 50)
+            GiveBoxMonTMHMMove(boxMon);
+    }
 }
 
 void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature)
@@ -2306,8 +2315,43 @@ static void GiveBoxMonEggMove(struct BoxPokemon *boxMon)
     else
         moveToLearn = Random() % numEggMoves;
 
-    if (GiveMoveToBoxMon(boxMon, sMonEggMoves[0]) == MON_HAS_MAX_MOVES)
+    if (GiveMoveToBoxMon(boxMon, sMonEggMoves[moveToLearn]) == MON_HAS_MAX_MOVES)
         DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, sMonEggMoves[moveToLearn]);
+}
+
+static void GiveBoxMonTMHMMove(struct BoxPokemon *boxMon)
+{
+    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES, NULL);
+    u16 moveToLearn, tmhm;
+    u32 mask, bitField;
+
+    if (species == SPECIES_EGG)
+    {
+        return;
+    }
+
+    // Iterate through random TMHMs until we find one learnable
+    do
+    {
+        tmhm = (Random() % (NUM_TECHNICAL_MACHINES + NUM_HIDDEN_MACHINES));
+
+        if (tmhm < 32)
+        {
+            mask = 1 << tmhm;
+            bitField = 0;
+        }
+        else
+        {
+            mask = 1 << (tmhm - 32);
+            bitField = 1;
+        }
+
+    } while ((sTMHMLearnsets[species][bitField] & mask) == 0);
+
+    moveToLearn = sTMHMMoves[tmhm];
+
+    if (GiveMoveToBoxMon(boxMon, moveToLearn) == MON_HAS_MAX_MOVES)
+        DeleteFirstMoveAndGiveMoveToBoxMon(boxMon, moveToLearn);
 }
 
 u16 MonTryLearningNewMove(struct Pokemon *mon, bool8 firstMove)
@@ -6481,3 +6525,65 @@ u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove)
     }
     return 0;
 }
+
+static const u16 sTMHMMoves[] =
+{
+    MOVE_FOCUS_PUNCH,
+    MOVE_DRAGON_CLAW,
+    MOVE_WATER_PULSE,
+    MOVE_CALM_MIND,
+    MOVE_ROAR,
+    MOVE_TOXIC,
+    MOVE_HAIL,
+    MOVE_BULK_UP,
+    MOVE_BULLET_SEED,
+    MOVE_HIDDEN_POWER,
+    MOVE_SUNNY_DAY,
+    MOVE_TAUNT,
+    MOVE_ICE_BEAM,
+    MOVE_BLIZZARD,
+    MOVE_HYPER_BEAM,
+    MOVE_LIGHT_SCREEN,
+    MOVE_PROTECT,
+    MOVE_RAIN_DANCE,
+    MOVE_GIGA_DRAIN,
+    MOVE_SAFEGUARD,
+    MOVE_FRUSTRATION,
+    MOVE_SOLAR_BEAM,
+    MOVE_IRON_TAIL,
+    MOVE_THUNDERBOLT,
+    MOVE_THUNDER,
+    MOVE_EARTHQUAKE,
+    MOVE_RETURN,
+    MOVE_DIG,
+    MOVE_PSYCHIC,
+    MOVE_SHADOW_BALL,
+    MOVE_BRICK_BREAK,
+    MOVE_DOUBLE_TEAM,
+    MOVE_REFLECT,
+    MOVE_SHOCK_WAVE,
+    MOVE_FLAMETHROWER,
+    MOVE_SLUDGE_BOMB,
+    MOVE_SANDSTORM,
+    MOVE_FIRE_BLAST,
+    MOVE_ROCK_TOMB,
+    MOVE_AERIAL_ACE,
+    MOVE_TORMENT,
+    MOVE_FACADE,
+    MOVE_SECRET_POWER,
+    MOVE_REST,
+    MOVE_ATTRACT,
+    MOVE_THIEF,
+    MOVE_STEEL_WING,
+    MOVE_SKILL_SWAP,
+    MOVE_SNATCH,
+    MOVE_OVERHEAT,
+    MOVE_CUT,
+    MOVE_FLY,
+    MOVE_SURF,
+    MOVE_STRENGTH,
+    MOVE_FLASH,
+    MOVE_ROCK_SMASH,
+    MOVE_WATERFALL,
+    MOVE_DIVE,
+};

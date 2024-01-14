@@ -430,4 +430,6 @@ void DestroyMonSpritesGfxManager(void);
 u8 *MonSpritesGfxManager_GetSpritePtr(u8 bufferId);
 u16 MonTryLearningNewMoveEvolution(struct Pokemon *mon, bool8 firstMove);
 
+static const u16 sTMHMMoves[];
+
 #endif // GUARD_POKEMON_H
