@@ -2503,8 +2503,16 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
         defenderHoldEffectParam = ItemId_GetHoldEffectParam(defender->item);
     }
 
-    if (attacker->ability == ABILITY_HUGE_POWER || attacker->ability == ABILITY_PURE_POWER)
+    if (attacker->ability == ABILITY_HUGE_POWER)
+    {
         attack *= 2;
+        spAttack /= 2;
+    }
+    if (attacker->ability == ABILITY_PURE_POWER)
+    {
+        attack /= 2;
+        spAttack *= 2;
+    }
 
     if (ShouldGetStatBadgeBoost(FLAG_BADGE01_GET, battlerIdAtk))
         attack = (110 * attack) / 100;
@@ -2555,7 +2563,10 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     if (attacker->ability == ABILITY_GUTS && attacker->status1)
         attack = (150 * attack) / 100;
     if (defender->ability == ABILITY_MARVEL_SCALE && defender->status1)
+    {
         defense = (150 * defense) / 100;
+        spDefense = (150 * spDefense) / 100;
+    }
     if (type == TYPE_ELECTRIC && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_MUD_SPORT, 0))
         gBattleMovePower /= 2;
     if (type == TYPE_FIRE && AbilityBattleEffects(ABILITYEFFECT_FIELD_SPORT, 0, 0, ABILITYEFFECT_WATER_SPORT, 0))
@@ -2564,7 +2575,7 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
       || (type == TYPE_WATER && attacker->ability == ABILITY_TORRENT) || (type == TYPE_BUG && attacker->ability == ABILITY_SWARM))
     {
         if (attacker->hp < (attacker->maxHP / 5))
-            gBattleMovePower = (175 * gBattleMovePower) / 100;
+            gBattleMovePower = (200 * gBattleMovePower) / 100;
         else if (attacker->hp < (attacker->maxHP / 2))
             gBattleMovePower = (150 * gBattleMovePower) / 100;
         else if (attacker->hp <= attacker->maxHP)
@@ -2572,6 +2583,8 @@ s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *de
     }
     if (attacker->ability == ABILITY_TECHNICIAN && gBattleMoves[move].power <= 60)
         gBattleMovePower = (150 * gBattleMovePower) / 100;
+    if (attacker->ability == ABILITY_TOUGH_CLAWS && (gBattleMoves[move].flags & FLAG_MAKES_CONTACT))
+        gBattleMovePower = (130 * gBattleMovePower) / 100;
 
     // Self-destruct / Explosion cut defense in half
     if (gBattleMoves[gCurrentMove].effect == EFFECT_EXPLOSION)
