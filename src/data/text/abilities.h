@@ -83,6 +83,7 @@ static const u8 sToughClawsDescription[]   = _("Ups moves that make contact.    
 static const u8 sSnowWarningDescription[]  = _("When switched in, summons hail.");
 static const u8 sSlushRushDescription[]    = _("Raises SPEED in hailstorms.       (x2.0)");
 static const u8 sSandRushDescription[]     = _("Raises SPEED in sandstorms.       (x2.0)");
+static const u8 sStrongJawDescription[]    = _("Ups “biting” moves.               (x1.5)");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -169,6 +170,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SNOW_WARNING] = sSnowWarningDescription,
     [ABILITY_SLUSH_RUSH] = sSlushRushDescription,
     [ABILITY_SAND_RUSH] = sSandRushDescription,
+    [ABILITY_STRONG_JAW] = sStrongJawDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -256,4 +258,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SNOW_WARNING] = _("SNOW WARNING"),
     [ABILITY_SLUSH_RUSH] = _("SLUSH RUSH"),
     [ABILITY_SAND_RUSH] = _("SAND RUSH"),
+    [ABILITY_STRONG_JAW] = _("STRONG JAW"),
 };
