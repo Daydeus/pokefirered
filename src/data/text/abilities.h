@@ -81,6 +81,8 @@ static const u8 sAirLockDescription[]      = _("Negates weather effects.");
 static const u8 sTechnicianDescription[]   = _("Ups moves with 60 or less power.  (x1.5)");
 static const u8 sToughClawsDescription[]   = _("Ups moves that make contact.      (x1.3)");
 static const u8 sSnowWarningDescription[]  = _("When switched in, summons hail.");
+static const u8 sSlushRushDescription[]    = _("Raises SPEED in hailstorms.       (x2.0)");
+static const u8 sSandRushDescription[]     = _("Raises SPEED in sandstorms.       (x2.0)");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -165,6 +167,8 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_TECHNICIAN] = sTechnicianDescription,
     [ABILITY_TOUGH_CLAWS] = sToughClawsDescription,
     [ABILITY_SNOW_WARNING] = sSnowWarningDescription,
+    [ABILITY_SLUSH_RUSH] = sSlushRushDescription,
+    [ABILITY_SAND_RUSH] = sSandRushDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -250,4 +254,6 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_TECHNICIAN] = _("TECHNICIAN"),
     [ABILITY_TOUGH_CLAWS] = _("TOUGH CLAWS"),
     [ABILITY_SNOW_WARNING] = _("SNOW WARNING"),
+    [ABILITY_SLUSH_RUSH] = _("SLUSH RUSH"),
+    [ABILITY_SAND_RUSH] = _("SAND RUSH"),
 };
