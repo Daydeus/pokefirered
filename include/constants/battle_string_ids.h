@@ -390,8 +390,9 @@
 #define STRINGID_PKMNENDUREDWITHABILITY         389
 #define STRINGID_EXPSHAREGRANTED                390
 #define STRINGID_ROCKHEADPREVENTEDCRASHDAMAGE   391
+#define STRINGID_PKMNSXWHIPPEDUPHAILSTORM       392
 
-#define BATTLESTRINGS_COUNT                     392
+#define BATTLESTRINGS_COUNT                     393
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,
