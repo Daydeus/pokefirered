@@ -503,6 +503,7 @@ static const u8 sText_PkmnsItemRestoredHPALittle[] = _("{B_SCR_ACTIVE_NAME_WITH_
 static const u8 sText_ItemAllowsOnlyYMove[] = _("{B_LAST_ITEM}'s effect allows only\n{B_CURRENT_MOVE} to be used!\p");
 static const u8 sText_PkmnHungOnWithX[] = _("{B_DEF_NAME_WITH_PREFIX} hung on\nusing its {B_LAST_ITEM}!");
 static const u8 sText_PkmnEnduredWithAbility[] = _("{B_DEF_NAME_WITH_PREFIX} endured\nthanks to its {B_LAST_ABILITY}!");
+static const u8 sText_RockHeadPreventedCrashDamage[] = _("{B_ATK_NAME_WITH_PREFIX}'s ROCK HEAD protected\nit from crash damage!");
 static const u8 sText_ExpShareGranted[] = _("The EXP. SHARE granted {B_BUFF1}\n{B_BUFF3} Exp. Points!\p");
 const u8 gText_EmptyString3[] = _("");
 static const u8 sText_PlayedFluteCatchyTune[] = _("{B_PLAYER_NAME} played the {B_LAST_ITEM}.\pNow, that's a catchy tune!");
@@ -899,6 +900,7 @@ const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_ST
     [STRINGID_RETRACTED_ITS_ROOTS - BATTLESTRINGS_TABLE_START]           = sText_RetractedItsRoots,
     [STRINGID_PKMNENDUREDWITHABILITY - BATTLESTRINGS_TABLE_START]        = sText_PkmnEnduredWithAbility,
     [STRINGID_EXPSHAREGRANTED - BATTLESTRINGS_TABLE_START]               = sText_ExpShareGranted,
+    [STRINGID_ROCKHEADPREVENTEDCRASHDAMAGE - BATTLESTRINGS_TABLE_START]  = sText_RockHeadPreventedCrashDamage,
 };
 
 const u16 gMissStringIds[] =

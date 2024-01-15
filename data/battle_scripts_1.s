@@ -877,6 +877,7 @@ BattleScript_MoveMissedDoDamage::
 	jumpifbyte CMP_COMMON_BITS, gMoveResultFlags, MOVE_RESULT_DOESNT_AFFECT_FOE, BattleScript_MoveEnd
 	printstring STRINGID_PKMNCRASHED
 	waitmessage B_WAIT_TIME_LONG
+	jumpifability BS_ATTACKER, ABILITY_ROCK_HEAD, BattleScript_RockHeadPreventedCrashDamage
 	damagecalc
 	typecalc
 	adjustnormaldamage
@@ -887,6 +888,10 @@ BattleScript_MoveMissedDoDamage::
 	datahpupdate BS_ATTACKER
 	tryfaintmon BS_ATTACKER
 	orbyte gMoveResultFlags, MOVE_RESULT_MISSED
+	goto BattleScript_MoveEnd
+BattleScript_RockHeadPreventedCrashDamage::
+	printstring STRINGID_ROCKHEADPREVENTEDCRASHDAMAGE
+	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
 
 BattleScript_EffectMist::
