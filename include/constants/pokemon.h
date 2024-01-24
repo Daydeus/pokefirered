@@ -244,6 +244,7 @@
 #define FLAG_KINGS_ROCK_AFFECTED    (1 << 5)
 #define FLAG_BITING_MOVE            (1 << 6)
 #define FLAG_PUNCHING_MOVE          (1 << 7)
+#define FLAG_SLICING_MOVE           (1 << 8)
 
 // Growth rates
 #define GROWTH_MEDIUM_FAST  0

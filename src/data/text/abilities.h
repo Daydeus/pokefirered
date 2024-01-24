@@ -85,6 +85,7 @@ static const u8 sSlushRushDescription[]    = _("Raises SPEED in hailstorms.     
 static const u8 sSandRushDescription[]     = _("Raises SPEED in sandstorms.       (x2.0)");
 static const u8 sStrongJawDescription[]    = _("Ups “biting” moves.               (x1.5)");
 static const u8 sIronFistDescription[]     = _("Ups “punching” moves.             (x1.3)");
+static const u8 sSharpnessDescription[]    = _("Ups “slicing” moves.              (x1.5)");
 
 const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
 {
@@ -173,6 +174,7 @@ const u8 *const gAbilityDescriptionPointers[ABILITIES_COUNT] =
     [ABILITY_SAND_RUSH] = sSandRushDescription,
     [ABILITY_STRONG_JAW] = sStrongJawDescription,
     [ABILITY_IRON_FIST] = sIronFistDescription,
+    [ABILITY_SHARPNESS] = sSharpnessDescription,
 };
 
 const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
@@ -262,4 +264,5 @@ const u8 gAbilityNames[ABILITIES_COUNT][ABILITY_NAME_LENGTH + 1] =
     [ABILITY_SAND_RUSH] = _("SAND RUSH"),
     [ABILITY_STRONG_JAW] = _("STRONG JAW"),
     [ABILITY_IRON_FIST] = _("IRON FIST"),
+    [ABILITY_SHARPNESS] = _("SHARPNESS"),
 };
