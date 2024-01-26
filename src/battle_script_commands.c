@@ -1198,7 +1198,9 @@ static void Cmd_critcalc(void)
      && !(Random() % sCriticalHitChance[critChance])
      && (!(gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE) || BtlCtrl_OakOldMan_TestState2Flag(1))
      && !(gBattleTypeFlags & BATTLE_TYPE_POKEDUDE))
-        gCritMultiplier = 1.5;
+        gCritMultiplier = 2;
+    else if ((gBattleMons[gBattlerAttacker].ability == ABILITY_MERCILESS) && (gBattleMons[gBattlerTarget].status1 & STATUS1_PSN_ANY))
+        gCritMultiplier = 2;
     else
         gCritMultiplier = 1;
 
