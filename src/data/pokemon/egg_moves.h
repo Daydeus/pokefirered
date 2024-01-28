@@ -1103,9 +1103,14 @@ const u16 gEggMoves[] = {
               MOVE_THRASH),
 
     egg_moves(TRAPINCH,
-              MOVE_FOCUS_ENERGY,
-              MOVE_QUICK_ATTACK,
-              MOVE_GUST),
+            MOVE_BUG_BUZZ,
+            MOVE_ENDURE,
+            MOVE_FOCUS_ENERGY,
+            MOVE_FURY_CUTTER,
+            MOVE_OUTRAGE,
+            MOVE_QUICK_ATTACK,
+            MOVE_SIGNAL_BEAM,
+            MOVE_STRUGGLE_BUG),
 
     egg_moves(MAKUHITA,
               MOVE_FEINT_ATTACK,
