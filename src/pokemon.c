@@ -1870,9 +1870,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     {
         int chance = Random() % 100;
 
-        if (chance < 35)
+        if (chance < 30)
             GiveBoxMonEggMove(boxMon);
-        else if (chance < 50)
+        if (chance > 25 && chance < 55)
             GiveBoxMonTMHMMove(boxMon);
     }
 }
