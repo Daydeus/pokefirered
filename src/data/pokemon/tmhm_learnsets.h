@@ -226,9 +226,43 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM07_WATERFALL)
                                         | TMHM(HM08_DIVE)),
 
-    [SPECIES_CATERPIE]    = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_CATERPIE]    = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM18_RAIN_DANCE)
+                                        | TMHM(TM19_GIGA_DRAIN)
+                                        | TMHM(TM20_SAFEGUARD)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM22_SOLAR_BEAM)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM45_ATTRACT)
+                                        | TMHM(TM46_THIEF)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_METAPOD]     = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_METAPOD]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM18_RAIN_DANCE)
+                                        | TMHM(TM19_GIGA_DRAIN)
+                                        | TMHM(TM20_SAFEGUARD)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM22_SOLAR_BEAM)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM45_ATTRACT)
+                                        | TMHM(TM46_THIEF)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
     [SPECIES_BUTTERFREE]  = TMHM_LEARNSET(TMHM(TM06_TOXIC)
                                         | TMHM(TM10_HIDDEN_POWER)
@@ -253,9 +287,41 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(TM48_SKILL_SWAP)
                                         | TMHM(HM05_FLASH)),
 
-    [SPECIES_WEEDLE]      = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_WEEDLE]      = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM19_GIGA_DRAIN)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM22_SOLAR_BEAM)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM36_SLUDGE_BOMB)
+                                        | TMHM(TM40_AERIAL_ACE)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM45_ATTRACT)
+                                        | TMHM(TM46_THIEF)
+                                        | TMHM(HM01_CUT)),
 
-    [SPECIES_KAKUNA]      = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_KAKUNA]      = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM19_GIGA_DRAIN)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM22_SOLAR_BEAM)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM36_SLUDGE_BOMB)
+                                        | TMHM(TM40_AERIAL_ACE)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM45_ATTRACT)
+                                        | TMHM(TM46_THIEF)
+                                        | TMHM(HM01_CUT)),
 
     [SPECIES_BEEDRILL]    = TMHM_LEARNSET(TMHM(TM06_TOXIC)
                                         | TMHM(TM10_HIDDEN_POWER)
@@ -3041,7 +3107,20 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM04_STRENGTH)
                                         | TMHM(HM06_ROCK_SMASH)),
 
-    [SPECIES_MAGIKARP]    = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_MAGIKARP]    = TMHM_LEARNSET(TMHM(TM03_WATER_PULSE)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM18_RAIN_DANCE)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM45_ATTRACT)
+                                        | TMHM(HM03_SURF)
+                                        | TMHM(HM07_WATERFALL)
+                                        | TMHM(HM08_DIVE)),
 
     [SPECIES_GYARADOS]    = TMHM_LEARNSET(TMHM(TM03_WATER_PULSE)
                                         | TMHM(TM05_ROAR)
@@ -3103,7 +3182,15 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM07_WATERFALL)
                                         | TMHM(HM08_DIVE)),
 
-    [SPECIES_DITTO]       = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_DITTO]       = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM45_ATTRACT)),
 
     [SPECIES_EEVEE]       = TMHM_LEARNSET(TMHM(TM06_TOXIC)
                                         | TMHM(TM10_HIDDEN_POWER)
@@ -4816,9 +4903,28 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(TM49_SNATCH)
                                         | TMHM(HM05_FLASH)),
 
-    [SPECIES_UNOWN]       = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_UNOWN]       = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_WOBBUFFET]   = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_WOBBUFFET]   = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)),
 
     [SPECIES_GIRAFARIG]   = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
                                         | TMHM(TM06_TOXIC)
@@ -6055,55 +6161,355 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM01_CUT)
                                         | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_B] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_B] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_C] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_C] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_D] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_D] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_E] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_E] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_F] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_F] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_G] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_G] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_H] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_H] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_I] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_I] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_J] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_J] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_K] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_K] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_L] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_L] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_M] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_M] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_N] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_N] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_O] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_O] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_P] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_P] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_Q] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_Q] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_R] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_R] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_S] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_S] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_T] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_T] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_U] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_U] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_V] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_V] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_W] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_W] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_X] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_X] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_Y] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_Y] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_OLD_UNOWN_Z] = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_OLD_UNOWN_Z] = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM48_SKILL_SWAP)
+                                        | TMHM(HM05_FLASH)),
 
     [SPECIES_TREECKO]     = TMHM_LEARNSET(TMHM(TM01_FOCUS_PUNCH)
                                         | TMHM(TM06_TOXIC)
@@ -6438,9 +6844,39 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM04_STRENGTH)
                                         | TMHM(HM06_ROCK_SMASH)),
 
-    [SPECIES_WURMPLE]     = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_WURMPLE]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM19_GIGA_DRAIN)
+                                        | TMHM(TM20_SAFEGUARD)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM22_SOLAR_BEAM)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM45_ATTRACT)
+                                        | TMHM(TM46_THIEF)
+                                        | TMHM(HM05_FLASH)),
 
-    [SPECIES_SILCOON]     = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_SILCOON]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM19_GIGA_DRAIN)
+                                        | TMHM(TM20_SAFEGUARD)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM22_SOLAR_BEAM)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM45_ATTRACT)
+                                        | TMHM(TM46_THIEF)
+                                        | TMHM(HM05_FLASH)),
 
     [SPECIES_BEAUTIFLY]   = TMHM_LEARNSET(TMHM(TM06_TOXIC)
                                         | TMHM(TM10_HIDDEN_POWER)
@@ -6463,7 +6899,23 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(TM46_THIEF)
                                         | TMHM(HM05_FLASH)),
 
-    [SPECIES_CASCOON]     = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_CASCOON]     = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(TM16_LIGHT_SCREEN)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM19_GIGA_DRAIN)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM22_SOLAR_BEAM)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM36_SLUDGE_BOMB)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(TM45_ATTRACT)
+                                        | TMHM(TM46_THIEF)
+                                        | TMHM(HM05_FLASH)),
 
     [SPECIES_DUSTOX]      = TMHM_LEARNSET(TMHM(TM06_TOXIC)
                                         | TMHM(TM10_HIDDEN_POWER)
@@ -8022,7 +8474,14 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM02_FLY)
                                         | TMHM(HM06_ROCK_SMASH)),
 
-    [SPECIES_WYNAUT]      = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_WYNAUT]      = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)),
 
     [SPECIES_DUSKULL]     = TMHM_LEARNSET(TMHM(TM04_CALM_MIND)
                                         | TMHM(TM06_TOXIC)
@@ -8991,7 +9450,25 @@ static const u32 sTMHMLearnsets[][2] =
                                         | TMHM(HM04_STRENGTH)
                                         | TMHM(HM06_ROCK_SMASH)),
 
-    [SPECIES_BELDUM]      = TMHM_LEARNSET(TMHM(TM10_HIDDEN_POWER)),
+    [SPECIES_BELDUM]      = TMHM_LEARNSET(TMHM(TM06_TOXIC)
+                                        | TMHM(TM10_HIDDEN_POWER)
+                                        | TMHM(TM11_SUNNY_DAY)
+                                        | TMHM(TM16_LIGHT_SCREEN)
+                                        | TMHM(TM17_PROTECT)
+                                        | TMHM(TM18_RAIN_DANCE)
+                                        | TMHM(TM21_FRUSTRATION)
+                                        | TMHM(TM27_RETURN)
+                                        | TMHM(TM29_PSYCHIC)
+                                        | TMHM(TM30_SHADOW_BALL)
+                                        | TMHM(TM32_DOUBLE_TEAM)
+                                        | TMHM(TM33_REFLECT)
+                                        | TMHM(TM36_SLUDGE_BOMB)
+                                        | TMHM(TM37_SANDSTORM)
+                                        | TMHM(TM39_ROCK_TOMB)
+                                        | TMHM(TM42_FACADE)
+                                        | TMHM(TM43_SECRET_POWER)
+                                        | TMHM(TM44_REST)
+                                        | TMHM(HM05_FLASH)),
 
     [SPECIES_METANG]      = TMHM_LEARNSET(TMHM(TM06_TOXIC)
                                         | TMHM(TM10_HIDDEN_POWER)
