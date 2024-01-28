@@ -184,6 +184,7 @@ gBattleAnims_Moves::
 	.4byte Move_INFESTATION
 	.4byte Move_INGRAIN
 	.4byte Move_IRON_DEFENSE
+	.4byte Move_IRON_HEAD
 	.4byte Move_IRON_TAIL
 	.4byte Move_JUMP_KICK
 	.4byte Move_KARATE_CHOP
@@ -11641,6 +11642,28 @@ InfestationVortex:
 	createsprite gInfestationBubbleTemplate, ANIM_TARGET, 2, 0x0, 0x21, 0x1d0, 0x1e, 0xf, 0xffce, 0x1
 	delay 0x1
 	return
+
+Move_IRON_HEAD:
+	loadspritegfx ANIM_TAG_GUST
+	loadspritegfx ANIM_TAG_IMPACT
+	loopsewithpan SE_M_HARDEN, SOUND_PAN_ATTACKER, 28, 2
+	createvisualtask AnimTask_MetallicShine, 5, 1, 0, RGB_BLACK
+	waitforvisualfinish
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 0
+	playsewithpan SE_M_HEADBUTT, SOUND_PAN_ATTACKER
+	waitforvisualfinish
+	delay 2
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 1
+	waitforvisualfinish
+	createvisualtask AnimTask_ShakeMonInPlace, 2, ANIM_ATTACKER, 2, 0, 4, 1
+	createvisualtask AnimTask_ShakeMon, 2, ANIM_TARGET, 5, 0, 7, 1
+	createsprite gBowMonSpriteTemplate, ANIM_ATTACKER, 2, 2
+	createsprite gFlashingHitSplatSpriteTemplate, ANIM_TARGET, 3, 0, 0, 1, 1
+	playsewithpan SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_SetGrayscaleOrOriginalPal, 5, ANIM_ATTACKER, TRUE
+	waitforvisualfinish
+	end
 
 Move_LAVA_PLUME:
 	loadspritegfx ANIM_TAG_FIRE_PLUME

@@ -163,6 +163,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_INFESTATION]   = _("INFESTATION"),
     [MOVE_INGRAIN]       = _("INGRAIN"),
     [MOVE_IRON_DEFENSE]  = _("IRON DEFENSE"),
+    [MOVE_IRON_HEAD]     = _("IRON HEAD"),
     [MOVE_IRON_TAIL]     = _("IRON TAIL"),
     [MOVE_JUMP_KICK]     = _("JUMP KICK"),
     [MOVE_KARATE_CHOP]   = _("KARATE CHOP"),
