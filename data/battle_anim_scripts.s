@@ -223,6 +223,7 @@ gBattleAnims_Moves::
 	.4byte Move_MINIMIZE
 	.4byte Move_MIRROR_COAT
 	.4byte Move_MIRROR_MOVE
+	.4byte Move_MIRROR_SHOT
 	.4byte Move_MIST
 	.4byte Move_MIST_BALL
 	.4byte Move_MOONBLAST
@@ -11707,6 +11708,40 @@ Move_LAVA_PLUME:
 	createsprite gLavaPlumeSpriteTemplate, 130, 1, 224
 	playsewithpan SE_M_SACRED_FIRE, SOUND_PAN_ATTACKER
 	waitforvisualfinish
+	end
+
+Move_MIRROR_SHOT:
+	loopsewithpan SE_M_HARDEN, SOUND_PAN_ATTACKER, 28, 2
+	createvisualtask AnimTask_MetallicShine, 5, 1, 0, RGB_BLACK
+	waitforvisualfinish
+	loadspritegfx ANIM_TAG_IMPACT
+	loadspritegfx ANIM_TAG_WHITE_CIRCLE_OF_LIGHT
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 0, 10, RGB_WHITEALPHA
+	createvisualtask AnimTask_BlendParticle, 5, ANIM_TAG_IMPACT, 0, 12, 12, RGB(21, 21, 21)
+	waitforvisualfinish
+	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	delay 3
+	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	delay 3
+	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	delay 3
+	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	delay 3
+	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	delay 3
+	createsprite gRandomPosHitSplatSpriteTemplate, 131, 2, 1, 2
+	createvisualtask SoundTask_PlaySE1WithPanning, 5, SE_M_VITAL_THROW2, SOUND_PAN_TARGET
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPalExclude, 5, 5, 2, 10, 0, RGB_WHITEALPHA
+	createvisualtask AnimTask_HorizontalShake, 5, ANIM_TARGET, 5, 14
+	waitforvisualfinish
+	clearmonbg ANIM_ATTACKER
+	blendoff
 	end
 
 Move_MOONBLAST:

@@ -1618,7 +1618,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
     [MOVE_FLASH_CANNON] =
     {
         .effect = EFFECT_SPECIAL_DEFENSE_DOWN_HIT,
-        .power = 90,
+        .power = 80,
         .type = TYPE_STEEL,
         .accuracy = 100,
         .category = MOVE_CATEGORY_SPECIAL,
@@ -1626,7 +1626,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .secondaryEffectChance = 10,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
-        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },
 
     [MOVE_FLATTER] =
@@ -2881,6 +2881,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .target = MOVE_TARGET_DEPENDS,
         .priority = 0,
         .flags = 0,
+    },
+
+    [MOVE_MIRROR_SHOT] =
+    {
+        .effect = EFFECT_ACCURACY_DOWN_HIT,
+        .power = 60,
+        .type = TYPE_STEEL,
+        .accuracy = 95,
+        .category = MOVE_CATEGORY_SPECIAL,
+        .pp = 20,
+        .secondaryEffectChance = 30,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
     },
 
     [MOVE_MIST] =

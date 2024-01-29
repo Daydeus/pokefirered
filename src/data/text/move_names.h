@@ -202,6 +202,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_MINIMIZE]      = _("MINIMIZE"),
     [MOVE_MIRROR_COAT]   = _("MIRROR COAT"),
     [MOVE_MIRROR_MOVE]   = _("MIRROR MOVE"),
+    [MOVE_MIRROR_SHOT]   = _("MIRROR SHOT"),
     [MOVE_MIST]          = _("MIST"),
     [MOVE_MIST_BALL]     = _("MIST BALL"),
     [MOVE_MOONBLAST]     = _("MOONBLAST"),
