@@ -139,6 +139,7 @@ const u8 gMoveNames[MOVES_COUNT][MOVE_NAME_LENGTH + 1] = {
     [MOVE_HARDEN]        = _("HARDEN"),
     [MOVE_HAZE]          = _("HAZE"),
     [MOVE_HEADBUTT]      = _("HEADBUTT"),
+    [MOVE_HEAD_SMASH]    = _("HEAD SMASH"),
     [MOVE_HEAL_BELL]     = _("HEAL BELL"),
     [MOVE_HEAT_WAVE]     = _("HEAT WAVE"),
     [MOVE_HELPING_HAND]  = _("HELPING HAND"),

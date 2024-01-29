@@ -1993,6 +1993,20 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .flags = FLAG_MAKES_CONTACT | FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED,
     },
 
+    [MOVE_HEAD_SMASH] =
+    {
+        .effect = EFFECT_RECOIL_IF_MISS,
+        .power = 140,
+        .type = TYPE_ROCK,
+        .accuracy = 80,
+        .category = MOVE_CATEGORY_PHYSICAL,
+        .pp = 5,
+        .secondaryEffectChance = 0,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .flags = FLAG_PROTECT_AFFECTED | FLAG_MIRROR_MOVE_AFFECTED | FLAG_KINGS_ROCK_AFFECTED,
+    },
+
     [MOVE_HEAL_BELL] =
     {
         .effect = EFFECT_HEAL_BELL,
@@ -2056,7 +2070,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .type = TYPE_FIGHTING,
         .accuracy = 70,
         .category = MOVE_CATEGORY_PHYSICAL,
-        .pp = 10,
+        .pp = 5,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -2364,7 +2378,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .type = TYPE_FIGHTING,
         .accuracy = 85,
         .category = MOVE_CATEGORY_PHYSICAL,
-        .pp = 15,
+        .pp = 10,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
@@ -4082,7 +4096,7 @@ const struct BattleMove gBattleMoves[MOVES_COUNT] =
         .type = TYPE_FLYING,
         .accuracy = 80,
         .category = MOVE_CATEGORY_PHYSICAL,
-        .pp = 10,
+        .pp = 5,
         .secondaryEffectChance = 0,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
